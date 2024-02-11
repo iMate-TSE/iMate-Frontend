@@ -16,11 +16,13 @@
         />
         <ShellContent
             Title="home"
+            Icon="{FontImage FontFamily=AveriaRegular}"
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage"
         />
         <ShellContent
             Title="journal"
+            Icon="{FontImage FontFamily=AveriaRegular}"
             ContentTemplate="{DataTemplate local:JournalPage}"
             Route="JournalPage"
          />
