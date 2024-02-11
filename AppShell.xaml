@@ -5,7 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:iMate"
     Shell.FlyoutBehavior="Disabled"
-    Title="iMate">
+    Title="iMate"
+    BackgroundColor="{DynamicResource Platinum}"
+    Shell.TabBarBackgroundColor="{DynamicResource Platinum}"
+   >
 
     <TabBar>
         <ShellContent

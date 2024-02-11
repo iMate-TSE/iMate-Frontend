@@ -63,6 +63,7 @@
 	  <None Remove="Resources\Fonts\AveriaGruesaLibre-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-SemiBold.ttf" />
+	  <None Remove="Resources\Images\profile_placeholder.png" />
 	</ItemGroup>
 
 	<ItemGroup>
