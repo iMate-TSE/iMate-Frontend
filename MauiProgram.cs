@@ -21,6 +21,7 @@ namespace iMate
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<TaskPage>();
             builder.Services.AddSingleton<JournalPage>();
+            builder.Services.AddSingleton<ProfilePage>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
