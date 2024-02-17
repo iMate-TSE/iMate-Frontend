@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:iMate.Views"
-             x:Class="iMate.JournalPage"
-             BackgroundColor="{DynamicResource Platinum}"
-             Shell.NavBarIsVisible="True"
-            >
-
-
-    <Shell.TitleView>
-        <local:CustomTitleView />
-    </Shell.TitleView>
-
+             x:Class="iMate.ProfilePage"
+             Title="Profile">
+    <!--        ^ This should probably bind the username rather than just saying "Profile" -->
     <VerticalStackLayout>
         <Label 
-            Text="Journal"
+            Text="Welcome to your Profile"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>
