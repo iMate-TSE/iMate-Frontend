@@ -15,7 +15,9 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Label Text="iMate" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Image Source="circle.svg" />
+
         </VerticalStackLayout>
     </ScrollView>
 
