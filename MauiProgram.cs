@@ -14,7 +14,7 @@ namespace iMate
                     fonts.AddFont("Amiko-Bold.ttf", "AmikoBold");
                     fonts.AddFont("Amiko-Regular.ttf", "AmikoRegular");
                     fonts.AddFont("Amiko-SemiBold.ttf", "AmikoSemiBold");
-                    fonts.AddFont("AveriaGruesaLibre-Regular.tff", "AveriaRegular");
+                    fonts.AddFont("AveriaGruesaLibre-Regular.ttf", "AveriaRegular");
                     fonts.AddFont("Rubik-Regular.tff", "RubikRegular");
                     fonts.AddFont("Rubik-SemiBold.tff", "RubikSemiBold");
                 });
