@@ -64,7 +64,9 @@
 	  <None Remove="Resources\Fonts\AveriaGruesaLibre-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-SemiBold.ttf" />
+	  <None Remove="Resources\Images\arrow_right.svg" />
 	  <None Remove="Resources\Images\circle.svg" />
+	  <None Remove="Resources\Images\home_icon.svg" />
 	  <None Remove="Resources\Images\profile_placeholder.png" />
 	</ItemGroup>
 
@@ -75,6 +77,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiFont Update="Resources\Fonts\Amiko-Regular.ttf">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiFont>
+	  <MauiFont Update="Resources\Fonts\AveriaGruesaLibre-Regular.ttf">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiFont>
+	  <MauiFont Update="Resources\Fonts\Rubik-Regular.ttf">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiFont>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="ChatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\CustomTitleView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
