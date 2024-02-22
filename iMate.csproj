@@ -68,6 +68,7 @@
 	  <None Remove="Resources\Images\circle.svg" />
 	  <None Remove="Resources\Images\home_icon.svg" />
 	  <None Remove="Resources\Images\profile_placeholder.png" />
+	  <None Remove="Resources\Images\send.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
