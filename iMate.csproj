@@ -66,7 +66,9 @@
 	  <None Remove="Resources\Fonts\Rubik-SemiBold.ttf" />
 	  <None Remove="Resources\Images\arrow_right.svg" />
 	  <None Remove="Resources\Images\circle.svg" />
+	  <None Remove="Resources\Images\help_icon.svg" />
 	  <None Remove="Resources\Images\home_icon.svg" />
+	  <None Remove="Resources\Images\login_icon.svg" />
 	  <None Remove="Resources\Images\profile_placeholder.png" />
 	</ItemGroup>
 
@@ -74,6 +76,12 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="LoginPage.xaml.cs">
+	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -90,6 +98,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="ChatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\CustomTitleView.xaml">

@@ -11,6 +11,7 @@
    >
 
     <TabBar>
+
         <ShellContent
             Title="tasks"
             Icon="{FontImage FontFamily=AveriaRegular}"

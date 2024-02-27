@@ -10,6 +10,7 @@
     <Color x:Key="Platinum">#EAE5E5</Color>
     <Color x:Key="DavyGray">#484747</Color>
     <Color x:Key="Cyclamen">#F46197</Color>
+    <Color x:Key="WhiteSmoke">#F5F5F5</Color>
 
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="PrimaryDark">#ac99ea</Color>
