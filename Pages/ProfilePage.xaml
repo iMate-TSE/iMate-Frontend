@@ -9,5 +9,13 @@
             Text="Welcome to your Profile"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+       <!-- Temporary button added so that settings can be accessed during implementation --> 
+        <Button
+            Text="Temp Button for Settings"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Clicked="NavigateSettings" />
+
     </VerticalStackLayout>
 </ContentPage>

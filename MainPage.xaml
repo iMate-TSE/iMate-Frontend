@@ -7,6 +7,11 @@
              Shell.NavBarIsVisible="True"
              >
 
+    <!-- Disables the back button feature when logging on-->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    
     <Shell.TitleView>
         <local:CustomTitleView />
     </Shell.TitleView>
