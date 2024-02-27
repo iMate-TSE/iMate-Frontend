@@ -11,6 +11,14 @@
    >
 
     <TabBar>
+
+        <ShellContent
+            Title="TEMP:LOGIN"
+            Icon="{FontImage FontFamily=AveriaRegular}"
+            ContentTemplate="{DataTemplate local:LoginPage}"
+            Route="LoginPage"
+        />
+
         <ShellContent
             Title="tasks"
             Icon="{FontImage FontFamily=AveriaRegular}"
