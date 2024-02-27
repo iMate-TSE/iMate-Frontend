@@ -6,7 +6,7 @@
              Title="Chat">
     <VerticalStackLayout>
         <Label 
-            Text="Chat Bot"
+            Text="Chat Bot!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>
