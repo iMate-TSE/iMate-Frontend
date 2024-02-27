@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:iMate.Views"
              x:Class="iMate.LoginPage"
              BackgroundColor="{DynamicResource Platinum}"
-             Title="">
+             Title=""
+             Shell.TabBarIsVisible="False"
+             >
 
+    <!-- Disables the back button feature when logging out-->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    
+    <!-- Creates a title view unique to the login page with a help button-->
     <Shell.TitleView>
 
         <Grid RowDefinitions="Auto, Auto" 
@@ -25,12 +32,10 @@
                  Source="help_icon.svg"
                  Clicked="Help_Clicked"
      />
-
-
         </Grid>
-
     </Shell.TitleView>
 
+    
     <ScrollView>
 
         <VerticalStackLayout
@@ -54,6 +59,32 @@
         />
 
             </Grid>
+
+            <!-- Empy button for when google authentication is added-->
+            <Button
+                Text="Login with google (Not implemented)"
+                VerticalOptions="Center"
+                FontSize="15"
+                FontFamily="AmikoBold"
+                Margin="10, 10"
+                BackgroundColor="{DynamicResource WhiteSmoke}"
+                TextColor="{DynamicResource DavyGray}"
+                Clicked="Button_Clicked"></Button>
+
+            <!-- Button to continue as guest to allow access to app without login-->
+            <Label
+                Text="Continue As Guest"
+                VerticalOptions="Center"
+                FontSize="23"
+                FontFamily="AmikoRegular"
+                Margin="10, 10"
+                HorizontalOptions="Start">
+                
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Login" />
+                </Label.GestureRecognizers>
+
+            </Label>
 
         </VerticalStackLayout>
 

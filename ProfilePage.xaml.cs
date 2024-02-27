@@ -6,4 +6,12 @@ public partial class ProfilePage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+
+    // TEMPORARY WAY TO NAVIGATE TO SETTINGS!!!!!
+    private void NavigateSettings(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new SettingsPage());
+    }
+
 }

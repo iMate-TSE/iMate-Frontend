@@ -12,4 +12,13 @@ public partial class LoginPage : ContentPage
 		await DisplayAlert("Help", "Help is on the way, dear!!! (not)", "k");
     }
 
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private async void Login(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MainPage());
+    }
 }
