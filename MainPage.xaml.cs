@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace iMate
+﻿namespace iMate
 {
     public partial class MainPage : ContentPage
     {

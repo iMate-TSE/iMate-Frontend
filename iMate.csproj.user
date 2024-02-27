@@ -8,19 +8,19 @@
     <DefaultDevice>pixel_5_-_api_34</DefaultDevice>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="ChatPage.xaml">
+    <MauiXaml Update="Pages\ChatPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\CustomTitleView.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="JournalPage.xaml">
+    <MauiXaml Update="Pages\JournalPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="ProfilePage.xaml">
+    <MauiXaml Update="Pages\ProfilePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="TaskPage.xaml">
+    <MauiXaml Update="Pages\TaskPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>
