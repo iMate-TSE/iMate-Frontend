@@ -1,5 +1,4 @@
 namespace iMate.Views;
-
 public partial class CustomTitleView : ContentView
 {
 	public CustomTitleView()

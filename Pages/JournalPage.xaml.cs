@@ -1,4 +1,4 @@
-namespace iMate;
+namespace iMate.Pages;
 
 public partial class JournalPage : ContentPage
 {

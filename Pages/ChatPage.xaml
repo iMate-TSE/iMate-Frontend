@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iMate.Pages.ChatPage"
+             BackgroundColor="{DynamicResource Platinum}"
+             Title="Chat">
+    <VerticalStackLayout>
+        <Label 
+            Text="Chat Bot"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Grid RowDefinitions="*, Auto">
+            <ScrollView Grid.Row="0" MinimumHeightRequest="600">
+               
+            </ScrollView>
+
+            <Border
+                    Padding="2"
+                    Grid.Row="1"
+                    Margin="5, 10"
+                    VerticalOptions="End"
+                    BackgroundColor="{DynamicResource Platinum }"
+                    StrokeShape="RoundRectangle 10"
+            >
+                <Grid Padding="2, 2, 30, 2">
+                    <Entry x:Name="entry"
+                        Placeholder="Type your message here..."
+                    />
+                    <Image Source="send.svg"
+                           Aspect="AspectFill"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           Margin="0, 0, -20, 0"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                    />
+                </Grid>
+            </Border>
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

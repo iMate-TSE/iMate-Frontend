@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace iMate
+﻿namespace iMate
 {
     public partial class MainPage : ContentPage
     {
@@ -8,16 +6,13 @@ namespace iMate
         {
             InitializeComponent();
         }
-
-        private async void ImageButton_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ProfilePage());
-        }
-
+        
+        // Route to the correct location based on what is clicked
         private async void TriggerNavigate(object sender, TappedEventArgs e)
         {
             if (sender is Label label)
             {
+                // checking to make sure a label is clicked and navigate based on the text
                 switch (label.Text)
                 {
                     case "Breathe":
