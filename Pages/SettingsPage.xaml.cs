@@ -1,7 +1,4 @@
-using Microsoft.Maui.ApplicationModel.Communication;
-using System.Runtime.Intrinsics.X86;
-
-namespace iMate;
+namespace iMate.Pages;
 
 public partial class SettingsPage : ContentPage
 {
@@ -14,4 +11,4 @@ public partial class SettingsPage : ContentPage
         await Navigation.PushAsync(new LoginPage());
     }
 
-    }
+}

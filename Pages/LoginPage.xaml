@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="iMate.LoginPage"
+             x:Class="iMate.Pages.LoginPage"
              BackgroundColor="{DynamicResource Platinum}"
              Title=""
              Shell.TabBarIsVisible="False"
@@ -31,7 +31,7 @@
                  Aspect="AspectFill"
                  Source="help_icon.svg"
                  Clicked="Help_Clicked"
-     />
+            />
         </Grid>
     </Shell.TitleView>
 
@@ -46,17 +46,15 @@
                    Margin="50"/>
 
             <Grid RowDefinitions="*"
-            RowSpacing="20"
-            Padding="10, 2"
-            VerticalOptions="Center">
-             
-
+                  RowSpacing="20"
+                  Padding="10, 2"
+                  VerticalOptions="Center">
                 <!--Draw a Line -->
                 <BoxView HeightRequest="1.5" 
-                 Color="Black" 
-                 HorizontalOptions="FillAndExpand" 
-                 VerticalOptions="End"
-        />
+                         Color="Black" 
+                         HorizontalOptions="FillAndExpand" 
+                         VerticalOptions="End"
+                />
 
             </Grid>
 

@@ -12,6 +12,8 @@
         <BackButtonBehavior IsVisible="False" IsEnabled="False" />
     </Shell.BackButtonBehavior>
     
+    <!-- Display the top bar from views for reuability -->
+    <!-- the local namespace is imported at the top in xmlns:local (XML is the file and ns is for namespace -->
     <Shell.TitleView>
         <local:CustomTitleView />
     </Shell.TitleView>
@@ -22,7 +24,8 @@
             Spacing="25">
 
             <Image Source="home_icon.svg" />
-
+            
+            <!-- Define a grid -->
             <Grid RowDefinitions="*,*,*,*,*"
                   RowSpacing="20"
                   Padding="10, 2"
@@ -71,6 +74,7 @@
                        Margin="10, 10"
                        HorizontalOptions="Start"
                 >
+                        <!-- Non clickable elements like labels need a gesture recogniser to listen to taps -->
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="TriggerNavigate" />
                         </Label.GestureRecognizers>

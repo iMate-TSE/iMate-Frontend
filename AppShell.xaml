@@ -12,7 +12,7 @@
    >
 
     <TabBar>
-
+        <!-- This is the thing at the bottom of each screen -->
         <ShellContent
             Title="tasks"
             Icon="{FontImage FontFamily=AveriaRegular}"

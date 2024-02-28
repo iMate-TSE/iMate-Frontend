@@ -6,7 +6,7 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
     
-    <!-- iMate Specific Colours -->
+    <!-- iMate Specific Colours - you can add more here if needed -->
     <Color x:Key="Platinum">#EAE5E5</Color>
     <Color x:Key="DavyGray">#484747</Color>
     <Color x:Key="Cyclamen">#F46197</Color>
