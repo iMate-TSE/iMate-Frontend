@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using iMate.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace iMate
 {
@@ -9,6 +10,7 @@ namespace iMate
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("Amiko-Bold.ttf", "AmikoBold");
@@ -27,6 +29,7 @@ namespace iMate
             builder.Services.AddSingleton<ProfilePage>();
             builder.Services.AddSingleton<SettingsPage>();
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddTransient<ChatViewModel>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
