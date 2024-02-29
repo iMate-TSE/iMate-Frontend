@@ -13,6 +13,7 @@ namespace iMate
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
+                    // adding all the fonts
                     fonts.AddFont("Amiko-Bold.ttf", "AmikoBold");
                     fonts.AddFont("Amiko-Regular.ttf", "AmikoRegular");
                     fonts.AddFont("Amiko-SemiBold.ttf", "AmikoSemiBold");

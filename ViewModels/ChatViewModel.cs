@@ -1,9 +1,14 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using iMate.Models;
+﻿using iMate.Models;
 using System.Collections.ObjectModel;
 
 namespace iMate.ViewModels
 {
+    /// <summary>
+    /// A view model connects a page or view to the model. It is like the intermediate step. 
+    /// This needs to talk to the backend.
+    /// 
+    /// Using an Observable means the UI will auto update when there is a change (i.e a new message)
+    /// </summary>
     public partial class ChatViewModel : ObservableObject
     {
         public ObservableCollection<Message> Messages { get;  } = new ObservableCollection<Message>();
@@ -15,6 +20,7 @@ namespace iMate.ViewModels
 
         private static ObservableCollection<Message> GetMessages()
         {
+            // this eventually needs to hit the backend and do ai things
             return new ObservableCollection<Message>()
             {
                 new Message(1, "Hello Bot how are you doing today?", "Richard"),
