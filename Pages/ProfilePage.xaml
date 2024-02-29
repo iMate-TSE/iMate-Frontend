@@ -4,18 +4,76 @@
              x:Class="iMate.Pages.ProfilePage"
              Title="Profile">
     <!--        ^ This should probably bind the username rather than just saying "Profile" -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="title" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource DavyGray}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0,0,0,20" />
+            </Style>
+            <Style x:Key="DividerLine" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1.5" />
+                <Setter Property="Color" Value="Black" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="End" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to your Profile"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
-       <!-- Temporary button added so that settings can be accessed during implementation --> 
-        <Button
-            Text="Temp Button for Settings"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Clicked="NavigateSettings" />
+        <Label Text="Full Name" FontSize="Title" HorizontalOptions="CenterAndExpand" Margin="0,20,0,10" TextColor="Black"/>
+        <Ellipse HeightRequest="150" WidthRequest="150" Fill="Pink" Margin="0, 0, 0, 50"/>
 
+        <Grid RowDefinitions="*, *, *, *, *" Margin="10, 0, 0, 0">
+            <StackLayout Margin="0,0,0,10" Grid.Row="0" Padding="10">
+                <Label Text="Username" x:Name="UsernameEntry" Style="{StaticResource title}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="UsernameTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+            <StackLayout  Margin="0,0,0,10" Grid.Row="1" Padding="10">
+                <Label Text="Personal Information" x:Name="PersonalInformation" Style="{StaticResource title}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PersonalInformationTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,10" Grid.Row="2" Padding="10">
+                <Label Text="Notifications" x:Name="Notifications" Style="{StaticResource title}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NotificationsTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,10" Grid.Row="3" Padding="10">
+                <Label Text="Feedback" x:Name="Feedback" Style="{StaticResource title}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="FeedbackTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,10" Grid.Row="4" Padding="10">
+                <Label Text="Settings" x:Name="Settings" Style="{StaticResource title}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NavigateSettings"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+        </Grid>
+
+        <!-- Add more entry fields or controls as needed -->
     </VerticalStackLayout>
 </ContentPage>
