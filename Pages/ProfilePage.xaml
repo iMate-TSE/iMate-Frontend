@@ -19,6 +19,13 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="End" />
             </Style>
+            <Style x:Key="EmojiStyles" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontSize" Value="25" />
+                <!-- Negative Margin here shifts it up a little account for the origin being in the top center -->
+                <Setter Property="Margin" Value="0, -15, 0, 10" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <VerticalStackLayout>
@@ -37,38 +44,50 @@
             </StackLayout>
 
             <StackLayout  Margin="0,0,0,10" Grid.Row="1" Padding="10">
-                <Label Text="Personal Information" x:Name="PersonalInformation" Style="{StaticResource title}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="PersonalInformationTapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Grid ColumnDefinitions="*, Auto, *">
+                    <Label Text="😊" Grid.Column="0" Style="{StaticResource EmojiStyles}" />
+                    <Label Text="Personal Information" x:Name="PersonalInformation" Style="{StaticResource title}" Grid.Column="1" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PersonalInformationTapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
                 <BoxView Style="{StaticResource DividerLine}"/>
             </StackLayout>
 
             <StackLayout Margin="0,0,0,10" Grid.Row="2" Padding="10">
-                <Label Text="Notifications" x:Name="Notifications" Style="{StaticResource title}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="NotificationsTapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Grid ColumnDefinitions="*, Auto, *">
+                    <Label Text="🔔" Grid.Column="0" Style="{StaticResource EmojiStyles}" />
+                    <Label Text="Notifications" x:Name="Notifications" Style="{StaticResource title}" Grid.Column="1" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NotificationsTapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                
                 <BoxView Style="{StaticResource DividerLine}"/>
             </StackLayout>
 
             <StackLayout Margin="0,0,0,10" Grid.Row="3" Padding="10">
-                <Label Text="Feedback" x:Name="Feedback" Style="{StaticResource title}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="FeedbackTapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Grid ColumnDefinitions="*, Auto, *">
+                    <Label Text="❤️" Grid.Column="0" Style="{StaticResource EmojiStyles}" />
+                    <Label Text="Feedback" x:Name="Feedback" Style="{StaticResource title}" Grid.Column="1" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="FeedbackTapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
                 <BoxView Style="{StaticResource DividerLine}"/>
             </StackLayout>
 
             <StackLayout Margin="0,0,0,10" Grid.Row="4" Padding="10">
-                <Label Text="Settings" x:Name="Settings" Style="{StaticResource title}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="NavigateSettings"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Grid ColumnDefinitions="*, Auto, *">
+                    <Label Text="⚙️" Grid.Column="0" Style="{StaticResource EmojiStyles}" />
+                    <Label Text="Settings" x:Name="Settings" Style="{StaticResource title}" Grid.Column="1" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NavigateSettings" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                
                 <BoxView Style="{StaticResource DividerLine}"/>
             </StackLayout>
 
