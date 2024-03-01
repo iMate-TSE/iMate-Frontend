@@ -30,6 +30,9 @@ namespace iMate
             builder.Services.AddSingleton<ProfilePage>();
             builder.Services.AddSingleton<SettingsPage>();
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<PersonalInfoPage>();
+            builder.Services.AddSingleton<ChatPage>();
+
             builder.Services.AddTransient<ChatViewModel>();
 #if DEBUG
     		builder.Logging.AddDebug();

@@ -19,7 +19,10 @@ public partial class ProfilePage : ContentPage
 
     }
 
-    private void PersonalInformationTapped(object sender, EventArgs e) { }
+    private void PersonalInformationTapped(object sender, EventArgs e) 
+    { 
+        Navigation.PushAsync(new PersonalInfoPage());
+    }
 
     private void NotificationsTapped(object sender, EventArgs e) { }
 
