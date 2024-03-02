@@ -39,7 +39,7 @@
             <!-- Scroll view lets the chat messages be scrollable leaving the rest of the page still -->
             <ScrollView Grid.Row="0" MinimumHeightRequest="600" MaximumHeightRequest="600">
                 <!-- A collection view binds to the view model displaying the data in this case messagaes -->
-                <CollectionView ItemsSource="{Binding Messages}" ItemsLayout="Vertical">
+                <CollectionView ItemsSource="{Binding Messages}" ItemsLayout="VerticalList">
                     <!-- A template is how a single unit of data is displayed in this case a single message -->
                     <CollectionView.ItemTemplate>
                         <!-- Define which model we are templating -->
