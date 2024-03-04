@@ -17,5 +17,9 @@
             Text="Tasks!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label
+            Text="Cards"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"  />
     </VerticalStackLayout>
 </ContentPage>
