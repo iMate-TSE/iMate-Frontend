@@ -2,18 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Pages.ChatPage"
+             xmlns:viewmodels="clr-namespace:iMate.ViewModels"
+             xmlns:models="clr-namespace:iMate.Models"
+             x:DataType="viewmodels:ChatViewModel"
              BackgroundColor="{DynamicResource Platinum}"
              Title="Chat">
-    <VerticalStackLayout>
-        <Label 
-            Text="Chat Bot yay"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Grid RowDefinitions="*, Auto">
-            <ScrollView Grid.Row="0" MinimumHeightRequest="600">
-               
-            </ScrollView>
+    
+    <ContentPage.Resources>
+        <!-- Resources store the styles for the page -->
+        <ResourceDictionary>
+            <Style x:Key="ChatBubbleStyle" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="#F46197" />
+                <Setter Property="Margin" Value="10, 10, 10, 0" />
+                <Setter Property="Padding" Value="15, 10, 15, 10" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+            </Style>
+            
+            <Style x:Key="chatTime" TargetType="Label">
+                <Setter Property="Padding" Value="20, 0, 0, 0"/>
+                <Setter Property="TextColor" Value="DarkGray" />
+            </Style>
+            
+            <Style x:Key="SendIcon" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="WidthRequest" Value="20" />
+                <Setter Property="Margin" Value="0, 0, -20, 0" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="End" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
+    <VerticalStackLayout>
+        <Grid RowDefinitions="*, Auto">
+            <!-- Scroll view lets the chat messages be scrollable leaving the rest of the page still -->
+            <ScrollView Grid.Row="0" MinimumHeightRequest="600" MaximumHeightRequest="600">
+                <!-- A collection view binds to the view model displaying the data in this case messagaes -->
+                <CollectionView ItemsSource="{Binding Messages}" ItemsLayout="VerticalList">
+                    <!-- A template is how a single unit of data is displayed in this case a single message -->
+                    <CollectionView.ItemTemplate>
+                        <!-- Define which model we are templating -->
+                        <DataTemplate x:DataType="models:Message">
+                            <Grid RowDefinitions="Auto, *" Margin="0, 0, 0, 15">
+                                <!-- Border to be able to make a round recangle -->
+                                <Border Style="{StaticResource ChatBubbleStyle}" Grid.Row="0">
+                                    <Label Text="{Binding Content}" />
+                                    <Border.Triggers>
+                                        <!-- Data Triggers change the styles conditionally in this case if the sender is the bot-->
+                                        <DataTrigger TargetType="Border" Binding="{Binding Sender}" Value="Bot">
+                                            <Setter Property="BackgroundColor" Value="LightGray" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                </Border>
+                                <!-- Display the time -->
+                                <Label Text="{Binding DateTimeSent}" Style="{StaticResource chatTime}" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>           
+            </ScrollView>
+             
+            <!-- Text box at the bottom using border to make it rounded -->
             <Border
                     Padding="2"
                     Grid.Row="1"
@@ -23,20 +73,24 @@
                     StrokeShape="RoundRectangle 10"
             >
                 <Grid Padding="2, 2, 30, 2">
-                    <Entry x:Name="entry"
+                    <!-- Allow the user to hit enter or click the image -->
+                    <Entry x:Name="MessageEntry"
                         Placeholder="Type your message here..."
+                        Completed="SendChat"
                     />
-                    <Image Source="send.svg"
-                           Aspect="AspectFill"
-                           HeightRequest="20"
-                           WidthRequest="20"
-                           Margin="0, 0, -20, 0"
-                           VerticalOptions="Center"
-                           HorizontalOptions="End"
-                    />
+                    <Image Source="send.svg" Style="{StaticResource SendIcon}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SendChat" />
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
             </Border>
         </Grid>
 
     </VerticalStackLayout>
 </ContentPage>
+    
+ <!--
+   https://www.youtube.com/watch?v=nzciueT0iFA&t=2109s  
+     
+     -->

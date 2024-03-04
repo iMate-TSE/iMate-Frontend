@@ -4,18 +4,95 @@
              x:Class="iMate.Pages.ProfilePage"
              Title="Profile">
     <!--        ^ This should probably bind the username rather than just saying "Profile" -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="title" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource DavyGray}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0,0,0,20" />
+            </Style>
+            <Style x:Key="DividerLine" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1.5" />
+                <Setter Property="Color" Value="Black" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="End" />
+            </Style>
+            <Style x:Key="EmojiStyles" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontSize" Value="25" />
+                <!-- Negative Margin here shifts it up a little account for the origin being in the top center -->
+                <Setter Property="Margin" Value="0, -15, 0, 10" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to your Profile"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
-       <!-- Temporary button added so that settings can be accessed during implementation --> 
-        <Button
-            Text="Temp Button for Settings"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Clicked="NavigateSettings" />
+        <Label Text="Full Name" FontSize="Title" HorizontalOptions="CenterAndExpand" Margin="0,20,0,10" TextColor="Black"/>
+        <Ellipse HeightRequest="150" WidthRequest="150" Fill="Pink" Margin="0, 0, 0, 50"/>
 
+        <Grid RowDefinitions="*, *, *, *, *" Margin="10, 0, 0, 0">
+            <StackLayout Margin="0,0,0,10" Grid.Row="0" Padding="10">
+                <Label Text="Username" x:Name="UsernameEntry" Style="{StaticResource title}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="UsernameTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+            <StackLayout  Margin="0,0,0,10" Grid.Row="1" Padding="10">
+                <Grid ColumnDefinitions="*, Auto, *">
+                    <Label Text="😊" Grid.Column="0" Style="{StaticResource EmojiStyles}" />
+                    <Label Text="Personal Information" x:Name="PersonalInformation" Style="{StaticResource title}" Grid.Column="1" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PersonalInformationTapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,10" Grid.Row="2" Padding="10">
+                <Grid ColumnDefinitions="*, Auto, *">
+                    <Label Text="🔔" Grid.Column="0" Style="{StaticResource EmojiStyles}" />
+                    <Label Text="Notifications" x:Name="Notifications" Style="{StaticResource title}" Grid.Column="1" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NotificationsTapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,10" Grid.Row="3" Padding="10">
+                <Grid ColumnDefinitions="*, Auto, *">
+                    <Label Text="❤️" Grid.Column="0" Style="{StaticResource EmojiStyles}" />
+                    <Label Text="Feedback" x:Name="Feedback" Style="{StaticResource title}" Grid.Column="1" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="FeedbackTapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,10" Grid.Row="4" Padding="10">
+                <Grid ColumnDefinitions="*, Auto, *">
+                    <Label Text="⚙️" Grid.Column="0" Style="{StaticResource EmojiStyles}" />
+                    <Label Text="Settings" x:Name="Settings" Style="{StaticResource title}" Grid.Column="1" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NavigateSettings" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                
+                <BoxView Style="{StaticResource DividerLine}"/>
+            </StackLayout>
+
+        </Grid>
+
+        <!-- Add more entry fields or controls as needed -->
     </VerticalStackLayout>
 </ContentPage>

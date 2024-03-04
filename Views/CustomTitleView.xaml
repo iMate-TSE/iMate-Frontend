@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Views.CustomTitleView">
+    <!-- This code is an abstraction for the bart at the top of the screen to asve copy pasting the samew block of code-->
     <Grid RowDefinitions="Auto, Auto" 
               ColumnDefinitions="Auto, *, Auto"
               ColumnSpacing="10"
