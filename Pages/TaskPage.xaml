@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:iMate.Views"
              x:Class="iMate.Pages.TaskPage"
              Title="TaskPage"
+             xmlns:viewmodels="clr-namespace:iMate.ViewModels"
+             xmlns:models="clr-namespace:iMate.Models"
+             x:DataType="viewmodels:DeckViewModel"
              BackgroundColor="{DynamicResource Platinum}"
              Shell.NavBarIsVisible="True"
              >
@@ -14,13 +17,22 @@
     
     <VerticalStackLayout>
         <Label 
-            Text="Tasks!"
+            Text="Your Tasks!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Label
-            Text="Cards"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"  />
+
+        <HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding Cards}" ItemsLayout="VerticalList">
+                <!-- A template is how a single unit of data is displayed in this case a single message -->
+                <CollectionView.ItemTemplate>
+                    <!-- Define which model we are templating -->
+                    <DataTemplate x:DataType="models:Card">
+                        <Label Text="{Binding Content}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </HorizontalStackLayout>
     </VerticalStackLayout>
     
 </ContentPage>
