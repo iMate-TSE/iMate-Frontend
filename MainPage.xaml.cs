@@ -17,9 +17,11 @@
                 {
                     case "Breathe":
                         SemanticScreenReader.Announce("Breathe Button Clicked");
+                        await Navigation.PushAsync(new BreathePage());
                         break;
                     case "Meditate":
                         SemanticScreenReader.Announce("Meditate Button Clicked");
+                        await Navigation.PushAsync(new MeditatePage());
                         break;
                     case "Chat":
                         SemanticScreenReader.Announce("Chat Button Clicked");
