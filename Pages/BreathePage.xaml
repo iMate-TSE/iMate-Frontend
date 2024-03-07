@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iMate.Pages.BreathePage"
+             Title="Breathe 💨">
+    <VerticalStackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+        <Grid ColumnDefinitions="*" RowDefinitions="4*, *, *" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="*, *, *, *" ColumnDefinitions="*">
+                <Label Text="Breathing Exercises" Margin="0, 20, 0, 5" Grid.Row="0" HorizontalOptions="Center" FontFamily="AveriaRegular" FontSize="20" />
+                <Label Text="Breathing exercises can help regulate emotions, relieve stress, anxiety and ease your mind." 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                       Grid.Row="1" Grid.Column="0" Padding="20, 20, 20, 0" LineHeight="1.4"
+                 />
+                <Label Text="Select a plan and get started, be sure to sit comfortably, try to keep your back straight."
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                        Grid.Row="2" Grid.Column="0" Padding="20" LineHeight="1.4"/>
+                <Picker x:Name="TimePicker" 
+                        Title="Select a plan" 
+                        Grid.Row="3" Grid.Column="0" 
+                        VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"
+                        WidthRequest="200"
+                        Margin="0, 40, 0, 100"
+                        SelectedIndexChanged="TimePicker_SelectedIndexChanged"
+                >
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>1 Minute</x:String>
+                            <x:String>2 Minutes</x:String>
+                            <x:String>3 Minutes</x:String>
+                            <x:String>4 Minutes</x:String>
+                            <x:String>5 Minutes</x:String>
+                            <x:String>6 Minutes</x:String>
+                            <x:String>7 Minutes</x:String>
+                            <x:String>8 Minutes</x:String>
+                            <x:String>9 Minutes</x:String>
+                            <x:String>10 Minutes</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0" RowDefinitions="*" ColumnDefinitions="*" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <Ellipse Stroke="{DynamicResource Cyclamen}"
+                 StrokeThickness="4"
+                 WidthRequest="150"
+                 HeightRequest="150"
+                 HorizontalOptions="Start"
+                 VerticalOptions="End"
+                 Grid.Column="0"
+                 Grid.Row="0"
+                 x:Name="BreathingCircle"
+        >
+                    <Ellipse.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Animate" />
+                    </Ellipse.GestureRecognizers>
+                </Ellipse>
+                <Label 
+                Text="Touch to Start" 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                VerticalOptions="Center"
+                HorizontalOptions="Center" 
+                x:Name="CircleText"
+                FontFamily="AmikoRegular"
+            />
+            </Grid>
+
+        </Grid>
+        <Label Text="Stop" HorizontalOptions="Center" Margin="0, 90, 0, 0" TextDecorations="Underline" Padding="10" TextColor="Blue">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="StopAnimation" />
+            </Label.GestureRecognizers>
+        </Label>
+
+    </VerticalStackLayout>
+</ContentPage>
