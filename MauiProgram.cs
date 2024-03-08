@@ -1,5 +1,7 @@
 ﻿using iMate.ViewModels;
+using iMate.Views;
 using Microsoft.Extensions.Logging;
+using CommunityToolkit.Maui;
 
 namespace iMate
 {
@@ -32,6 +34,7 @@ namespace iMate
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<BreathePage>();
             builder.Services.AddSingleton<MeditatePage>();
+
             builder.Services.AddTransient<ChatViewModel>();
 #if DEBUG
     		builder.Logging.AddDebug();

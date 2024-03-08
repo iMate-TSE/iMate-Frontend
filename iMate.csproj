@@ -71,6 +71,7 @@
 	  <None Remove="Resources\Images\login_icon.svg" />
 	  <None Remove="Resources\Images\profile_placeholder.png" />
 	  <None Remove="Resources\Images\send.svg" />
+	  <None Remove="Resources\Images\underline.png" />
 	</ItemGroup>
 
 	<ItemGroup>
