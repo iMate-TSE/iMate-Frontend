@@ -1,3 +1,6 @@
+using CommunityToolkit.Maui.Views;
+using iMate.Views;
+
 namespace iMate.Pages;
 
 public partial class ProfilePage : ContentPage
@@ -7,8 +10,6 @@ public partial class ProfilePage : ContentPage
         InitializeComponent();
     }
 
-
-    // TEMPORARY WAY TO NAVIGATE TO SETTINGS!!!!!
     private void NavigateSettings(object sender, EventArgs e)
     {
         Navigation.PushAsync(new SettingsPage());
@@ -26,6 +27,9 @@ public partial class ProfilePage : ContentPage
 
     private void NotificationsTapped(object sender, EventArgs e) { }
 
-    private void FeedbackTapped(object sender, EventArgs e) { }
+    private async void FeedbackTapped(object sender, EventArgs e)
+    {
+        string feedback = await DisplayPromptAsync("Feedback", "Enter any feedback you may have:");
+    }
 
 }
