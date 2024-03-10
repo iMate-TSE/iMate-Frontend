@@ -5,9 +5,14 @@ namespace iMate.Pages;
 
 public partial class ProfilePage : ContentPage
 {
+    private PersonalInfoViewModel _viewmodel; 
     public ProfilePage()
     {
         InitializeComponent();
+
+        _viewmodel = new PersonalInfoViewModel();
+
+        BindingContext = _viewmodel;
     }
 
     private void NavigateSettings(object sender, EventArgs e)

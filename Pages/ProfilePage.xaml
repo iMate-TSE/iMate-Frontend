@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Views="clr-namespace:iMate.Views"
              x:Class="iMate.Pages.ProfilePage"
+             xmlns:models="clr-namespace:iMate.Models"
+             xmlns:viewmodels="clr-namespace:iMate.ViewModels"
+             x:DataType="viewmodels:PersonalInfoViewModel"
              BackgroundColor="{DynamicResource Platinum}"
              Title="Profile 👲">
     <!--        ^ This should probably bind the username rather than just saying "Profile" -->
@@ -32,12 +35,12 @@
     </ContentPage.Resources>
 
     <VerticalStackLayout>
-        <Label Text="Full Name" FontSize="Title" HorizontalOptions="CenterAndExpand" Margin="0,20,0,10" TextColor="Black"/>
+        <Label Text="{Binding Fullname}" FontSize="Title" HorizontalOptions="CenterAndExpand" Margin="0,20,0,10" TextColor="Black"/>
         <Ellipse HeightRequest="150" WidthRequest="150" Fill="Pink" Margin="0, 0, 0, 50"/>
 
         <Grid RowDefinitions="*, *, *, *, *" Margin="10, 0, 0, 0">
             <StackLayout Margin="0,0,0,10" Grid.Row="0" Padding="10">
-                <Label Text="Username" x:Name="UsernameEntry" Style="{StaticResource title}">
+                <Label Text="{Binding Username}" x:Name="UsernameEntry" Style="{StaticResource title}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="UsernameTapped"/>
                     </Label.GestureRecognizers>
