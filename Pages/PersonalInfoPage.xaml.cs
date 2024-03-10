@@ -6,4 +6,8 @@ public partial class PersonalInfoPage : ContentPage
 	{
 		InitializeComponent();
 	}
+	private void ChangePictureTapped(object sender, EventArgs e)
+	{
+
+	}
 }

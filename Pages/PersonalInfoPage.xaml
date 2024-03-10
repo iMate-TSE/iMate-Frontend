@@ -5,9 +5,28 @@
              BackgroundColor="{DynamicResource Platinum}"
              Title="Personal Information">
     <VerticalStackLayout>
-        <Label 
-            Text="We have all your personal info"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid RowDefinitions="Auto,*,*,*,*,*,*,*,*,*,*" ColumnDefinitions="*">
+            <Ellipse Grid.Row="0" Grid.Column="0" HeightRequest="100" WidthRequest="100" Fill="Pink" Margin="0, 0, 0, 10"/>
+            <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" Text="Change Picture" TextColor="#227093">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ChangePictureTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Row="2" Grid.Column="0" Text="Full Name" Margin="10, 20, 0, 0" Padding="20, 20, 20, 0" TextColor="#84817a"/>
+            <Entry x:Name="FullName" Placeholder="Josh Coric" Grid.Row="3" Grid.Column="0" Margin="25, 0, 25, 0"/>
+            
+            <Label Grid.Row="4" Grid.Column="0" Text="Username" Margin="10, 20, 0, 0" Padding="20, 5, 20, 0" TextColor="#84817a"/>
+            <Entry x:Name="Username" Placeholder="Yoshi1346" Grid.Row="5" Grid.Column="0" Margin="25, 0, 25, 0"/>
+
+            <Label Grid.Row="6" Grid.Column="0" Text="Age" Margin="10, 20, 0, 0" Padding="20, 0, 20, 0" TextColor="#84817a"/>
+            <Entry x:Name="Age" Placeholder="23" Grid.Row="7" Grid.Column="0" Margin="25, 0, 25, 5"/>
+
+            <Label Grid.Row="8" Grid.Column="0" Text="Gender" Margin="10, 20, 0, 0" Padding="20, 5, 20, 0" TextColor="#84817a"/>
+            <Entry x:Name="Gender" Placeholder="Male" Grid.Row="9" Grid.Column="0" Margin="25, 0, 25, 0"/>
+
+            <Button Text="Save" Grid.Row="10" Grid.Column="0" Margin="0,20,0,0" WidthRequest="170"/>
+
+
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
