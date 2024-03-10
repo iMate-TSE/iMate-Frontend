@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Pages.SliderPage"
-             Title="SliderPage">
+             Title="Check Mood ☀️">
     <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
@@ -55,6 +55,7 @@
                        VerticalOptions="End"
                        Margin="10, 0"    
                        FontFamily="AveriaRegular"
+                       HorizontalTextAlignment="Center"
                 />
 
                 <!-- Slider 1 -->
@@ -89,6 +90,7 @@
                     <ColumnDefinition Width="90"/>
                 </Grid.ColumnDefinitions>
 
+
                 <!--  Mood 1  -->
                 <Label Grid.Column="0" 
                        Grid.Row="0" 
@@ -102,7 +104,7 @@
                 <!-- Slider 1 -->
                 <Slider Grid.Column="1" Grid.Row="0" 
                     Minimum="0" Maximum="100" 
-                    Value="50" 
+                    Value="50"
                     VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
                     Margin="10, 0"
                     ThumbColor="{DynamicResource Cyclamen}"
