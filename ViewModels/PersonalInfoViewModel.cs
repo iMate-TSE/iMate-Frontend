@@ -1,9 +1,4 @@
-﻿using iMate.Models;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-
-
-namespace iMate.ViewModels
+﻿namespace iMate.ViewModels
 {
     partial class PersonalInfoViewModel : ObservableObject
     {
@@ -21,7 +16,23 @@ namespace iMate.ViewModels
 
         public PersonalInfoViewModel()
         {
-            
+            Dictionary<String, string> ProfileData = fetchProfileData();
+
+            _fullname = ProfileData["fullname"];
+            _username = ProfileData["username"];
+            _age = Int16.Parse(ProfileData["age"]);
+            _gender = ProfileData["gender"];
+        }
+
+        private Dictionary<string, string> fetchProfileData()
+        {
+            return new Dictionary<string, string>()
+            {
+                ["fullname"] = "Alan Turnig",
+                ["username"] = "aturing",
+                ["age"] = "21",
+                ["gender"] = "Male"
+            };
         }
 
     }
