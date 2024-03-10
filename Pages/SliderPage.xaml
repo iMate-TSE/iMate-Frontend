@@ -142,13 +142,10 @@
 
             <!-- Pick a Colour Buttons -->
             <StackLayout Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="Red" BackgroundColor="Red" TextColor="White" FontFamily="AveriaRegular"/>
-                <Button Text="Blue" BackgroundColor="Blue" TextColor="White" Margin="10,0" FontFamily="AveriaRegular"/>
-                <Button Text="Yellow" BackgroundColor="Yellow" TextColor="Black" FontFamily="AveriaRegular"/>
+                <Button Text="Red" BackgroundColor="#ff5252" TextColor="White" FontFamily="AveriaRegular"/>
+                <Button Text="Blue" BackgroundColor="#34ace0" TextColor="White" Margin="10,0" FontFamily="AveriaRegular"/>
+                <Button Text="Yellow" BackgroundColor="#ffda79" TextColor="Black" FontFamily="AveriaRegular"/>
             </StackLayout>
-
-
-
 
         </Grid>
     </VerticalStackLayout>
