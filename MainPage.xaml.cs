@@ -29,6 +29,7 @@
                         break;
                     case "Check Mood":
                         SemanticScreenReader.Announce("Check Mood button clicked");
+                        await Navigation.PushAsync(new SliderPage());
                         break;
                 }
             }

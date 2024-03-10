@@ -30,6 +30,9 @@
     <MauiXaml Update="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\SliderPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Views\CustomTitleView.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
