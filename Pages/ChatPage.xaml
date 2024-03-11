@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:iMate.Models"
              x:DataType="viewmodels:ChatViewModel"
              BackgroundColor="{DynamicResource Platinum}"
-             Title="Chat">
+             Title="Chat 💬">
     
     <ContentPage.Resources>
         <!-- Resources store the styles for the page -->
