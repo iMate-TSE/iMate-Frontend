@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Pages.SettingsPage"
+             xmlns:models="clr-namespace:iMate.Models"
+             xmlns:viewmodels="clr-namespace:iMate.ViewModels"
+             x:DataType="viewmodels:SettingsViewModel"
              BackgroundColor="{DynamicResource Platinum}"
              Title="Back">
 
@@ -34,7 +37,7 @@
 
                 <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto" RowDefinitions="*,*,*,*,*,*" RowSpacing="30">
 
-                    <Label Grid.Row="0" Grid.Column="1"
+                    <Label Grid.Row="0" Grid.Column="0"
                         Text="Sound Effects"
                         VerticalOptions="Center"
                         FontSize="23"
@@ -43,7 +46,12 @@
                         HorizontalOptions="Start"
                       />
 
-                    <Label Grid.Row="1" Grid.Column="1"
+                    <Switch Grid.Row="0" Grid.Column="2" 
+                        OnColor="{DynamicResource Cyclamen}"
+                        ThumbColor="{DynamicResource Cyclamen}"
+                        IsToggled="{Binding SoundEffects}"/>
+
+                    <Label Grid.Row="1" Grid.Column="0"
                            Text="Reduced Motion"
                             VerticalOptions="Center"
                             FontSize="23"
@@ -51,8 +59,12 @@
                             Margin="10, 10"
                             HorizontalOptions="Start"
                     />
+                    <Switch Grid.Row="1" Grid.Column="2" 
+                        OnColor="{DynamicResource Cyclamen}"
+                        ThumbColor="{DynamicResource Cyclamen}"
+                        IsToggled="{Binding ReducedMotion}"/>
 
-                    <Label Grid.Row="2" Grid.Column="1"
+                    <Label Grid.Row="2" Grid.Column="0"
                         Text="Motivational Messages"
                         VerticalOptions="Center"
                         FontSize="23"
@@ -60,8 +72,13 @@
                         Margin="10, 10"
                         HorizontalOptions="Start"
                         />
-                    
-                    <Label Grid.Row="3" Grid.Column="1"
+
+                    <Switch Grid.Row="2" Grid.Column="2" 
+                        OnColor="{DynamicResource Cyclamen}"
+                        ThumbColor="{DynamicResource Cyclamen}"
+                        IsToggled="{Binding MotivationalMessages}"/>
+
+                    <Label Grid.Row="3" Grid.Column="0"
                         Text="Practice Reminder"
                         VerticalOptions="Center"
                         FontSize="23"
@@ -70,7 +87,12 @@
                         HorizontalOptions="Start"
                         />
 
-                    <Label Grid.Row="4" Grid.Column="1"
+                    <Switch Grid.Row="3" Grid.Column="2" 
+                        OnColor="{DynamicResource Cyclamen}"
+                        ThumbColor="{DynamicResource Cyclamen}" 
+                        IsToggled="{Binding PracticeReminder}"/>
+
+                    <Label Grid.Row="4" Grid.Column="0"
                         Text="Smart Scheduling"
                         VerticalOptions="Center"
                         FontSize="23"
@@ -79,7 +101,13 @@
                         HorizontalOptions="Start"
                         />
 
-                    <Label Grid.Row="5" Grid.Column="1"
+                    <Switch Grid.Row="4" Grid.Column="2" 
+                        OnColor="{DynamicResource Cyclamen}"
+                        ThumbColor="{DynamicResource Cyclamen}"
+                        IsToggled="{Binding SmartScheduling}"/>
+
+
+                    <Label Grid.Row="5" Grid.Column="0"
                         Text="Reminder Time"
                         VerticalOptions="Center"
                         FontSize="23"
@@ -88,6 +116,14 @@
                         HorizontalOptions="Start"
                         />
 
+                    <TimePicker Grid.Row="5" Grid.Column="2"
+                            Time="{Binding ReminderTime}"
+                            VerticalOptions="Center"
+                            FontSize="23"
+                            FontFamily="AmikoRegular"
+                            Margin="0,0"
+                            HorizontalOptions="Start"/>
+                    
                 </Grid>
 
             </Border>
@@ -98,7 +134,7 @@
                 StrokeShape="RoundRectangle 20,20,20,20"
                 Background="{DynamicResource WhiteSmoke}"
                 Padding="20,10"
-                Margin="50,50"
+                Margin="50,25"
                 HorizontalOptions="Center"
                 >
                 <Label
