@@ -1,4 +1,5 @@
 ﻿using iMate.Models;
+using Syncfusion.Maui.Cards;
 using System.Collections.ObjectModel;
 
 namespace iMate.ViewModels
@@ -16,11 +17,7 @@ namespace iMate.ViewModels
         {
             return new ObservableCollection<Card>()
             {
-                new Card (1, "Go for a run!", 0.1f),
-                new Card (2, "Cook a meal!", 0.2f),
-                new Card (3, "Meditate for 10 minutes!", 0.3f),
-                new Card (4, "Do exercise for 10 minutes!", 0.4f),
-                new Card (5, "Reflect on your day!", 0.5f)
+                
             };
         }
     }

@@ -7,6 +7,7 @@
              xmlns:viewmodels="clr-namespace:iMate.ViewModels"
              xmlns:models="clr-namespace:iMate.Models"
              x:DataType="viewmodels:DeckViewModel"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
              BackgroundColor="{DynamicResource Platinum}"
              Shell.NavBarIsVisible="True"
              >
@@ -31,8 +32,22 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
         </HorizontalStackLayout>
+        
+        <sf:SfCardLayout HeightRequest="550">
+            <sf:SfCardView Margin="40" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" HeightRequest="500" SwipeToDismiss="True" >
+                <Grid>
+                    <Image Source="card_back_black.png" Grid.Row="0" Margin="0, 0, 0, 0" Aspect="Fill" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TriggerNavigate" />
+                            <TapGestureRecognizer Tapped="TriggerNavigate" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </sf:SfCardView>
+        </sf:SfCardLayout>
+        
     </VerticalStackLayout>
+    
     
 </ContentPage>
