@@ -23,8 +23,12 @@
             Padding="30,0"
             Spacing="25">
 
-            <Image Source="home_icon.svg" />
-            
+            <Image Source="home_icon.svg">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TriggerNavigate" />
+                </Image.GestureRecognizers>
+            </Image>
+
             <!-- Define a grid -->
             <Grid RowDefinitions="*,*,*,*,*"
                   RowSpacing="20"
@@ -48,9 +52,24 @@
                  
                 <!-- Navigation Thingy -->
                 <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto" RowDefinitions="*,*,*,*" RowSpacing="30">
-                    <!-- Breathe Link -->
+                    <!-- Mood Link -->
                     <Image Grid.Column="0" Grid.Row="0" Source="arrow_right.svg" HorizontalOptions="Start" />
                     <Label Grid.Row="0" Grid.Column="1"
+                       Text="Check Mood"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontFamily="AmikoRegular"
+                       Margin="10, 10"
+                       HorizontalOptions="Start"
+                >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TriggerNavigate" />
+                        </Label.GestureRecognizers>
+
+                    </Label>
+                    <!-- Breathe Link -->
+                    <Image Grid.Column="0" Grid.Row="1" Source="arrow_right.svg" HorizontalOptions="Start" />
+                    <Label Grid.Row="1" Grid.Column="1"
                        Text="Breathe"
                        VerticalOptions="Center"
                        FontSize="23"
@@ -63,44 +82,12 @@
                         </Label.GestureRecognizers>
 
                     </Label>
-                    
-                    <!-- Mediate Link -->
-                    <Image Grid.Column="0" Grid.Row="1" Source="arrow_right.svg" HorizontalOptions="Start" />
-                    <Label Grid.Row="1" Grid.Column="1"
-                       Text="Meditate"
-                       VerticalOptions="Center"
-                       FontSize="23"
-                       FontFamily="AmikoRegular"
-                       Margin="10, 10"
-                       HorizontalOptions="Start"
-                >
-                        <!-- Non clickable elements like labels need a gesture recogniser to listen to taps -->
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TriggerNavigate" />
-                        </Label.GestureRecognizers>
-
-                    </Label>
+                   
 
                     <!-- Chat Link -->
                     <Image Grid.Column="0" Grid.Row="2" Source="arrow_right.svg" HorizontalOptions="Start" />
                     <Label Grid.Row="2" Grid.Column="1"
                        Text="Chat"
-                       VerticalOptions="Center"
-                       FontSize="23"
-                       FontFamily="AmikoRegular"
-                       Margin="10, 10"
-                       HorizontalOptions="Start"
-                >
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TriggerNavigate" />
-                        </Label.GestureRecognizers>
-
-                    </Label>
-
-                    <!-- Mediate Link -->
-                    <Image Grid.Column="0" Grid.Row="3" Source="arrow_right.svg" HorizontalOptions="Start" />
-                    <Label Grid.Row="3" Grid.Column="1"
-                       Text="Check Mood"
                        VerticalOptions="Center"
                        FontSize="23"
                        FontFamily="AmikoRegular"
