@@ -58,17 +58,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Remove="Pages\Cards.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Resources\Fonts\Amiko-Bold.ttf" />
 	  <None Remove="Resources\Fonts\Amiko-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Amiko-SemiBold.ttf" />
 	  <None Remove="Resources\Fonts\AveriaGruesaLibre-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-SemiBold.ttf" />
-	  <None Remove="Resources\Images\arrow_down.svg" />
 	  <None Remove="Resources\Images\arrow_right.svg" />
 	  <None Remove="Resources\Images\circle.svg" />
 	  <None Remove="Resources\Images\help_icon.svg" />
