@@ -32,6 +32,9 @@
                         await Navigation.PushAsync(new SliderPage());
                         break;
                 }
+            } else if (sender is Image image)
+            {
+                await Navigation.PushAsync(new SliderPage());
             }
         }
     }
