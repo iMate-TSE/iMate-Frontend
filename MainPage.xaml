@@ -67,6 +67,7 @@
                         </Label.GestureRecognizers>
 
                     </Label>
+
                     <!-- Breathe Link -->
                     <Image Grid.Column="0" Grid.Row="1" Source="arrow_right.svg" HorizontalOptions="Start" />
                     <Label Grid.Row="1" Grid.Column="1"
@@ -88,6 +89,23 @@
                     <Image Grid.Column="0" Grid.Row="2" Source="arrow_right.svg" HorizontalOptions="Start" />
                     <Label Grid.Row="2" Grid.Column="1"
                        Text="Chat"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontFamily="AmikoRegular"
+                       Margin="10, 10"
+                       HorizontalOptions="Start"
+                >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TriggerNavigate" />
+                        </Label.GestureRecognizers>
+
+                    </Label>
+                    
+                    
+                    <!-- TEMP -->
+                    <Image Grid.Column="0" Grid.Row="3" Source="arrow_right.svg" HorizontalOptions="Start" />
+                    <Label Grid.Row="3" Grid.Column="1"
+                       Text="Questionnaire [TEMP]"
                        VerticalOptions="Center"
                        FontSize="23"
                        FontFamily="AmikoRegular"
