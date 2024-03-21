@@ -28,7 +28,7 @@
         {
             return new Dictionary<string, string>()
             {
-                ["fullname"] = "Alan Turnig",
+                ["fullname"] = "Alan Turing",
                 ["username"] = "aturing",
                 ["age"] = "21",
                 ["gender"] = "Male"
