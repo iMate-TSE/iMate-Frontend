@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iMate.Pages.FormPage"
+             Title="Check Mood ☀️">
+    <VerticalStackLayout>
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+              ColumnDefinitions="*"
+              Padding="15"
+              RowSpacing="40">
+
+            <Grid RowDefinitions="*" Grid.Row="0">
+                <Label Text="How is your mood?"
+                       FontSize="20"
+                       FontFamily="RubikSemiBold"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="{DynamicResource DavyGray}"
+                       Margin="0, 20"
+                    />
+                <Image Source="underline.png" Grid.Row="0" Margin="10, 10" WidthRequest="300" HeightRequest="50" />
+            </Grid>
+
+            <!--  Main  -->
+
+
+
+            <!--  Question 1  -->
+            <Label Grid.Row="1" 
+                   Text="How are you feeling right now?" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="End"   
+                   FontFamily="AveriaRegular"
+                   HorizontalTextAlignment="Center"
+            />
+
+            <!-- Answer 1 -->
+            <Border
+                Grid.Row="2"
+                VerticalOptions="Start"
+                WidthRequest="370"
+                HeightRequest="150"
+                BackgroundColor="{DynamicResource Platinum }"
+                StrokeShape="RoundRectangle 10"
+                Margin="0,0,0,25"
+            />
+
+            <Grid Padding="2" Grid.Row="2" VerticalOptions="Start">
+                <Editor x:Name="Question1"
+                        Placeholder="Type your answer here..."
+                        HeightRequest="150" 
+                />
+            </Grid>
+
+
+            <!--  Question 2  -->
+            <Label Grid.Row="3" 
+                  Text="Do you know what aspect of your life is triggering this?" 
+                  HorizontalOptions="Center" 
+                  VerticalOptions="End"
+                  FontFamily="AveriaRegular"
+                  HorizontalTextAlignment="Center"
+            />
+
+            <!-- Answer 2 -->
+            <Border
+                Grid.Row="4"
+                VerticalOptions="Start"
+                WidthRequest="370"
+                HeightRequest="150"
+                BackgroundColor="{DynamicResource Platinum }"
+                StrokeShape="RoundRectangle 10"
+            />
+            <Grid Padding="2" Grid.Row="4" VerticalOptions="Start">
+                <Editor x:Name="Question2"
+                        Placeholder="Type your answer here..."
+                        HeightRequest="150" 
+                />
+            </Grid>
+
+
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
