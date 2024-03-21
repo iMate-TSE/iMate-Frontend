@@ -7,7 +7,6 @@
              xmlns:viewmodels="clr-namespace:iMate.ViewModels"
              xmlns:models="clr-namespace:iMate.Models"
              x:DataType="viewmodels:DeckViewModel"
-             xmlns:sf="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
              BackgroundColor="{DynamicResource Platinum}"
              Shell.NavBarIsVisible="True"
              >
