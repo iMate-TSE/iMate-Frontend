@@ -17,7 +17,9 @@ namespace iMate.ViewModels
         {
             return new ObservableCollection<Card>()
             {
-                
+                new Card(1, "Go for a walk", 3.0f),
+                new Card(1, "Go for a walk", 3.0f),
+                new Card(1, "Go for a walk", 3.0f),
             };
         }
     }
