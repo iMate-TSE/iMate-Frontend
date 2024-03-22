@@ -17,7 +17,7 @@ public partial class TaskPage : ContentPage
 	private void FlipCard(object sender, EventArgs e)
 	{
         StackLayout sl = (StackLayout)sender;
-        Image Front = (Image)sl.Children[0];
+        Border Front = (Border)sl.Children[0];
         Border Back = (Border)sl.Children[1];
 
         sl.RotationY = 0;

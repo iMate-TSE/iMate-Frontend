@@ -22,17 +22,19 @@
             HorizontalOptions="Center" />
 
 
-        <HorizontalStackLayout>
-                <CarouselView ItemsSource="{Binding Cards}" ItemsLayout="HorizontalList">
+        <HorizontalStackLayout VerticalOptions="Center">
+                <CarouselView ItemsSource="{Binding Cards}" ItemsLayout="HorizontalList" VerticalOptions="Center" Margin="0, 60, 0, 0">
                     <!-- A template is how a single unit of data is displayed in this case a single message -->
                     <CarouselView.ItemTemplate>
                         <!-- Define which model we are templating -->
                         <DataTemplate x:DataType="models:Card">
                             <StackLayout WidthRequest="350" HeightRequest="500">
-                                <Image x:Name="CardBack" Source="card_back_black.png" Grid.Row="0" Margin="40, 10, 10, 10" Aspect="Fill"/>
-                            <Border Margin="40, 10, 10, 10" WidthRequest="300" HeightRequest="450" Stroke="Black" StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="1" IsVisible="False">
-                                <Grid x:Name="CardFront" Margin="40, 10, 10, 10" WidthRequest="300" HeightRequest="450">
-                                    <Label Text="{Binding Content}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            <Border Margin="40, 10, 10, 10" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="450" WidthRequest="300" Stroke="Black" StrokeThickness="1">
+                                    <Image x:Name="CardBack" Source="card_back_black.png" Aspect="AspectFill"/>
+                            </Border>
+                            <Border Margin="40, 10, 10, 10" WidthRequest="300" HeightRequest="450" Stroke="Black" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10" IsVisible="False">
+                                <Grid x:Name="CardFront" Margin="10, 10, 10, 10" WidthRequest="300" HeightRequest="450">
+                                    <Label Text="{Binding Content}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
                                 </Grid>
                             </Border>
                             <StackLayout.GestureRecognizers>
