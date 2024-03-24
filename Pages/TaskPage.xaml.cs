@@ -22,7 +22,7 @@ public partial class TaskPage : ContentPage
 
         sl.RotationY = 0;
         Animation animation = new Animation();
-        animation.Add(0, 0.5, new Animation(v => sl.RotateYTo(v, 200), 0, 360));
+        animation.Add(0, 0.5, new Animation(v => sl.RotateYTo(v, 180), 0, 360));
         animation.Commit(this, "ChildAnimation", 5, 100, finished: delegate
         {
             if (side == 1)

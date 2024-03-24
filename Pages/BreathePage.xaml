@@ -43,6 +43,7 @@
                     </Picker.ItemsSource>
                 </Picker>
             </Grid>
+            
             <Grid Grid.Row="2" Grid.Column="0" RowDefinitions="*" ColumnDefinitions="*" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                 <Ellipse Stroke="{DynamicResource Cyclamen}"
                  StrokeThickness="4"
