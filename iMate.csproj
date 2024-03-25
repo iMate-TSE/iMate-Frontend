@@ -68,6 +68,7 @@
 	  <None Remove="Resources\Fonts\AveriaGruesaLibre-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-SemiBold.ttf" />
+	  <None Remove="Resources\Images\arrow_down.svg" />
 	  <None Remove="Resources\Images\arrow_right.svg" />
 	  <None Remove="Resources\Images\circle.svg" />
 	  <None Remove="Resources\Images\help_icon.svg" />
@@ -84,6 +85,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Syncfusion.Maui.Cards" Version="24.2.9" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -109,6 +111,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ChatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\FormPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LoginPage.xaml">

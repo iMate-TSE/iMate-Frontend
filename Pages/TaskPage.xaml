@@ -21,18 +21,32 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <HorizontalStackLayout>
-            <CollectionView ItemsSource="{Binding Cards}" ItemsLayout="VerticalList">
-                <!-- A template is how a single unit of data is displayed in this case a single message -->
-                <CollectionView.ItemTemplate>
-                    <!-- Define which model we are templating -->
-                    <DataTemplate x:DataType="models:Card">
-                        <Label Text="{Binding Content}"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
 
+        <HorizontalStackLayout>
+                <CarouselView ItemsSource="{Binding Cards}" ItemsLayout="HorizontalList">
+                    <!-- A template is how a single unit of data is displayed in this case a single message -->
+                    <CarouselView.ItemTemplate>
+                        <!-- Define which model we are templating -->
+                        <DataTemplate x:DataType="models:Card">
+                            <StackLayout WidthRequest="350" HeightRequest="500">
+                                <Image x:Name="CardBack" Source="card_back_black.png" Grid.Row="0" Margin="40, 10, 10, 10" Aspect="Fill"/>
+                            <Border Margin="40, 10, 10, 10" WidthRequest="300" HeightRequest="450" Stroke="Black" StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="1" IsVisible="False">
+                                <Grid x:Name="CardFront" Margin="40, 10, 10, 10" WidthRequest="300" HeightRequest="450">
+                                    <Label Text="{Binding Content}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                            <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="FlipCard" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
         </HorizontalStackLayout>
+
+
+        
     </VerticalStackLayout>
+    
     
 </ContentPage>
