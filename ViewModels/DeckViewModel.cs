@@ -1,5 +1,4 @@
 ﻿using iMate.Models;
-using Syncfusion.Maui.Cards;
 using System.Collections.ObjectModel;
 
 namespace iMate.ViewModels

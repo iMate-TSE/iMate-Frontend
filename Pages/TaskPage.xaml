@@ -16,10 +16,10 @@
     </Shell.TitleView>
     
     <VerticalStackLayout>
-        <Label 
-            Text="Your Tasks!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid RowDefinitions="*" Grid.Row="0" Margin="0, 20, 0, 0">
+            <Label Text="Your Tasks!" Margin="0, 20, 0, 5" Grid.Row="0" HorizontalOptions="Center" FontFamily="AveriaRegular" FontSize="20" />
+            <Image Source="underline.png" Grid.Row="0" Margin="0, 10, 0, 0"/>
+        </Grid>
 
 
         <HorizontalStackLayout VerticalOptions="Center">
@@ -32,7 +32,12 @@
                             <Border Margin="40, 10, 10, 10" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="450" WidthRequest="300" Stroke="Black" StrokeThickness="1">
                                     <Image x:Name="CardBack" Source="card_back_black.png" Aspect="AspectFill"/>
                             </Border>
-                            <Border Margin="40, 10, 10, 10" WidthRequest="300" HeightRequest="450" Stroke="Black" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10" IsVisible="False">
+                            <Border Margin="40, 10, 10, 10" 
+                                    WidthRequest="300" HeightRequest="450" 
+                                    Stroke="#010203" StrokeThickness="3" StrokeShape="RoundRectangle 10,10,10,10" 
+                                    BackgroundColor="WhiteSmoke"
+                                    IsVisible="False"
+                             >
                                 <Grid x:Name="CardFront" Margin="10, 10, 10, 10" WidthRequest="300" HeightRequest="450">
                                     <Label Text="{Binding Content}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
                                 </Grid>

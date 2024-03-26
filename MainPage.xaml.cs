@@ -31,8 +31,8 @@
                         SemanticScreenReader.Announce("Check Mood button clicked");
                         await Navigation.PushAsync(new SliderPage());
                         break;
-                    case "Questionnaire [TEMP]":
-                        await Navigation.PushAsync(new FormPage());
+                    case "Resources":
+                        await Navigation.PushAsync(new ResourcesPage());
                         break;
                 }
             } else if (sender is Image image)

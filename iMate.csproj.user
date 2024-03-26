@@ -30,6 +30,9 @@
     <MauiXaml Update="Pages\MeditatePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\ResourcesPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
