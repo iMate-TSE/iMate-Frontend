@@ -20,13 +20,18 @@ public partial class LoginPage : ContentPage
 
     private async void Login(object sender, EventArgs e)
     {
-
+        
         string username = UserName.Text;
         username = username.Replace(" ", "");
         string password = Password.Text;
         password = password.Replace(" ", "");
 
-        if (username == "" || password == "")
+        if (username == null || password == null)
+        {
+            IncorrectWarning.IsVisible = false;
+            NullWarning.IsVisible = true;
+        }
+        else if (username == "" || password == "")
         {
             IncorrectWarning.IsVisible = false;
             NullWarning.IsVisible = true;
