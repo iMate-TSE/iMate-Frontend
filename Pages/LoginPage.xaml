@@ -58,31 +58,47 @@
 
             </Grid>
 
-            <!-- Empy button for when google authentication is added-->
-            <Button
-                Text="Login with google (Not implemented)"
-                VerticalOptions="Center"
-                FontSize="15"
-                FontFamily="AmikoBold"
-                Margin="10, 10"
-                BackgroundColor="{DynamicResource WhiteSmoke}"
-                TextColor="{DynamicResource DavyGray}"
-                Clicked="Button_Clicked"></Button>
+            <Grid RowDefinitions="*,*,*,*,*" RowSpacing="20" Padding="10,30" VerticalOptions="Center">
 
-            <!-- Button to continue as guest to allow access to app without login-->
-            <Label
-                Text="Continue As Guest"
-                VerticalOptions="Center"
-                FontSize="23"
-                FontFamily="AmikoRegular"
-                Margin="10, 10"
-                HorizontalOptions="Start">
+                <!--  Username entry -->
+
+                <Label Grid.Row="0" 
+                       Text="Username:"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontFamily="AmikoRegular"
+                       Margin="10, 10"
+                       HorizontalOptions="Start" />
+                <Entry Grid.Row="1"
+                       Placeholder="Enter Username"
+                       FontFamily="AmikoRegular"/>
+
+                <!-- password entry-->
+
+                <Label Grid.Row="2" 
+                        Text="Password:"
+                        VerticalOptions="Center"
+                        FontSize="23"
+                        FontFamily="AmikoRegular"
+                        Margin="10, 10"
+                        HorizontalOptions="Start" />
+    
+                <Entry Grid.Row="3"
+                        Placeholder="Enter Password"
+                        FontFamily="AmikoRegular"
+                        IsPassword="True"/>
+
                 
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Login" />
-                </Label.GestureRecognizers>
+                <!-- Press to Log in -->
+                <Button Grid.Row="4"
+                        Text="Log In"
+                        FontFamily="AmikoRegular"
+                        FontSize="23"
+                        Margin="80,50"
+                        IsEnabled="True"
+                        Clicked="Login"/>
 
-            </Label>
+            </Grid>
 
         </VerticalStackLayout>
 
