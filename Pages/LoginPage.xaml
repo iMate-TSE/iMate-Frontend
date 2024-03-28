@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Pages.LoginPage"
+             xmlns:models="clr-namespace:iMate.Models"
+             xmlns:viewmodels="clr-namespace:iMate.ViewModels"
+             x:DataType="viewmodels:LoginViewModel"
              BackgroundColor="{DynamicResource Platinum}"
              Title=""
              Shell.TabBarIsVisible="False"
@@ -32,7 +35,9 @@
                  Source="help_icon.svg"
                  Clicked="Help_Clicked"
             />
+            
         </Grid>
+        
     </Shell.TitleView>
 
     
@@ -58,43 +63,67 @@
 
             </Grid>
 
-            <Grid RowDefinitions="*,*,*,*,*" RowSpacing="20" Padding="10,30" VerticalOptions="Center">
+            <Grid RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20" Padding="10,10" VerticalOptions="Center">
+
+                <Label Grid.Row="0"
+                       x:Name="NullWarning"
+                       Text="Username or password is empty!"
+                       VerticalOptions="Center"
+                       FontSize="16"
+                       FontFamily="AmikoRegular"
+                       TextColor="Firebrick"
+                       IsVisible="false"
+                       />
+
+                <Label Grid.Row="0"
+                       x:Name="IncorrectWarning"
+                       Text="Username or password is false!"
+                       VerticalOptions="Center"
+                       FontSize="16"
+                       FontFamily="AmikoRegular"
+                       TextColor="Firebrick"
+                       IsVisible="false"
+                       />
 
                 <!--  Username entry -->
 
-                <Label Grid.Row="0" 
+                <Label Grid.Row="1" 
                        Text="Username:"
                        VerticalOptions="Center"
                        FontSize="23"
                        FontFamily="AmikoRegular"
-                       Margin="10, 10"
-                       HorizontalOptions="Start" />
-                <Entry Grid.Row="1"
+                       Margin="10, 5"
+                       HorizontalOptions="Start"
+                       TextColor="{DynamicResource DavyGray}"/>
+                <Entry Grid.Row="2"
+                       x:Name="UserName"
                        Placeholder="Enter Username"
                        FontFamily="AmikoRegular"/>
 
                 <!-- password entry-->
 
-                <Label Grid.Row="2" 
+                <Label Grid.Row="3" 
                         Text="Password:"
                         VerticalOptions="Center"
                         FontSize="23"
                         FontFamily="AmikoRegular"
-                        Margin="10, 10"
-                        HorizontalOptions="Start" />
+                        Margin="10, 5"
+                        HorizontalOptions="Start" 
+                        TextColor="{DynamicResource DavyGray}"/>
     
-                <Entry Grid.Row="3"
+                <Entry Grid.Row="5"
+                        x:Name="Password"
                         Placeholder="Enter Password"
                         FontFamily="AmikoRegular"
                         IsPassword="True"/>
 
                 
                 <!-- Press to Log in -->
-                <Button Grid.Row="4"
+                <Button Grid.Row="6"
                         Text="Log In"
                         FontFamily="AmikoRegular"
                         FontSize="23"
-                        Margin="80,50"
+                        Margin="80,20"
                         IsEnabled="True"
                         Clicked="Login"/>
 
