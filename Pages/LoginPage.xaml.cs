@@ -20,7 +20,7 @@ public partial class LoginPage : ContentPage
 
     private async void Login(object sender, EventArgs e)
     {
-        
+
         string username = UserName.Text;
         username = username.Replace(" ", "");
         string password = Password.Text;
@@ -36,14 +36,21 @@ public partial class LoginPage : ContentPage
             IncorrectWarning.IsVisible = false;
             NullWarning.IsVisible = true;
         }
-        else if ( _viewModel.CheckUser(username, password) )
+        else if (_viewModel.CheckUser(username, password))
         {
             await Navigation.PushAsync(new MainPage());
         }
         else
         {
             NullWarning.IsVisible = false;
-            IncorrectWarning.IsVisible= true;
+            IncorrectWarning.IsVisible = true;
         }
+
     }
+
+        private async void Sign_Up(object sender, EventArgs e)
+        {
+            await DisplayAlert("Sign Up", "Not Implemented", "Okay");
+        }
+    
 }

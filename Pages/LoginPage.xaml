@@ -119,15 +119,29 @@
                         IsPassword="True"
                        Text=""/>
 
-                
-                <!-- Press to Log in -->
-                <Button Grid.Row="6"
+
+
+                <HorizontalStackLayout Grid.Row="6">
+                    
+                    <!-- Press to Log in -->
+                <Button 
                         Text="Log In"
                         FontFamily="AmikoRegular"
                         FontSize="23"
-                        Margin="80,20"
+                        Margin="40,20"
                         IsEnabled="True"
                         Clicked="Login"/>
+
+                <Button 
+                        Text="Sign Up"
+                        FontFamily="AmikoRegular"
+                        FontSize="23"
+                        Margin="20,20"
+                        IsEnabled="True"
+                        Clicked="Sign_Up"/>
+                    
+                </HorizontalStackLayout>
+                
 
             </Grid>
 
