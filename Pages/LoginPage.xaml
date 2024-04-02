@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Pages.LoginPage"
+             xmlns:models="clr-namespace:iMate.Models"
+             xmlns:viewmodels="clr-namespace:iMate.ViewModels"
+             x:DataType="viewmodels:LoginViewModel"
              BackgroundColor="{DynamicResource Platinum}"
              Title=""
              Shell.TabBarIsVisible="False"
@@ -32,7 +35,9 @@
                  Source="help_icon.svg"
                  Clicked="Help_Clicked"
             />
+            
         </Grid>
+        
     </Shell.TitleView>
 
     
@@ -58,31 +63,73 @@
 
             </Grid>
 
-            <!-- Empy button for when google authentication is added-->
-            <Button
-                Text="Login with google (Not implemented)"
-                VerticalOptions="Center"
-                FontSize="15"
-                FontFamily="AmikoBold"
-                Margin="10, 10"
-                BackgroundColor="{DynamicResource WhiteSmoke}"
-                TextColor="{DynamicResource DavyGray}"
-                Clicked="Button_Clicked"></Button>
+            <Grid RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20" Padding="10,10" VerticalOptions="Center">
 
-            <!-- Button to continue as guest to allow access to app without login-->
-            <Label
-                Text="Continue As Guest"
-                VerticalOptions="Center"
-                FontSize="23"
-                FontFamily="AmikoRegular"
-                Margin="10, 10"
-                HorizontalOptions="Start">
+                <Label Grid.Row="0"
+                       x:Name="NullWarning"
+                       Text="Username or password is empty!"
+                       VerticalOptions="Center"
+                       FontSize="16"
+                       FontFamily="AmikoRegular"
+                       TextColor="Firebrick"
+                       IsVisible="false"
+                       />
+
+                <Label Grid.Row="0"
+                       x:Name="IncorrectWarning"
+                       Text="Username or password is false!"
+                       VerticalOptions="Center"
+                       FontSize="16"
+                       FontFamily="AmikoRegular"
+                       TextColor="Firebrick"
+                       IsVisible="false"
+                       />
+
+                <!--  Username entry -->
+
+                <Label Grid.Row="1" 
+                       Text="Username:"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontFamily="AmikoRegular"
+                       Margin="10, 5"
+                       HorizontalOptions="Start"
+                       TextColor="{DynamicResource DavyGray}"/>
+                <Entry Grid.Row="2"
+                       x:Name="UserName"
+                       Placeholder="Enter Username"
+                       FontFamily="AmikoRegular"
+                       Text=""/>
+
+                <!-- password entry-->
+
+                <Label Grid.Row="3" 
+                        Text="Password:"
+                        VerticalOptions="Center"
+                        FontSize="23"
+                        FontFamily="AmikoRegular"
+                        Margin="10, 5"
+                        HorizontalOptions="Start" 
+                        TextColor="{DynamicResource DavyGray}"/>
+    
+                <Entry Grid.Row="5"
+                        x:Name="Password"
+                        Placeholder="Enter Password"
+                        FontFamily="AmikoRegular"
+                        IsPassword="True"
+                       Text=""/>
+
                 
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Login" />
-                </Label.GestureRecognizers>
+                <!-- Press to Log in -->
+                <Button Grid.Row="6"
+                        Text="Log In"
+                        FontFamily="AmikoRegular"
+                        FontSize="23"
+                        Margin="80,20"
+                        IsEnabled="True"
+                        Clicked="Login"/>
 
-            </Label>
+            </Grid>
 
         </VerticalStackLayout>
 
