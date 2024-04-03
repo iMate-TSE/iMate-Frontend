@@ -31,19 +31,19 @@ public partial class JournalPage : ContentPage
                 ValueLabel = "214",
                 Color = SKColor.Parse("#3498db")
             },
-                        new ChartEntry(67)
+            new ChartEntry(67)
             {
                 Label = "Fri",
                 ValueLabel = "214",
                 Color = SKColor.Parse("#3498db")
             },
-                                    new ChartEntry(89)
+            new ChartEntry(89)
             {
                 Label = "Sat",
                 ValueLabel = "214",
                 Color = SKColor.Parse("#3498db")
             },
-                                                new ChartEntry(100)
+            new ChartEntry(100)
             {
                 Label = "Sun",
                 ValueLabel = "214",

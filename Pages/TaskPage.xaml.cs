@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace iMate.Pages;
 
 public partial class TaskPage : ContentPage
@@ -43,9 +45,10 @@ public partial class TaskPage : ContentPage
 
     }
 
-    private void TriggerNavigate(object sender, EventArgs e)
+	private void Button_OnClicked(object? sender, EventArgs e)
 	{
-
+		int cardIdx = CardsCarousel.Position;
+		//await DisplayAlert("Position", cardIdx.ToString(), "Close this shit");
+		_deckViewModel.RemoveCard(cardIdx); 
 	}
-
 }
