@@ -21,7 +21,5 @@ namespace iMate.Models
 
 
         public string Content { get; set; }
-
-        public float PadVal { get; set; }
     }
 }
