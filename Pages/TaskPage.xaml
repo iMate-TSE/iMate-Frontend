@@ -16,23 +16,59 @@
     </Shell.TitleView>
     
     <VerticalStackLayout>
-        <Label 
-            Text="Your Tasks!"
+        <Grid RowDefinitions="*" Grid.Row="0" Margin="0, 20, 0, 0">
+            <Label Text="Your Tasks!" Margin="0, 20, 0, 5" Grid.Row="0" HorizontalOptions="Center" FontFamily="AveriaRegular" FontSize="20" />
+            <Image Source="underline.png" Grid.Row="0" Margin="0, 10, 0, 0"/>
+        </Grid>
+
+        <!-- Swipe indicator -->
+        <HorizontalStackLayout 
+            HorizontalOptions="Center" 
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            Margin="0, 10, 0, 0"
+            >
+            <Image Source="swipe_left_arrow.svg" />
+            <Label Text="Swipe Cards" HorizontalTextAlignment="Center" Margin="0, 10" />
+            <Image Source="swipe_right_arrow.svg" />
+        </HorizontalStackLayout>
 
-
-        <HorizontalStackLayout>
-                <CarouselView ItemsSource="{Binding Cards}" ItemsLayout="HorizontalList">
-                    <!-- A template is how a single unit of data is displayed in this case a single message -->
+        <HorizontalStackLayout VerticalOptions="Center">
+            <StackLayout WidthRequest="350" 
+                         HeightRequest="500" 
+                         IsVisible="{Binding HasCards}"
+                         VerticalOptions="Center"
+                         >
+                <Grid Margin="10, 10, 10, 10" WidthRequest="300" HeightRequest="450">
+                    <Label Margin="40, 0,0,0"
+                           Text="No more Tasks for Today! &#10; Assess your mood again tomorrow!"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center" />
+                </Grid>
+            </StackLayout>
+            <CarouselView ItemsSource="{Binding Cards}" 
+                          ItemsLayout="HorizontalList" 
+                          VerticalOptions="Center" 
+                          Margin="0, 10, 0, 0"
+                          x:Name="CardsCarousel"
+                          HorizontalOptions="Center"
+            >
+   
+                <!-- A template is how a single unit of data is displayed in this case a single message -->
                     <CarouselView.ItemTemplate>
                         <!-- Define which model we are templating -->
                         <DataTemplate x:DataType="models:Card">
                             <StackLayout WidthRequest="350" HeightRequest="500">
-                                <Image x:Name="CardBack" Source="card_back_black.png" Grid.Row="0" Margin="40, 10, 10, 10" Aspect="Fill"/>
-                            <Border Margin="40, 10, 10, 10" WidthRequest="300" HeightRequest="450" Stroke="Black" StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="1" IsVisible="False">
-                                <Grid x:Name="CardFront" Margin="40, 10, 10, 10" WidthRequest="300" HeightRequest="450">
-                                    <Label Text="{Binding Content}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            <Border Margin="40, 10, 10, 10" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="450" WidthRequest="300" Stroke="Black" StrokeThickness="1">
+                                    <Image x:Name="CardBack" Source="card_back_black.png" Aspect="AspectFill"/>
+                            </Border>
+                            <Border Margin="40, 10, 10, 10" 
+                                    WidthRequest="300" HeightRequest="450" 
+                                    Stroke="#010203" StrokeThickness="3" StrokeShape="RoundRectangle 10,10,10,10" 
+                                    BackgroundColor="WhiteSmoke"
+                                    IsVisible="False"
+                             >
+                                <Grid x:Name="CardFront" Margin="10, 10, 10, 10" WidthRequest="300" HeightRequest="450">
+                                    <Label Text="{Binding Content}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
                                 </Grid>
                             </Border>
                             <StackLayout.GestureRecognizers>
@@ -43,9 +79,7 @@
                     </CarouselView.ItemTemplate>
                 </CarouselView>
         </HorizontalStackLayout>
-
-
-        
+        <Button Text="Complete Card" Clicked="Button_OnClicked" WidthRequest="250" Margin="-20, 0,0,0"/>
     </VerticalStackLayout>
     
     

@@ -1,7 +1,7 @@
-﻿using iMate.ViewModels;
-using iMate.Views;
+﻿using iMate.Services;
+using Microcharts.Maui;
 using Microsoft.Extensions.Logging;
-using CommunityToolkit.Maui;
+
 namespace iMate
 {
     public static class MauiProgram
@@ -12,6 +12,7 @@ namespace iMate
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseMicrocharts()
                 .ConfigureFonts(fonts =>
                 {
                     // adding all the fonts
@@ -32,9 +33,11 @@ namespace iMate
             builder.Services.AddSingleton<SettingsPage>();
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<BreathePage>();
-            builder.Services.AddSingleton<MeditatePage>();
             builder.Services.AddSingleton<SliderPage>();
             builder.Services.AddSingleton<FormPage>();
+            builder.Services.AddSingleton<ResourcesPage>();
+
+            builder.Services.AddSingleton<IHttpService, HttpService>();
 
             builder.Services.AddTransient<ChatViewModel>();
             builder.Services.AddTransient<DeckViewModel>();

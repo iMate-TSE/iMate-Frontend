@@ -19,10 +19,6 @@
                         SemanticScreenReader.Announce("Breathe Button Clicked");
                         await Navigation.PushAsync(new BreathePage());
                         break;
-                    case "Meditate":
-                        SemanticScreenReader.Announce("Meditate Button Clicked");
-                        await Navigation.PushAsync(new MeditatePage());
-                        break;
                     case "Chat":
                         SemanticScreenReader.Announce("Chat Button Clicked");
                         await Navigation.PushAsync(new ChatPage());
@@ -31,8 +27,8 @@
                         SemanticScreenReader.Announce("Check Mood button clicked");
                         await Navigation.PushAsync(new SliderPage());
                         break;
-                    case "Questionnaire [TEMP]":
-                        await Navigation.PushAsync(new FormPage());
+                    case "Resources":
+                        await Navigation.PushAsync(new ResourcesPage());
                         break;
                 }
             } else if (sender is Image image)

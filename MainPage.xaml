@@ -102,10 +102,10 @@
                     </Label>
                     
                     
-                    <!-- TEMP -->
+                    <!-- Resources -->
                     <Image Grid.Column="0" Grid.Row="3" Source="arrow_right.svg" HorizontalOptions="Start" />
                     <Label Grid.Row="3" Grid.Column="1"
-                       Text="Questionnaire [TEMP]"
+                       Text="Resources"
                        VerticalOptions="Center"
                        FontSize="23"
                        FontFamily="AmikoRegular"
