@@ -1,11 +1,10 @@
 namespace iMate.Pages;
 using SkiaSharp;
 using Microcharts;
-using Microcharts.Maui;
 
 public partial class JournalPage : ContentPage
 {
-    ChartEntry[] entries = new[]
+    ChartEntry[] _entries = new[]
 {
             new ChartEntry(20)
             {
@@ -57,15 +56,10 @@ public partial class JournalPage : ContentPage
 
         chartView.Chart = new LineChart
         {
-            Entries = entries,
+            Entries = _entries,
             LabelTextSize = 35,
             LabelOrientation = Orientation.Horizontal,
             BackgroundColor = SKColor.Parse("#EAE5E5"),
         };
-    }
-
-    private async void ImageButton_Clicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new ProfilePage());
     }
 }

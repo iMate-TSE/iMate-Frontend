@@ -3,13 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Pages.ResourcesPage"
              Title="📄 Resources">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LinkStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#F46197" />
+                <Setter Property="Margin" Value="0, 10" />
+                <Setter Property="FontFamily" Value="AmikoRegular" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <VerticalStackLayout>
         <Grid RowDefinitions="*" Grid.Row="0" Margin="0, 20, 0, 0">
             <Label Text="Resources" Margin="0, 20, 0, 5" Grid.Row="0" HorizontalOptions="Center" FontFamily="AveriaRegular" FontSize="20" />
             <Image Source="underline.png" Grid.Row="0" Margin="0, 10, 0, 0"/>
         </Grid>
-
-        <Button Text="Hello" Clicked="Button_Clicked" />
-
+        
+        <ScrollView MinimumHeightRequest="300" MaximumHeightRequest="600">
+            <Grid RowDefinitions="*,*,*,*,*" ColumnDefinitions="*" RowSpacing="10">
+                <Grid Grid.Row="0" ColumnDefinitions="*" RowDefinitions="*, *, *" Margin="30, 20">
+                    <Label Text="Kooth" Grid.Row="0" Grid.Column="0" FontSize="20" FontFamily="AveriaRegular"/>
+                    <Label Text="www.kooth.com" Grid.Row="1" Grid.Column="0" Style="{StaticResource LinkStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button_Clicked"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Grid.Row="2" FontFamily="AmikoRegular" Text="Kooth provides online emotional wellbeing and mental health support for children and young people aged 10-18 (up to 25 in some areas). The website is available 24/7 and our practitioners are online offering live chat until 10pm" />
+                </Grid>
+                
+                <Grid Grid.Row="1" ColumnDefinitions="*" RowDefinitions="*, *, *" Margin="30, 20">
+                    <Label Text="Samaritans" Grid.Row="0" Grid.Column="0" FontSize="20" FontFamily="AveriaRegular"/>
+                    <Label Text="www.samaritans.org" Grid.Row="1" Grid.Column="0" Style="{StaticResource LinkStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button_Clicked"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Grid.Row="2" FontFamily="AmikoRegular" Text="If you are feeling down, and feel at risk of suicide, the Samaritan line is free and open 24/7" />
+                </Grid>
+                
+                <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="*, *, *" Margin="30, 20">
+                    <Label Text="Mind" Grid.Row="0" Grid.Column="0" FontSize="20" FontFamily="AveriaRegular"/>
+                    <Label Text="www.mind.org.uk" Grid.Row="1" Grid.Column="0" Style="{StaticResource LinkStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button_Clicked"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Grid.Row="2" FontFamily="AmikoRegular" Text="Mind has a lot of resources and help for just about anything you may need" />
+                </Grid>
+                
+                <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="*, *, *" Margin="30, 20">
+                    <Label Text="TogetherAll" Grid.Row="0" Grid.Column="0" FontSize="20" FontFamily="AveriaRegular"/>
+                    <Label Text="www.togetherall.com" Grid.Row="1" Grid.Column="0" Style="{StaticResource LinkStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button_Clicked"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Grid.Row="2" FontFamily="AmikoRegular" Text="A large community of people who came together to listen and help others. Some universities provide you with free access so check with your institution." />
+                </Grid>
+                
+                <Grid Grid.Row="4" ColumnDefinitions="*" RowDefinitions="*, *, *" Margin="30, 20">
+                    <Label Text="Crisis Contact List" Grid.Row="0" Grid.Column="0" FontSize="20" FontFamily="AveriaRegular"/>
+                    <Label Text="www.centreformentalhealth.org.uk/helplines-and-crisis-contacts" Grid.Row="1" Grid.Column="0" Style="{StaticResource LinkStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button_Clicked"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Grid.Row="2" FontFamily="AmikoRegular" Text="If you feel you are in a crisis, and need extra support please don't hesitate to talk to someone. The Center for Mental Health has a list of services you can use." />
+                </Grid>
+            </Grid>
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>

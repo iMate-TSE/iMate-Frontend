@@ -9,14 +9,17 @@ public partial class ResourcesPage : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        try
+        if (sender is Label label)
         {
-            Uri uri = new Uri("https://www.microsoft.com");
-            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
-        }
-        catch (Exception ex)
-        {
-            // An unexpected error occurred. No browser may be installed on the device.
+            try
+            {
+                Uri uri = new Uri("https://" + label.Text);
+                await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+            }
+            catch (Exception ex)
+            {
+                // An unexpected error occurred. No browser may be installed on the device.
+            }
         }
     }
 }
