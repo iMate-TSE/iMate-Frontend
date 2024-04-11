@@ -12,19 +12,19 @@ namespace iMate.ViewModels
 
         public LoginViewModel(IHttpService httpService) : base(httpService)
         {
-
             _Username = "";
             _Password = "";
-
         }
 
         
 
         public async Task<bool> CheckUser ()
         {
-            string token = "";
+            string token = "404";
+
             token = await HttpService.Login(_Username, _Password);
-            if (token == "404")
+
+            if (token == "404" )
             {
                 return false;
             }
@@ -38,7 +38,7 @@ namespace iMate.ViewModels
             HttpService.SignUpUser(_Username, _Password);
 
             string token = "";
-            token = await HttpService.Login(_Username, _Password);
+            //token = await HttpService.Login(_Username, _Password);
             if (token == "404")
             {
                 return false;

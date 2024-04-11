@@ -26,6 +26,8 @@ namespace iMate
             // Add all the pages here as a singleton (This is the inversion of control principle 
             // namely dependency injection 
             // https://learn.microsoft.com/en-us/dotnet/architecture/maui/dependency-injection
+            builder.Services.AddSingleton<IHttpService, HttpService>();
+
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<TaskPage>();
             builder.Services.AddSingleton<JournalPage>();
@@ -37,7 +39,6 @@ namespace iMate
             builder.Services.AddSingleton<FormPage>();
             builder.Services.AddSingleton<ResourcesPage>();
 
-            builder.Services.AddSingleton<IHttpService, HttpService>();
 
             builder.Services.AddTransient<ChatViewModel>();
             builder.Services.AddTransient<DeckViewModel>();

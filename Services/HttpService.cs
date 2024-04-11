@@ -1,6 +1,5 @@
-﻿using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text;
+﻿using System.Diagnostics;
+using System.Net.Http.Json;
 using Exception = System.Exception;
 
 namespace iMate.Services
@@ -38,6 +37,7 @@ namespace iMate.Services
 
                 if (jsonResponse != null)
                 {
+                    Debug.WriteLine(jsonResponse);
                     return jsonResponse;
                 }
                 else
@@ -61,6 +61,7 @@ namespace iMate.Services
 
                 var jsonResponse = await (response.Content.ReadFromJsonAsync<Dictionary<string, string>>());
 
+                
                 if (jsonResponse != null) 
                 {
                     return jsonResponse;
@@ -79,12 +80,16 @@ namespace iMate.Services
         {
             try
             {
-                using HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"Login/Login", (username: username, password: password));
+                var content = new { username, password };
+                
+                using HttpResponseMessage response = 
+                    await _httpClient.PostAsJsonAsync("Login/Login", content);
 
                 response.EnsureSuccessStatusCode();
 
                 var jsonResponse = await (response.Content.ReadAsStringAsync());
 
+                Console.WriteLine("====================" + jsonResponse);
                 if (jsonResponse != null)
                 {
                     return jsonResponse;

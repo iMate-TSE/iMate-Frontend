@@ -24,7 +24,7 @@ public partial class SettingsPage : ContentPage
         await Navigation.PushAsync(new LoginPage(_httpService));
     }
 
-    private async void Update(object sender, TappedEventArgs e) 
+    private async void UpdateTap(object sender, PropertyChangedEventArgs e) 
     {
         _viewModel._soundEffects = SE.IsToggled;
         _viewModel._motivationalMessages = MM.IsToggled;
@@ -35,7 +35,7 @@ public partial class SettingsPage : ContentPage
         _viewModel.UpdateSettings();
     }
 
-    private async void Update(object sender, PropertyChangedEventArgs e)
+    private async void Update(object? sender, ToggledEventArgs e)
     {
         _viewModel._soundEffects = SE.IsToggled;
         _viewModel._motivationalMessages = MM.IsToggled;
@@ -45,5 +45,4 @@ public partial class SettingsPage : ContentPage
         _viewModel._reminderTime = RT.Time;
         _viewModel.UpdateSettings();
     }
-
 }
