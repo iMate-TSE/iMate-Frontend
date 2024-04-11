@@ -9,9 +9,12 @@ public partial class ProfilePage : ContentPage
     private PersonalInfoViewModel _viewmodel;
     private IHttpService _httpService;
     
-    public ProfilePage()
+    public ProfilePage(IHttpService httpService)
     {
         InitializeComponent();
+
+        _httpService = httpService;
+
         _viewmodel = new PersonalInfoViewModel();
 
         BindingContext = _viewmodel;

@@ -26,23 +26,23 @@ public partial class SettingsPage : ContentPage
 
     private async void UpdateTap(object sender, PropertyChangedEventArgs e) 
     {
-        _viewModel._soundEffects = SE.IsToggled;
-        _viewModel._motivationalMessages = MM.IsToggled;
-        _viewModel._practiceReminder = PR.IsToggled;
-        _viewModel._reducedMotion = RM.IsToggled;
-        _viewModel._smartScheduling = SS.IsToggled;
-        _viewModel._reminderTime = RT.Time;
+        _viewModel.SoundEffects = SE.IsToggled;
+        _viewModel.MotivationalMessages = MM.IsToggled;
+        _viewModel.PracticeReminder = PR.IsToggled;
+        _viewModel.ReducedMotion = RM.IsToggled;
+        _viewModel.SmartScheduling = SS.IsToggled;
+        _viewModel.ReminderTime = RT.Time;
         _viewModel.UpdateSettings();
     }
 
     private async void Update(object? sender, ToggledEventArgs e)
     {
-        _viewModel._soundEffects = SE.IsToggled;
-        _viewModel._motivationalMessages = MM.IsToggled;
-        _viewModel._practiceReminder = PR.IsToggled;
-        _viewModel._reducedMotion = RM.IsToggled;
-        _viewModel._smartScheduling = SS.IsToggled;
-        _viewModel._reminderTime = RT.Time;
+        _viewModel.SoundEffects = SE.IsToggled;
+        _viewModel.MotivationalMessages = MM.IsToggled;
+        _viewModel.PracticeReminder = PR.IsToggled;
+        _viewModel.ReducedMotion = RM.IsToggled;
+        _viewModel.SmartScheduling = SS.IsToggled;
+        _viewModel.ReminderTime = RT.Time;
         _viewModel.UpdateSettings();
     }
 }

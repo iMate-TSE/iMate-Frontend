@@ -38,7 +38,7 @@ namespace iMate.ViewModels
             HttpService.SignUpUser(_Username, _Password);
 
             string token = "";
-            //token = await HttpService.Login(_Username, _Password);
+            token = await HttpService.Login(_Username, _Password);
             if (token == "404")
             {
                 return false;

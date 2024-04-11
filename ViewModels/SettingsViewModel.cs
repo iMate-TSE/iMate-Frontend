@@ -8,22 +8,22 @@ namespace iMate.ViewModels
     {
 
         [ObservableProperty]
-        public bool _soundEffects;
+        private bool _soundEffects;
 
         [ObservableProperty]
-        public bool _reducedMotion;
+        private bool _reducedMotion;
 
         [ObservableProperty]
-        public bool _motivationalMessages;
+        private bool _motivationalMessages;
 
         [ObservableProperty]
-        public bool _practiceReminder;
+        private bool _practiceReminder;
 
         [ObservableProperty]
-        public bool _smartScheduling;
+        private bool _smartScheduling;
 
         [ObservableProperty]
-        public TimeSpan _reminderTime;
+        private TimeSpan _reminderTime;
 
         private Dictionary<string, string> _settings = new Dictionary<string, string>();
 
@@ -53,13 +53,16 @@ namespace iMate.ViewModels
 
         public async void GetUsername()
         {
-            string token = await SecureStorage.Default.GetAsync("auth_token");
-            userName = await HttpService.GetUsername(token);
+            string? token = await SecureStorage.Default.GetAsync("auth_token");
+            if (token != null)
+            {
+                userName = await HttpService.GetUsername(token);
+            }
         }
 
         public async void UpdateSettings() 
         {
-            HttpService.UpdateSettings(userName, _soundEffects, _reducedMotion, _motivationalMessages, _practiceReminder, _smartScheduling, _reminderTime.ToString());
+            HttpService.UpdateSettings(userName, SoundEffects, ReducedMotion, MotivationalMessages, PracticeReminder, SmartScheduling, ReminderTime.ToString());
         }
 
         public async void LogOut()

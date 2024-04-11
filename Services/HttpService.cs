@@ -109,10 +109,12 @@ namespace iMate.Services
         {
             try
             {
-                StringContent content = new StringContent($"username={username}&password={password}");
-                using HttpResponseMessage response = await _httpClient.PostAsync("Login/SignUp", content);
+                var content = new { username, password };
+                using HttpResponseMessage response = 
+                    await _httpClient.PostAsJsonAsync("Login/SignUp", content);
 
                 response.EnsureSuccessStatusCode();
+
             }
             catch (Exception ex)
             {
@@ -124,8 +126,9 @@ namespace iMate.Services
         {
             try
             {
-                StringContent content = new StringContent($"username={username}");
-                using HttpResponseMessage response = await _httpClient.PostAsync("Settings/CreateDefaultSettings", content);
+                var content = new { username };
+                using HttpResponseMessage response =
+                    await _httpClient.PostAsJsonAsync("Settings/CreateDefaultSettings", content);
 
                 response.EnsureSuccessStatusCode();
             }
@@ -139,9 +142,9 @@ namespace iMate.Services
         {
             try
             {
-                StringContent content = new StringContent($"username={username}&soundEffects={soundEffects}&reducedMotion={reducedMotion}&motivation={motivation}&practice={practice}&scheduling={scheduling}&reminder={reminder}");
+                var content = new { username, soundEffects, reducedMotion, motivation, practice, scheduling, reminder };
 
-                using HttpResponseMessage response = await _httpClient.PostAsync("Settings/UpdateUserSettings", content);
+                using HttpResponseMessage response = await _httpClient.PostAsJsonAsync("Settings/UpdateUserSettings", content);
                 response.EnsureSuccessStatusCode();
 
             }catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -151,9 +154,9 @@ namespace iMate.Services
         {
             try
             {
-                StringContent content = new StringContent($"username={username}");
+                var content = new {username};
 
-                using HttpResponseMessage response = await _httpClient.PostAsync("Settings/LogOut", content);
+                using HttpResponseMessage response = await _httpClient.PostAsJsonAsync("Settings/LogOut", content);
                 response.EnsureSuccessStatusCode();
             }catch(Exception ex) { Console.WriteLine(ex.Message); }
         }
