@@ -1,5 +1,5 @@
 ﻿using iMate.Models;
-using Syncfusion.Maui.Cards;
+using iMate.Services;
 using System.Collections.ObjectModel;
 
 namespace iMate.ViewModels
@@ -8,9 +8,20 @@ namespace iMate.ViewModels
     {
         public ObservableCollection<Card> Cards { get; } = new ObservableCollection<Card>();
 
+        [ObservableProperty] 
+        private bool _hasCards;
+
         public DeckViewModel() 
         { 
-            Cards = GetCards(); 
+            Cards = GetCards();
+            HasCards = !(Cards.Count > 0);
+        }
+
+        public void RemoveCard(int index)
+        {
+            if (index < 0) return;
+            Cards.RemoveAt(index);
+            HasCards = !(Cards.Count > 0);
         }
 
         private static ObservableCollection<Card> GetCards ()

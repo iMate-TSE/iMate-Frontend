@@ -46,7 +46,7 @@
                         HorizontalOptions="Start"
                       />
 
-                    <Switch Grid.Row="0" Grid.Column="2" 
+                    <Switch Grid.Row="0" Grid.Column="1" 
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
                         IsToggled="{Binding SoundEffects}"/>
@@ -59,7 +59,7 @@
                             Margin="10, 10"
                             HorizontalOptions="Start"
                     />
-                    <Switch Grid.Row="1" Grid.Column="2" 
+                    <Switch Grid.Row="1" Grid.Column="1" 
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
                         IsToggled="{Binding ReducedMotion}"/>
@@ -73,7 +73,7 @@
                         HorizontalOptions="Start"
                         />
 
-                    <Switch Grid.Row="2" Grid.Column="2" 
+                    <Switch Grid.Row="2" Grid.Column="1" 
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
                         IsToggled="{Binding MotivationalMessages}"/>
@@ -87,7 +87,7 @@
                         HorizontalOptions="Start"
                         />
 
-                    <Switch Grid.Row="3" Grid.Column="2" 
+                    <Switch Grid.Row="3" Grid.Column="1" 
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}" 
                         IsToggled="{Binding PracticeReminder}"/>
@@ -101,7 +101,7 @@
                         HorizontalOptions="Start"
                         />
 
-                    <Switch Grid.Row="4" Grid.Column="2" 
+                    <Switch Grid.Row="4" Grid.Column="1" 
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
                         IsToggled="{Binding SmartScheduling}"/>
@@ -116,7 +116,7 @@
                         HorizontalOptions="Start"
                         />
 
-                    <TimePicker Grid.Row="5" Grid.Column="2"
+                    <TimePicker Grid.Row="5" Grid.Column="1"
                             Time="{Binding ReminderTime}"
                             VerticalOptions="Center"
                             FontSize="23"

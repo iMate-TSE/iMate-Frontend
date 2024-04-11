@@ -82,15 +82,20 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Syncfusion.Maui.Cards" Version="24.2.9" />
+		<PackageReference Include="SkiaSharp" Version="2.88.7" />
+		<PackageReference Include="SkiaSharp.Views" Version="2.88.7" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="Pages\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\ResourcesPage.xaml.cs">
+	    <DependentUpon>ResourcesPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -119,7 +124,7 @@
 	  <MauiXaml Update="Pages\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\MeditatePage.xaml">
+	  <MauiXaml Update="Pages\ResourcesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SettingsPage.xaml">

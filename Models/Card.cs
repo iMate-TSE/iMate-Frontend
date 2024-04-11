@@ -11,10 +11,9 @@ namespace iMate.Models
         public Card() {
 
         }
-        public Card(int id, string content, float padVal) {
+        public Card(int id, string content) {
             Id = id;
             Content = content;
-            PadVal = padVal;
         }
 
         public int Id { get; set; }
