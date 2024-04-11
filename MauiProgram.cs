@@ -41,6 +41,8 @@ namespace iMate
 
             builder.Services.AddTransient<ChatViewModel>();
             builder.Services.AddTransient<DeckViewModel>();
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<SettingsViewModel>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

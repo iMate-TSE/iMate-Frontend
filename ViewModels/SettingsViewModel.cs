@@ -1,56 +1,75 @@
 ﻿
+using iMate.Services;
+using System.Windows.Input;
+
 namespace iMate.ViewModels
 {
-    partial class SettingsViewModel : ObservableObject
+    partial class SettingsViewModel : ViewModelBase
     {
 
         [ObservableProperty]
-        private bool _soundEffects;
+        public bool _soundEffects;
 
         [ObservableProperty]
-        private bool _reducedMotion;
+        public bool _reducedMotion;
 
         [ObservableProperty]
-        private bool _motivationalMessages;
+        public bool _motivationalMessages;
 
         [ObservableProperty]
-        private bool _practiceReminder;
+        public bool _practiceReminder;
 
         [ObservableProperty]
-        private bool _smartScheduling;
+        public bool _smartScheduling;
 
         [ObservableProperty]
-        private TimeSpan _reminderTime;
+        public TimeSpan _reminderTime;
 
-        public SettingsViewModel() 
+        private Dictionary<string, string> _settings = new Dictionary<string, string>();
+
+        private string userName;
+
+        
+
+        public SettingsViewModel(IHttpService httpService) : base(httpService)
         {
-
-            Dictionary<String, string> Settings = fetchSettings();
-
-            _soundEffects = bool.Parse(Settings["sound"]);
-            _reducedMotion = bool.Parse(Settings["motion"]);
-            _motivationalMessages = bool.Parse(Settings["motivation"]);
-            _practiceReminder = bool.Parse(Settings["reminder"]);
-            _smartScheduling = bool.Parse(Settings["scheduling"]);
-            _reminderTime = TimeSpan.Parse(Settings["time"]);
+            GetUsername();
+            GetSettings();
+            LogOutCommand = new Command(LogOut);
+            UpdateSettingsCommand = new Command(UpdateSettings);
+            _soundEffects = bool.Parse(_settings["sound"]);
+            _reducedMotion = bool.Parse(_settings["motion"]);
+            _motivationalMessages = bool.Parse(_settings["motivation"]);
+            _practiceReminder = bool.Parse(_settings["reminder"]);
+            _smartScheduling = bool.Parse(_settings["scheduling"]);
+            _reminderTime = TimeSpan.Parse(_settings["time"]);
 
         }
 
-        private Dictionary<string, string> fetchSettings() 
+        public async void GetSettings()
         {
-
-            return new Dictionary<string, string>()
-            {
-                ["sound"] = "True",
-                ["motion"] = "False",
-                ["motivation"] = "False",
-                ["reminder"] = "True",
-                ["scheduling"] = "True",
-                ["time"] = "16:25:00"
-            };
-
+            _settings = await HttpService.GetSettings(userName);
         }
 
+        public async void GetUsername()
+        {
+            string token = await SecureStorage.Default.GetAsync("auth_token");
+            userName = await HttpService.GetUsername(token);
+        }
+
+        public async void UpdateSettings() 
+        {
+            HttpService.UpdateSettings(userName, _soundEffects, _reducedMotion, _motivationalMessages, _practiceReminder, _smartScheduling, _reminderTime.ToString());
+        }
+
+        public async void LogOut()
+        {
+            HttpService.LogOut(userName);
+            SecureStorage.Default.Remove("auth_token");
+        }
+
+        public ICommand LogOutCommand { get; }
+        public ICommand UpdateSettingsCommand { get; }
     }
 
 }
