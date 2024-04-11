@@ -6,6 +6,8 @@ namespace iMate.ViewModels
 {
     public partial class DeckViewModel : ViewModelBase
     {
+        List<Card> cards = new List<Card>
+
         public ObservableCollection<Card> Cards { get; } = new ObservableCollection<Card>();
 
         [ObservableProperty] 
@@ -31,15 +33,18 @@ namespace iMate.ViewModels
                 new Card(1, "Go for a walk"),
                 new Card(1, "Listen to rainforest sounds"),
                 new Card(1, "Cook yourself some food"),
+
+                GetCard();
             };
         }
+
         public async void GetCard()
         {
             Console.WriteLine("Running command");
 
             string mood = "Happy"; // this needs to eventually come from the form
 
-            List<Card> cards = await HttpService.GetCards(mood);
+            cards = await HttpService.GetCards(mood);
         }
 
 
