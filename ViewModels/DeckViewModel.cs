@@ -1,4 +1,5 @@
 ﻿using iMate.Models;
+using iMate.Services;
 using System.Collections.ObjectModel;
 
 namespace iMate.ViewModels
@@ -27,10 +28,17 @@ namespace iMate.ViewModels
         {
             return new ObservableCollection<Card>()
             {
-                new Card(1, "Go for a walk", 3.0f),
-                new Card(1, "Listen to rainforest sounds", 3.0f),
-                new Card(1, "Cook yourself some food", 3.0f),
+                new Card(1, "Go for a walk"),
+                new Card(1, "Listen to rainforest sounds"),
+                new Card(1, "Cook yourself some food")
             };
+        }
+
+        public async void GetCard()
+        {
+            Console.WriteLine("Running command");
+            
+            List<Card> cards = await HttpService.GetCards();
         }
     }
 }
