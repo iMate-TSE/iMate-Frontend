@@ -33,12 +33,5 @@ namespace iMate.ViewModels
                 new Card(1, "Cook yourself some food")
             };
         }
-
-        public async void GetCard()
-        {
-            Console.WriteLine("Running command");
-            
-            List<Card> cards = await HttpService.GetCards();
-        }
     }
 }
