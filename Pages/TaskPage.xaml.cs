@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using iMate.Services;
 
 namespace iMate.Pages;
 
@@ -7,11 +8,11 @@ public partial class TaskPage : ContentPage
 	private DeckViewModel _deckViewModel;
     private int side = 0;
 
-	public TaskPage()
+	public TaskPage(IHttpService httpService)
 	{
 		InitializeComponent();
 
-		_deckViewModel = new DeckViewModel();
+		_deckViewModel = new DeckViewModel(httpService);
 
 		BindingContext = _deckViewModel;
 	}

@@ -4,14 +4,16 @@ using System.Collections.ObjectModel;
 
 namespace iMate.ViewModels
 {
-    public partial class DeckViewModel : ObservableObject
+    public partial class DeckViewModel : ViewModelBase
     {
+        List<Card> cards = new List<Card>();
+
         public ObservableCollection<Card> Cards { get; } = new ObservableCollection<Card>();
 
         [ObservableProperty] 
         private bool _hasCards;
 
-        public DeckViewModel() 
+        public DeckViewModel(IHttpService httpService) : base(httpService) 
         { 
             Cards = GetCards();
             HasCards = !(Cards.Count > 0);
@@ -24,14 +26,26 @@ namespace iMate.ViewModels
             HasCards = !(Cards.Count > 0);
         }
 
-        private static ObservableCollection<Card> GetCards ()
+        private ObservableCollection<Card> GetCards()
         {
-            return new ObservableCollection<Card>()
+            Console.WriteLine("Running command");
+            ObservableCollection<Card> cardList = new ObservableCollection<Card>();
+
+            string mood = "Happy"; // this needs to eventually come from the form
+
+            async void GetCard()
             {
-                new Card(1, "Go for a walk"),
-                new Card(1, "Listen to rainforest sounds"),
-                new Card(1, "Cook yourself some food")
-            };
+                List<Card> cards = await HttpService.GetCards(mood);
+                foreach (var card in cards)
+                {
+                    cards.Add(card);
+                }
+
+            }
+            GetCard();
+
+            return cardList;
         }
+
     }
 }
