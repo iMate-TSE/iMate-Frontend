@@ -134,7 +134,7 @@
                             FontFamily="AmikoRegular"
                             Margin="0,0"
                             HorizontalOptions="Start"
-                            PropertyChanged="UpdateTap"/>
+                            />
                     
                 </Grid>
 

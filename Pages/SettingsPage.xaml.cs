@@ -1,6 +1,4 @@
-using CommunityToolkit.Maui.Views;
 using iMate.Services;
-using iMate.Views;
 using System.ComponentModel;
 namespace iMate.Pages;
 
@@ -21,7 +19,8 @@ public partial class SettingsPage : ContentPage
     private async void TriggerNavigate(object sender, TappedEventArgs e)
     {
         _viewModel.LogOut();
-        await Navigation.PushAsync(new LoginPage(_httpService));
+        await SecureStorage.Default.SetAsync("isLoggedIn", "false");
+        Application.Current.MainPage = new LoginPage(_httpService);
     }
 
     private async void UpdateTap(object sender, PropertyChangedEventArgs e) 
@@ -32,7 +31,7 @@ public partial class SettingsPage : ContentPage
         _viewModel.ReducedMotion = RM.IsToggled;
         _viewModel.SmartScheduling = SS.IsToggled;
         _viewModel.ReminderTime = RT.Time;
-        _viewModel.UpdateSettings();
+        //_viewModel.UpdateSettings();
     }
 
     private async void Update(object? sender, ToggledEventArgs e)
@@ -43,6 +42,6 @@ public partial class SettingsPage : ContentPage
         _viewModel.ReducedMotion = RM.IsToggled;
         _viewModel.SmartScheduling = SS.IsToggled;
         _viewModel.ReminderTime = RT.Time;
-        _viewModel.UpdateSettings();
+        //_viewModel.UpdateSettings();
     }
 }

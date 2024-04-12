@@ -42,7 +42,12 @@ public partial class LoginPage : ContentPage
         {
             _viewModel._Username = username;
             _viewModel._Password = password;
-            if (await _viewModel.CheckUser()) { await Navigation.PushAsync(new MainPage()); }
+            if (await _viewModel.CheckUser())
+            {
+                await SecureStorage.Default.SetAsync("isLoggedIn", "true");
+                Application.Current.MainPage = new AppShell();
+                //await Navigation.PopAsync();  
+            }
 
             NullWarning.IsVisible = false;
             IncorrectWarning.IsVisible = true;
@@ -71,7 +76,12 @@ public partial class LoginPage : ContentPage
             {
                 _viewModel._Username = username;
                 _viewModel._Password = password;
-                if (await _viewModel.SignUp()) { await Navigation.PushAsync(new MainPage()); }
+                if (await _viewModel.SignUp())
+                {
+                    await SecureStorage.Default.SetAsync("isLoggedIn", "true");
+                    Application.Current.MainPage = new AppShell();
+                    //await Navigation.PushAsync(new MainPage());
+                }
         }
     }
     

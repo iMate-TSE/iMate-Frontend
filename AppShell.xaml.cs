@@ -4,11 +4,11 @@ namespace iMate
 {
     public partial class AppShell : Shell
     {
-        public AppShell(IHttpService httpService)
+        public AppShell()
         {
             InitializeComponent();
 
-            Navigation.PushAsync(new LoginPage(httpService));
+            // Navigation.PushAsync(new MainPage());
 
         }
     }

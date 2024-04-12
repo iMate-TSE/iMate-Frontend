@@ -7,7 +7,22 @@ namespace iMate
         public App(IHttpService httpService)
         {
             InitializeComponent();
-            MainPage = new AppShell(httpService);
+
+            if (IsUserLoggedIn())
+            {
+                MainPage = new AppShell();
+            }
+            else
+            {
+                MainPage = new LoginPage(httpService);
+            }
+        }
+        
+        private bool IsUserLoggedIn()
+        {
+            // Implement logic to check secure storage for a login token or flag
+            var isLoggedIn = SecureStorage.GetAsync("isLoggedIn").Result == "true";
+            return isLoggedIn;
         }
     }
 }

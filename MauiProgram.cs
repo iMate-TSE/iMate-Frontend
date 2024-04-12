@@ -38,12 +38,15 @@ namespace iMate
             builder.Services.AddSingleton<SliderPage>();
             builder.Services.AddSingleton<FormPage>();
             builder.Services.AddSingleton<ResourcesPage>();
+            builder.Services.AddSingleton<PersonalInfoPage>();
 
 
             builder.Services.AddTransient<ChatViewModel>();
             builder.Services.AddTransient<DeckViewModel>();
+            builder.Services.AddTransient<HeaderViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<PersonalInfoViewModel>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
