@@ -1,3 +1,5 @@
+using iMate.Services;
+
 namespace iMate.Views;
 public partial class CustomTitleView : ContentView
 {
@@ -10,9 +12,22 @@ public partial class CustomTitleView : ContentView
 
 		BindingContext = _viewModel;
 	}
+
+	protected IHttpService _httpservice;
+	public CustomTitleView(IHttpService httpService)
+	{
+		InitializeComponent();
+
+		_httpservice = httpService;
+
+		_viewModel = new HeaderViewModel();
+
+		BindingContext = _viewModel;
+	}
+	
     private async void ImageButton_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ProfilePage());
+        await Navigation.PushAsync(new ProfilePage(_httpservice));
     }
 
 }

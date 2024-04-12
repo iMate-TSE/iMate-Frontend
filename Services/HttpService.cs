@@ -1,4 +1,4 @@
-﻿using iMate.Models;
+using iMate.Models;
 using System.Net.Http.Json;
 
 namespace iMate.Services
@@ -6,7 +6,9 @@ namespace iMate.Services
     // Singleton
     public interface IHttpService
     {
+
         Task<List<Card>> GetCards(string mood);
+        Task<User> FetchProfile(string token);
     }
 
 
@@ -14,10 +16,38 @@ namespace iMate.Services
     {
         private static readonly HttpClient _httpClient = new()
         {
-            BaseAddress = new Uri("http://10.0.2.2:5137/api/")
+            BaseAddress = new Uri("http://10.0.2.2:5137/api/v1/")
         };
 
+
         public HttpService() { }
+        
+        public async Task<User> FetchProfile(string token)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync($"Profile/?token={token}");
+
+                response.EnsureSuccessStatusCode();
+
+                var jsonResponse = await (response.Content.ReadFromJsonAsync<User>());
+                
+                if (jsonResponse != null)
+                {
+                    return jsonResponse;
+                }
+                else
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+                
+
+        }
         
         public async Task<List<Card>> GetCards(string mood)
         {
@@ -28,13 +58,12 @@ namespace iMate.Services
                 response.EnsureSuccessStatusCode();
 
                 var jsonResponse = await (response.Content.ReadFromJsonAsync<List<Card>>());
-
+                
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
                 }
                 else
-                {
                     return new List<Card>();
                 }
             }
@@ -44,7 +73,5 @@ namespace iMate.Services
                 return new List<Card>();
             }
         }
-        
     }
-    
 }
