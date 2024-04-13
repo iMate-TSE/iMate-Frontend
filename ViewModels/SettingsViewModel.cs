@@ -1,5 +1,7 @@
 ﻿
+using System.Text.Json;
 using iMate.Services;
+using iMate.Models.FormModels;
 using System.Windows.Input;
 
 namespace iMate.ViewModels
@@ -27,61 +29,80 @@ namespace iMate.ViewModels
 
         private Dictionary<string, string> _settings = new Dictionary<string, string>()
         {
-            { "sound", "false" },
-            { "motion", "false" },
+            { "sound", "true" },
+            { "motion", "true" },
             { "motivation", "false" },
-            { "reminder", "false" },
+            { "reminder", "true" },
             { "scheduling", "false" },
-            { "time", "00:00:00" },
+            { "time", "12:15:00" },
         };
 
-        private string userName = "user";
+        private string _userName;
 
         
 
         public SettingsViewModel(IHttpService httpService) : base(httpService)
         {
-            //GetUsername();
-            //GetSettings();
-            LogOutCommand = new Command(LogOut);
-            //UpdateSettingsCommand = new Command(UpdateSettings);
-            _soundEffects = bool.Parse(_settings["sound"]);
-            _reducedMotion = bool.Parse(_settings["motion"]);
-            _motivationalMessages = bool.Parse(_settings["motivation"]);
-            _practiceReminder = bool.Parse(_settings["reminder"]);
-            _smartScheduling = bool.Parse(_settings["scheduling"]);
-            _reminderTime = TimeSpan.Parse(_settings["time"]);
 
+            GetSettings();
+            
+            LogOutCommand = new Command(LogOut);
+            UpdateSettingsCommand = new Command(UpdateSettings);
+            
+            
+            
         }
 
-        /*public async void GetSettings()
+        public async void GetSettings()
         {
             
-            var settings = await HttpService.GetSettings(userName);
+            await GetUsername();
+            
+            var settings = await HttpService.GetSettings(_userName);
+            
 
             if (settings != null)
             {
                 _settings = settings;
+                SoundEffects = bool.Parse(_settings["sound"]);
+                ReducedMotion = bool.Parse(_settings["motion"]);
+                MotivationalMessages = bool.Parse(_settings["motivation"]);
+                PracticeReminder = bool.Parse(_settings["reminder"]);
+                SmartScheduling = bool.Parse(_settings["scheduling"]);
+                ReminderTime = TimeSpan.Parse(_settings["time"]);
             }
-        }*/
+        }
 
-        /*public async void GetUsername()
+        public async Task GetUsername()
         {
             string? token = await SecureStorage.Default.GetAsync("auth_token");
             if (token != null)
             {
-                userName = await HttpService.GetUsername(token);
+                _userName = await HttpService.GetUsername(token);
             }
             else
             {
-                userName = "user";
+                _userName = "user";
             }
-        }*/
+        }
 
-        /*public async void UpdateSettings() 
+        public async void UpdateSettings()
         {
-            HttpService.UpdateSettings(userName, SoundEffects, ReducedMotion, MotivationalMessages, PracticeReminder, SmartScheduling, ReminderTime.ToString());
-        }*/
+            var settingsData = new SettingsDataModel
+            {
+                username  = _userName,
+                soundEffects= this.SoundEffects,
+                reducedMotion= this.ReducedMotion,
+                motivation= this.MotivationalMessages,
+                practice = this.PracticeReminder,
+                scheduling = this.SmartScheduling,
+                reminder = this.ReminderTime
+            };
+            string content = JsonSerializer.Serialize(settingsData);
+            
+            Console.WriteLine("================"+content);
+            HttpService.UpdateSettings(content);
+        }
 
         public async void LogOut()
         {
@@ -92,6 +113,7 @@ namespace iMate.ViewModels
 
         public ICommand LogOutCommand { get; }
         public ICommand UpdateSettingsCommand { get; }
+
     }
 
 }

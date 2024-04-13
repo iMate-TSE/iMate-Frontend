@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using Exception = System.Exception;
 using iMate.Models;
 using System.Net.Http.Json;
+using System.Text;
 
 
 namespace iMate.Services
@@ -16,7 +17,7 @@ namespace iMate.Services
         void SignUpUser(string username, string password);
         void CreateDefaultSettings(string username);
         Task<string> GetUsername(string token);
-        void UpdateSettings(string username, bool soundEffects, bool reducedMotion, bool motivation, bool practice, bool scheduling, string? reminder);
+        void UpdateSettings(string content);
         void LogOut(string username);
         Task<List<Card>> GetCards(string mood);
         Task<User> FetchProfile(string token);
@@ -97,7 +98,6 @@ namespace iMate.Services
 
                 var jsonResponse = await (response.Content.ReadAsStringAsync());
 
-                Console.WriteLine("====================" + jsonResponse);
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
@@ -146,13 +146,13 @@ namespace iMate.Services
             }
         }
 
-        public async void UpdateSettings(string username, bool soundEffects, bool reducedMotion, bool motivation, bool practice, bool scheduling, string? reminder)
+        public async void UpdateSettings(string content)
         {
             try
             {
-                var content = new { username, soundEffects, reducedMotion, motivation, practice, scheduling, reminder };
-
-                using HttpResponseMessage response = await _httpClient.PostAsJsonAsync("Settings/UpdateUserSettings", content);
+                var jsonContent = new StringContent(content, Encoding.UTF8, "application/json");
+                
+                using HttpResponseMessage response = await _httpClient.PostAsync("Settings/UpdateUserSettings", jsonContent);
                 response.EnsureSuccessStatusCode();
 
             }catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -203,7 +203,7 @@ namespace iMate.Services
         {
             try
             {
-                using HttpResponseMessage response = await _httpClient.GetAsync($"getCards?mood={mood}");
+                using HttpResponseMessage response = await _httpClient.GetAsync($"Card?mood={mood}");
 
                 response.EnsureSuccessStatusCode();
 

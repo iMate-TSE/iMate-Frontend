@@ -1,6 +1,7 @@
 ﻿using iMate.Models;
 using iMate.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace iMate.ViewModels
 {
@@ -8,14 +9,16 @@ namespace iMate.ViewModels
     {
         List<Card> cards = new List<Card>();
 
-        public ObservableCollection<Card> Cards { get; } = new ObservableCollection<Card>();
+        public ICommand GetCardsCommand { get; }
+
+        public ObservableCollection<Card> Cards { get; set; } = new ObservableCollection<Card>();
 
         [ObservableProperty] 
         private bool _hasCards;
 
-        public DeckViewModel(IHttpService httpService) : base(httpService) 
-        { 
-            Cards = GetCards();
+        public DeckViewModel(IHttpService httpService) : base(httpService)
+        {
+            GetCardsCommand = new Command(GetCards);
             HasCards = !(Cards.Count > 0);
         }
 
@@ -26,25 +29,25 @@ namespace iMate.ViewModels
             HasCards = !(Cards.Count > 0);
         }
 
-        private ObservableCollection<Card> GetCards()
+        private void GetCards()
         {
             Console.WriteLine("Running command");
             ObservableCollection<Card> cardList = new ObservableCollection<Card>();
 
-            string mood = "Happy"; // this needs to eventually come from the form
+            string mood = "Sad"; // this needs to eventually come from the form
 
             async void GetCard()
             {
-                List<Card> cards = await HttpService.GetCards(mood);
-                foreach (var card in cards)
+                foreach (var card in await HttpService.GetCards(mood))
                 {
-                    cards.Add(card);
+                    Console.WriteLine("=====================");
+                    Console.WriteLine(card.Content);
+                    cardList.Add(new Card(card.Id, card.Content));
                 }
 
             }
             GetCard();
-
-            return cardList;
+            Cards = cardList;
         }
 
     }

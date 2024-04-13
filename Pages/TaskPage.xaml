@@ -79,7 +79,8 @@
                     </CarouselView.ItemTemplate>
                 </CarouselView>
         </HorizontalStackLayout>
-        <Button Text="Complete Card" Clicked="Button_OnClicked" WidthRequest="250" Margin="-20, 0,0,0"/>
+        <!-- Clicked="Button_OnClicked" -->
+        <Button Text="Complete Card" Command="{Binding GetCardsCommand}"  WidthRequest="250" Margin="-20, 0,0,0"/>
     </VerticalStackLayout>
     
     

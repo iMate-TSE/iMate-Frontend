@@ -84,5 +84,19 @@ public partial class LoginPage : ContentPage
                 }
         }
     }
+
+        private async void Show_Password(object sender, EventArgs e)
+        {
+            if (Password.IsPassword)
+            {
+                Show.Source = "open_eye.png";
+            }
+            else
+            {
+                Show.Source = "closed_eye.png";
+                
+            }
+            Password.IsPassword = !Password.IsPassword;
+        }
     
 }
