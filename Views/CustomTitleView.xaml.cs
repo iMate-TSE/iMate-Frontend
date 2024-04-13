@@ -1,4 +1,5 @@
 using iMate.Services;
+
 namespace iMate.Views;
 
 
@@ -6,7 +7,7 @@ public partial class CustomTitleView : ContentView
 {
 	private HeaderViewModel _viewModel;
 
-    private IHttpService _httpService;
+    protected IHttpService _httpService;
 
     public CustomTitleView()
     {

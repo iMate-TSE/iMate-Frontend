@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using Exception = System.Exception;
+using iMate.Models;
+using System.Net.Http.Json;
+
 
 namespace iMate.Services
 {
@@ -15,7 +18,10 @@ namespace iMate.Services
         Task<string> GetUsername(string token);
         void UpdateSettings(string username, bool soundEffects, bool reducedMotion, bool motivation, bool practice, bool scheduling, string? reminder);
         void LogOut(string username);
+        Task<List<Card>> GetCards(string mood);
+        Task<User> FetchProfile(string token);
     }
+
 
     class HttpService : IHttpService
     {
@@ -23,6 +29,7 @@ namespace iMate.Services
         {
             BaseAddress = new Uri("http://10.0.2.2:5137/api/v1/")
         };
+
 
         public HttpService() { }
 
@@ -162,6 +169,60 @@ namespace iMate.Services
             }catch(Exception ex) { Console.WriteLine(ex.Message); }
         }
 
+        
+        public async Task<User> FetchProfile(string token)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync($"Profile/?token={token}");
+
+                response.EnsureSuccessStatusCode();
+
+                var jsonResponse = await (response.Content.ReadFromJsonAsync<User>());
+                
+                if (jsonResponse != null)
+                {
+                    return jsonResponse;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+
+        
+        public async Task<List<Card>> GetCards(string mood)
+        {
+            try
+            {
+                using HttpResponseMessage response = await _httpClient.GetAsync($"getCards?mood={mood}");
+
+                response.EnsureSuccessStatusCode();
+
+                var jsonResponse = await (response.Content.ReadFromJsonAsync<List<Card>>());
+                
+                if (jsonResponse != null)
+                {
+                    return jsonResponse;
+                }
+                else {
+                    return new List<Card>();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<Card>();
+            }
+        }
+
     }
-    
 }

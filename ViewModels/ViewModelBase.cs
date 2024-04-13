@@ -3,7 +3,7 @@
 
 namespace iMate.ViewModels
 {
-    internal class ViewModelBase : ObservableObject
+    public class ViewModelBase : ObservableObject
     {
         private readonly IHttpService _httpService;
 

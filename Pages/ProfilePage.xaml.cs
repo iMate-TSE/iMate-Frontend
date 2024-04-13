@@ -15,7 +15,7 @@ public partial class ProfilePage : ContentPage
 
         _httpService = httpService;
 
-        _viewmodel = new PersonalInfoViewModel();
+        _viewmodel = new PersonalInfoViewModel(_httpService);
 
         BindingContext = _viewmodel;
     }
@@ -32,7 +32,7 @@ public partial class ProfilePage : ContentPage
 
     private void PersonalInformationTapped(object sender, EventArgs e) 
     { 
-        Navigation.PushAsync(new PersonalInfoPage());
+        Navigation.PushAsync(new PersonalInfoPage(_httpService));
     }
 
     private void NotificationsTapped(object sender, EventArgs e) { }

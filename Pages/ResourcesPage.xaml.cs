@@ -18,7 +18,7 @@ public partial class ResourcesPage : ContentPage
             }
             catch (Exception ex)
             {
-                // An unexpected error occurred. No browser may be installed on the device.
+                Console.Write(ex.Message);
             }
         }
     }
