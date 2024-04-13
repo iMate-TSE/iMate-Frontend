@@ -12,22 +12,12 @@ public partial class CustomTitleView : ContentView
     {
 	    InitializeComponent();
 
+	    _httpService = new HttpService();
+
 	    _viewModel = new HeaderViewModel();
 
 	    BindingContext = _viewModel;
     }
-
-    public CustomTitleView(IHttpService httpService)
-	{
-		InitializeComponent();
-
-        _httpService = httpService;
-
-		_viewModel = new HeaderViewModel();
-
-		BindingContext = _viewModel;
-	}
-    
     
     private async void ImageButton_Clicked(object sender, EventArgs e)
     {

@@ -158,7 +158,7 @@
                     HorizontalOptions="Start">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TriggerNavigate" />
+                        <TapGestureRecognizer Tapped="Logout" />
                     </Label.GestureRecognizers>
 
                 </Label>

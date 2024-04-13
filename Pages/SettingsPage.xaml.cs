@@ -16,10 +16,10 @@ public partial class SettingsPage : ContentPage
         _viewModel = new SettingsViewModel(_httpService);
         BindingContext = _viewModel;
     }
-    private async void TriggerNavigate(object sender, TappedEventArgs e)
+    private async void Logout(object sender, TappedEventArgs e)
     {
-        _viewModel.LogOut();
         await SecureStorage.Default.SetAsync("isLoggedIn", "false");
+        _viewModel.LogOut();
         Application.Current.MainPage = new LoginPage(_httpService);
     }
 

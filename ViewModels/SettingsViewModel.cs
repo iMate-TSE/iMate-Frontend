@@ -86,7 +86,7 @@ namespace iMate.ViewModels
         public async void LogOut()
         {
             string token = await SecureStorage.Default.GetAsync("auth_token");
-            //HttpService.LogOut(token);
+            HttpService.LogOut(token);
             SecureStorage.Default.Remove("auth_token");
         }
 

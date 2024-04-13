@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Net.Http.Json;
+using System.Text.Json.Serialization;
 using Exception = System.Exception;
 
 namespace iMate.Services
@@ -150,12 +151,12 @@ namespace iMate.Services
             }catch (Exception ex) { Console.WriteLine(ex.Message); }
         }
 
-        public async void LogOut(string username)
+        public async void LogOut(string token)
         {
             try
             {
-                var content = new {username};
-
+                var content = new {token}; 
+                
                 using HttpResponseMessage response = await _httpClient.PostAsJsonAsync("Settings/LogOut", content);
                 response.EnsureSuccessStatusCode();
             }catch(Exception ex) { Console.WriteLine(ex.Message); }
