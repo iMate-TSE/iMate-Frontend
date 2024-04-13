@@ -7,8 +7,8 @@ namespace iMate.Pages;
 public partial class ProfilePage : ContentPage
 {
     private PersonalInfoViewModel _viewmodel;
-
-    protected IHttpService _httpService;
+    private IHttpService _httpService;
+    
     public ProfilePage(IHttpService httpService)
     {
         InitializeComponent();
@@ -22,7 +22,7 @@ public partial class ProfilePage : ContentPage
 
     private void NavigateSettings(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new SettingsPage());
+        Navigation.PushAsync(new SettingsPage(_httpService));
     }
 
     private void UsernameTapped(object sender, EventArgs e)

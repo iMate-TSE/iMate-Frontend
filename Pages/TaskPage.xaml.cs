@@ -10,7 +10,7 @@ public partial class TaskPage : ContentPage
 
 	public TaskPage(IHttpService httpService)
 	{
-		InitializeComponent();
+        InitializeComponent();
 
 		_deckViewModel = new DeckViewModel(httpService);
 

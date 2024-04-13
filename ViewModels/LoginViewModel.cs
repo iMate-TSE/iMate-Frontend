@@ -1,44 +1,54 @@
-﻿using iMate.Models;
-using System.Collections.ObjectModel;
+﻿using iMate.Services;
+using System.Windows.Input;
 
 namespace iMate.ViewModels
 {
-    public partial class LoginViewModel : ObservableObject
+    partial class LoginViewModel : ViewModelBase
     {
-        private string _Username;
+        public string _Username { get; set; }
 
-        private string _Password;
+        public string _Password { get; set; }
 
-        public LoginViewModel() 
+
+        public LoginViewModel(IHttpService httpService) : base(httpService)
         {
-
-            Dictionary<String, string> details = tempUser();
-
-            _Username = details["username"];
-            _Password = details["password"];
-
+            _Username = "";
+            _Password = "";
         }
 
+        
 
-        private Dictionary<string, string> tempUser()
+        public async Task<bool> CheckUser ()
         {
+            string token = "404";
 
-            return new Dictionary<string, string>()
+            token = await HttpService.Login(_Username, _Password);
+
+            if (token == "404" )
             {
-                ["username"] = "aturing",
-                ["password"] = "password"
-            };
-
-        }
-
-        public bool CheckUser (string username, string password)
-        {
-            if (_Username == username && _Password == password)
-            {
-                return true;
+                return false;
             }
-            return false;
+
+            await SecureStorage.Default.SetAsync("auth_token", token);
+            return true;
         }
+
+        public async Task<bool> SignUp()
+        {
+            HttpService.SignUpUser(_Username, _Password);
+
+            string token = "";
+            token = await HttpService.Login(_Username, _Password);
+            if (token == "404")
+            {
+                return false;
+            }
+
+            await SecureStorage.Default.SetAsync("auth_token", token);
+            HttpService.CreateDefaultSettings(_Username);
+            return true;
+        }
+
     }
 
 }
