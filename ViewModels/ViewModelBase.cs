@@ -1,8 +1,9 @@
 ﻿using iMate.Services;
 
+
 namespace iMate.ViewModels
 {
-    internal class ViewModelBase : ObservableObject
+    public class ViewModelBase : ObservableObject
     {
         private readonly IHttpService _httpService;
 
@@ -12,6 +13,6 @@ namespace iMate.ViewModels
             _httpService = httpService;
         }
 
-        protected IHttpService HttpService => _httpService;
+        public IHttpService HttpService => _httpService;
     }
 }

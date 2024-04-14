@@ -1,13 +1,15 @@
+using iMate.Services;
+
 namespace iMate.Pages;
 
 public partial class PersonalInfoPage : ContentPage
 {
     private PersonalInfoViewModel _viewModel;
-    public PersonalInfoPage()
+    public PersonalInfoPage(IHttpService httpService)
 	{
 		InitializeComponent();
 
-        _viewModel = new PersonalInfoViewModel();
+        _viewModel = new PersonalInfoViewModel(httpService);
 
 		BindingContext = _viewModel;
 

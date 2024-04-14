@@ -47,9 +47,11 @@
                       />
 
                     <Switch Grid.Row="0" Grid.Column="1" 
+                        x:Name="SE"
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
-                        IsToggled="{Binding SoundEffects}"/>
+                        IsToggled="{Binding SoundEffects}"
+                        Toggled="Update"/>
 
                     <Label Grid.Row="1" Grid.Column="0"
                            Text="Reduced Motion"
@@ -60,9 +62,11 @@
                             HorizontalOptions="Start"
                     />
                     <Switch Grid.Row="1" Grid.Column="1" 
+                        x:Name="RM"
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
-                        IsToggled="{Binding ReducedMotion}"/>
+                        IsToggled="{Binding ReducedMotion}"
+                        Toggled="Update"/>
 
                     <Label Grid.Row="2" Grid.Column="0"
                         Text="Motivational Messages"
@@ -74,9 +78,11 @@
                         />
 
                     <Switch Grid.Row="2" Grid.Column="1" 
+                        x:Name="MM"
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
-                        IsToggled="{Binding MotivationalMessages}"/>
+                        IsToggled="{Binding MotivationalMessages}"
+                        Toggled="Update"/>
 
                     <Label Grid.Row="3" Grid.Column="0"
                         Text="Practice Reminder"
@@ -87,10 +93,12 @@
                         HorizontalOptions="Start"
                         />
 
-                    <Switch Grid.Row="3" Grid.Column="1" 
+                    <Switch Grid.Row="3" Grid.Column="1"
+                        x:Name="PR"
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}" 
-                        IsToggled="{Binding PracticeReminder}"/>
+                        IsToggled="{Binding PracticeReminder}"
+                        Toggled="Update"/>
 
                     <Label Grid.Row="4" Grid.Column="0"
                         Text="Smart Scheduling"
@@ -101,10 +109,12 @@
                         HorizontalOptions="Start"
                         />
 
-                    <Switch Grid.Row="4" Grid.Column="1" 
+                    <Switch Grid.Row="4" Grid.Column="1"
+                        x:Name="SS"
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
-                        IsToggled="{Binding SmartScheduling}"/>
+                        IsToggled="{Binding SmartScheduling}"
+                        Toggled="Update"/>
 
 
                     <Label Grid.Row="5" Grid.Column="0"
@@ -117,12 +127,14 @@
                         />
 
                     <TimePicker Grid.Row="5" Grid.Column="1"
+                            x:Name="RT"
                             Time="{Binding ReminderTime}"
                             VerticalOptions="Center"
                             FontSize="23"
                             FontFamily="AmikoRegular"
                             Margin="0,0"
-                            HorizontalOptions="Start"/>
+                            HorizontalOptions="Start"
+                            />
                     
                 </Grid>
 
@@ -146,7 +158,7 @@
                     HorizontalOptions="Start">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TriggerNavigate" />
+                        <TapGestureRecognizer Tapped="Logout" />
                     </Label.GestureRecognizers>
 
                 </Label>
