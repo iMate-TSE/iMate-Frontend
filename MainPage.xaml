@@ -51,7 +51,7 @@
                 />
                  
                 <!-- Navigation Thingy -->
-                <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto" RowDefinitions="*,*,*,*,*" RowSpacing="30">
+                <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto" RowDefinitions="*,*,*,*" RowSpacing="30">
                     <!-- Mood Link -->
                     <Image Grid.Column="0" Grid.Row="0" Source="arrow_right.svg" HorizontalOptions="Start" />
                     <Label Grid.Row="0" Grid.Column="1"
@@ -67,26 +67,10 @@
                         </Label.GestureRecognizers>
 
                     </Label>
-
-                    <!-- Mood Form Link -->
+                    
+                    <!-- Breathe Link -->
                     <Image Grid.Column="0" Grid.Row="1" Source="arrow_right.svg" HorizontalOptions="Start" />
                     <Label Grid.Row="1" Grid.Column="1"
-                       Text="Check Mood Form"
-                       VerticalOptions="Center"
-                       FontSize="23"
-                       FontFamily="AmikoRegular"
-                       Margin="10, 10"
-                       HorizontalOptions="Start"
->
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TriggerNavigate" />
-                        </Label.GestureRecognizers>
-
-                    </Label>
-
-                    <!-- Breathe Link -->
-                    <Image Grid.Column="0" Grid.Row="2" Source="arrow_right.svg" HorizontalOptions="Start" />
-                    <Label Grid.Row="2" Grid.Column="1"
                        Text="Breathe"
                        VerticalOptions="Center"
                        FontSize="23"
@@ -102,8 +86,8 @@
                    
 
                     <!-- Chat Link -->
-                    <Image Grid.Column="0" Grid.Row="3" Source="arrow_right.svg" HorizontalOptions="Start" />
-                    <Label Grid.Row="3" Grid.Column="1"
+                    <Image Grid.Column="0" Grid.Row="2" Source="arrow_right.svg" HorizontalOptions="Start" />
+                    <Label Grid.Row="2" Grid.Column="1"
                        Text="Chat"
                        VerticalOptions="Center"
                        FontSize="23"
@@ -119,8 +103,8 @@
                     
                     
                     <!-- Resources -->
-                    <Image Grid.Column="0" Grid.Row="4" Source="arrow_right.svg" HorizontalOptions="Start" />
-                    <Label Grid.Row="4" Grid.Column="1"
+                    <Image Grid.Column="0" Grid.Row="3" Source="arrow_right.svg" HorizontalOptions="Start" />
+                    <Label Grid.Row="3" Grid.Column="1"
                        Text="Resources"
                        VerticalOptions="Center"
                        FontSize="23"
