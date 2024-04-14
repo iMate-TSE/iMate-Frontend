@@ -5,6 +5,7 @@ using Exception = System.Exception;
 using iMate.Models;
 using System.Net.Http.Json;
 using System.Text;
+using iMate.Models.ApiModels;
 
 
 namespace iMate.Services
@@ -19,7 +20,7 @@ namespace iMate.Services
         Task<string> GetUsername(string token);
         void UpdateSettings(string content);
         void LogOut(string username);
-        Task<List<Card>> GetCards(string mood);
+        Task<List<DatabaseCard>> GetCards(string mood);
         Task<User> FetchProfile(string token);
     }
 
@@ -199,7 +200,7 @@ namespace iMate.Services
 
 
         
-        public async Task<List<Card>> GetCards(string mood)
+        public async Task<List<DatabaseCard>> GetCards(string mood)
         {
             try
             {
@@ -207,20 +208,21 @@ namespace iMate.Services
 
                 response.EnsureSuccessStatusCode();
 
-                var jsonResponse = await (response.Content.ReadFromJsonAsync<List<Card>>());
+                var jsonResponse = await (response.Content.ReadFromJsonAsync<List<DatabaseCard>>());
+                
                 
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
                 }
                 else {
-                    return new List<Card>();
+                    return new List<DatabaseCard>();
                 }
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new List<Card>();
+                return new List<DatabaseCard>();
             }
         }
 
