@@ -2,14 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Pages.FormPage"
+             BackgroundColor="{DynamicResource Platinum}"
              Title="Check Mood ☀️">
+
+    
     <VerticalStackLayout>
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+        
+        
+        <!-- Setting up the pages grid-->
+        
+        <Grid RowDefinitions="Auto, Auto, Auto"
               ColumnDefinitions="*"
               Padding="15"
               RowSpacing="40">
 
-            <Grid RowDefinitions="*" Grid.Row="0">
+            
+            <!-- Heading -->
+
+            <Grid Grid.Row="0">
                 <Label Text="How is your mood?"
                        FontSize="20"
                        FontFamily="RubikSemiBold"
@@ -22,63 +32,54 @@
                 <Image Source="underline.png" Grid.Row="0" Margin="10, 10" WidthRequest="300" HeightRequest="50" />
             </Grid>
 
+
             <!--  Main  -->
+            
+            <!-- Question 1 -->
 
+            <Grid Grid.Row="1" Margin="15, 0, 0, 0">
+                <VerticalStackLayout>
+                    <Label Text="Example Question" />
+                    <VerticalStackLayout RadioButtonGroup.GroupName="Question1" />
 
+                    <RadioButton Content="Option1" 
+                                  />
 
-            <!--  Question 1  -->
-            <Label Grid.Row="1" 
-                   Text="How are you feeling right now?" 
-                   HorizontalOptions="Center" 
-                   VerticalOptions="End"   
-                   FontFamily="AveriaRegular"
-                   HorizontalTextAlignment="Center"
-            />
+                    <RadioButton Content="Option2"
+                                  />
 
-            <!-- Answer 1 -->
-            <Border
-                Grid.Row="2"
-                VerticalOptions="Start"
-                WidthRequest="370"
-                HeightRequest="150"
-                BackgroundColor="{DynamicResource Platinum }"
-                StrokeShape="RoundRectangle 10"
-                Margin="0,0,0,25"
-            />
+                    <RadioButton Content="Option3" 
+                                  />
+                    <RadioButton Content="Option4" 
+                                  />
 
-            <Grid Padding="2" Grid.Row="2" VerticalOptions="Start">
-                <Editor x:Name="Question1"
-                        Placeholder="Type your answer here..."
-                        HeightRequest="150" 
-                />
+                </VerticalStackLayout>
             </Grid>
 
+            
+            <!-- Question 2 -->
+            
+            <Grid Grid.Row="2" Margin="15, 0, 0, 0">
+                <VerticalStackLayout>
+                    <Label Text="Example Question 2" />
+                    <VerticalStackLayout RadioButtonGroup.GroupName="Question2" />
 
-            <!--  Question 2  -->
-            <Label Grid.Row="3" 
-                  Text="Do you know what aspect of your life is triggering this?" 
-                  HorizontalOptions="Center" 
-                  VerticalOptions="End"
-                  FontFamily="AveriaRegular"
-                  HorizontalTextAlignment="Center"
-            />
+                    <RadioButton Content="Option1" 
+                                  />
 
-            <!-- Answer 2 -->
-            <Border
-                Grid.Row="4"
-                VerticalOptions="Start"
-                WidthRequest="370"
-                HeightRequest="150"
-                BackgroundColor="{DynamicResource Platinum }"
-                StrokeShape="RoundRectangle 10"
-            />
-            <Grid Padding="2" Grid.Row="4" VerticalOptions="Start">
-                <Editor x:Name="Question2"
-                        Placeholder="Type your answer here..."
-                        HeightRequest="150" 
-                />
+                    <RadioButton Content="Option2" 
+                                />
+
+                    <RadioButton Content="Option3" 
+                                />
+
+                    <RadioButton Content="Option4" 
+                                  />
+
+                </VerticalStackLayout>
             </Grid>
 
+            <!-- End -->
 
         </Grid>
     </VerticalStackLayout>
