@@ -25,7 +25,7 @@
                         break;
                     case "Check Mood":
                         SemanticScreenReader.Announce("Check Mood button clicked");
-                        await Navigation.PushAsync(new SliderPage());
+                        await Navigation.PushAsync(new FormPage());
                         break;
                     case "Resources":
                         await Navigation.PushAsync(new ResourcesPage());
