@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using iMate.Services;
+using iMate.Models;
 
 namespace iMate.Pages;
 
@@ -22,6 +23,8 @@ public partial class TaskPage : ContentPage
         StackLayout sl = (StackLayout)sender;
         Border Front = (Border)sl.Children[0];
         Border Back = (Border)sl.Children[1];
+        
+        Console.WriteLine(CardsCarousel.Position);
 
         sl.RotationY = 0;
         Animation animation = new Animation();
@@ -42,14 +45,13 @@ public partial class TaskPage : ContentPage
             }
             animation.Dispose();
         });
-
-
     }
+	
 
-	private void Button_OnClicked(object? sender, EventArgs e)
+	private void CompleteCard(object? sender, EventArgs e)
 	{
-		int cardIdx = CardsCarousel.Position;
+		Card currentCard = (Card)CardsCarousel.CurrentItem;
 		//await DisplayAlert("Position", cardIdx.ToString(), "Close this shit");
-		_deckViewModel.RemoveCard(cardIdx); 
+		_deckViewModel.RemoveCard(currentCard.Id); 
 	}
 }

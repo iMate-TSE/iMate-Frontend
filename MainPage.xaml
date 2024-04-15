@@ -22,12 +22,30 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-
+            
+            <!--/*<Grid HorizontalOptions="Center" VerticalOptions="Center">
+                <Ellipse Stroke="{DynamicResource Cyclamen}"
+                         StrokeThickness="5"
+                         WidthRequest="200"
+                         HeightRequest="200"
+                         />
+                <Label 
+                    TextColor="{DynamicResource DavyGray}"
+                    VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                    FontSize="30" FontFamily="AveriaRegular" Padding="40, 0"
+                    >
+                    <Label.Text >
+                        what is my
+                        mood?
+                    </Label.Text>
+                </Label>
+            </Grid>*/-->
+    
             <Image Source="home_icon.svg">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TriggerNavigate" />
                 </Image.GestureRecognizers>
-            </Image>
+            </Image> 
 
             <!-- Define a grid -->
             <Grid RowDefinitions="*,*,*,*,*"

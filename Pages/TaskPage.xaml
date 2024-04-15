@@ -35,7 +35,7 @@
         <HorizontalStackLayout VerticalOptions="Center">
             <StackLayout WidthRequest="350" 
                          HeightRequest="500" 
-                         IsVisible="{Binding HasCards}"
+                         IsVisible="{Binding IsErrorVisible}"
                          VerticalOptions="Center"
                          >
                 <Grid Margin="10, 10, 10, 10" WidthRequest="300" HeightRequest="450">
@@ -67,8 +67,28 @@
                                     BackgroundColor="WhiteSmoke"
                                     IsVisible="False"
                              >
-                                <Grid x:Name="CardFront" Margin="10, 10, 10, 10" WidthRequest="300" HeightRequest="450">
-                                    <Label Text="{Binding Content}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                                <Grid x:Name="CardFront" 
+                                      Padding="15, 0" 
+                                      Margin="10, 10, 10, 10"
+                                      WidthRequest="300" HeightRequest="450"
+                                      RowDefinitions="*,Auto,Auto,Auto,*"
+                                      >
+                                    <Label Text="✨✨"
+                                           Grid.Row="1"
+                                           VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                           FontSize="25"
+                                           />
+                                    <Label Text="{Binding Content}" 
+                                           Grid.Row="2"
+                                           Margin="0, 10"
+                                           VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                           FontSize="17"
+                                    />
+                                    <Label Text="✨✨"
+                                           Grid.Row="3"
+                                           VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                           FontSize="25"
+                                    />
                                 </Grid>
                             </Border>
                             <StackLayout.GestureRecognizers>
@@ -79,7 +99,8 @@
                     </CarouselView.ItemTemplate>
                 </CarouselView>
         </HorizontalStackLayout>
-        <Button Text="Complete Card" Clicked="Button_OnClicked" WidthRequest="250" Margin="-20, 0,0,0"/>
+        <!-- Clicked="Button_OnClicked" -->
+        <Button Text="Complete Card" Clicked="CompleteCard"  WidthRequest="150"/>
     </VerticalStackLayout>
     
     

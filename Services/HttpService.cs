@@ -4,6 +4,8 @@ using System.Text.Json.Serialization;
 using Exception = System.Exception;
 using iMate.Models;
 using System.Net.Http.Json;
+using System.Text;
+using iMate.Models.ApiModels;
 
 
 namespace iMate.Services
@@ -16,10 +18,11 @@ namespace iMate.Services
         void SignUpUser(string username, string password);
         void CreateDefaultSettings(string username);
         Task<string> GetUsername(string token);
-        void UpdateSettings(string username, bool soundEffects, bool reducedMotion, bool motivation, bool practice, bool scheduling, string? reminder);
+        void UpdateSettings(string content);
         void LogOut(string username);
-        Task<List<Card>> GetCards(string mood);
+        Task<List<DatabaseCard>> GetCards(string mood);
         Task<User> FetchProfile(string token);
+        Task<List<FormQuestions>> GetQuestions(string questionCategory);
     }
 
 
@@ -97,7 +100,6 @@ namespace iMate.Services
 
                 var jsonResponse = await (response.Content.ReadAsStringAsync());
 
-                Console.WriteLine("====================" + jsonResponse);
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
@@ -146,13 +148,13 @@ namespace iMate.Services
             }
         }
 
-        public async void UpdateSettings(string username, bool soundEffects, bool reducedMotion, bool motivation, bool practice, bool scheduling, string? reminder)
+        public async void UpdateSettings(string content)
         {
             try
             {
-                var content = new { username, soundEffects, reducedMotion, motivation, practice, scheduling, reminder };
-
-                using HttpResponseMessage response = await _httpClient.PostAsJsonAsync("Settings/UpdateUserSettings", content);
+                var jsonContent = new StringContent(content, Encoding.UTF8, "application/json");
+                
+                using HttpResponseMessage response = await _httpClient.PostAsync("Settings/UpdateUserSettings", jsonContent);
                 response.EnsureSuccessStatusCode();
 
             }catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -168,7 +170,6 @@ namespace iMate.Services
                 response.EnsureSuccessStatusCode();
             }catch(Exception ex) { Console.WriteLine(ex.Message); }
         }
-
         
         public async Task<User> FetchProfile(string token)
         {
@@ -196,33 +197,62 @@ namespace iMate.Services
                 return null;
             }
         }
-
-
         
-        public async Task<List<Card>> GetCards(string mood)
+        public async Task<List<DatabaseCard>> GetCards(string mood)
         {
             try
             {
-                using HttpResponseMessage response = await _httpClient.GetAsync($"getCards?mood={mood}");
+                using HttpResponseMessage response = await _httpClient.GetAsync($"Card?mood={mood}");
 
                 response.EnsureSuccessStatusCode();
 
-                var jsonResponse = await (response.Content.ReadFromJsonAsync<List<Card>>());
+                var jsonResponse = await (response.Content.ReadFromJsonAsync<List<DatabaseCard>>());
+                
                 
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
                 }
                 else {
-                    return new List<Card>();
+                    return new List<DatabaseCard>();
                 }
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new List<Card>();
+                return new List<DatabaseCard>();
             }
         }
 
+        public async Task<List<FormQuestions>> GetQuestions(string questionCategory)
+        {
+            try
+            {
+                using HttpResponseMessage response =
+                    await _httpClient.GetAsync($"Mood/generateQuestions/?moodCategory={questionCategory}");
+
+                response.EnsureSuccessStatusCode();
+                var JsonReponse = await (response.Content.ReadFromJsonAsync<List<FormQuestions>>());
+
+                foreach (FormQuestions q in JsonReponse)
+                {
+                    Console.WriteLine("===========================" + q.Category);
+                }
+
+                if (JsonReponse != null)
+                {
+                    return JsonReponse;
+                }
+                else
+                {
+                    return new List<FormQuestions>();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new List<FormQuestions>();
+            }
+        }
     }
 }

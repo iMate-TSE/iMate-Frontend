@@ -35,7 +35,7 @@
                 HorizontalOptions="Center"
                 >
 
-                <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto" RowDefinitions="*,*,*,*,*,*" RowSpacing="30">
+                <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto" RowDefinitions="*,*,*,*,*,*,*" RowSpacing="30">
 
                     <Label Grid.Row="0" Grid.Column="0"
                         Text="Sound Effects"
@@ -51,7 +51,7 @@
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
                         IsToggled="{Binding SoundEffects}"
-                        Toggled="Update"/>
+                        />
 
                     <Label Grid.Row="1" Grid.Column="0"
                            Text="Reduced Motion"
@@ -66,7 +66,7 @@
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
                         IsToggled="{Binding ReducedMotion}"
-                        Toggled="Update"/>
+                        />
 
                     <Label Grid.Row="2" Grid.Column="0"
                         Text="Motivational Messages"
@@ -82,7 +82,7 @@
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
                         IsToggled="{Binding MotivationalMessages}"
-                        Toggled="Update"/>
+                        />
 
                     <Label Grid.Row="3" Grid.Column="0"
                         Text="Practice Reminder"
@@ -98,7 +98,7 @@
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}" 
                         IsToggled="{Binding PracticeReminder}"
-                        Toggled="Update"/>
+                        />
 
                     <Label Grid.Row="4" Grid.Column="0"
                         Text="Smart Scheduling"
@@ -114,7 +114,7 @@
                         OnColor="{DynamicResource Cyclamen}"
                         ThumbColor="{DynamicResource Cyclamen}"
                         IsToggled="{Binding SmartScheduling}"
-                        Toggled="Update"/>
+                        />
 
 
                     <Label Grid.Row="5" Grid.Column="0"
@@ -135,6 +135,16 @@
                             Margin="0,0"
                             HorizontalOptions="Start"
                             />
+                    
+                    <Button Grid.Row="6" Grid.ColumnSpan="2"
+                            Text="Save"
+                            FontFamily="AmikoRegular"
+                            FontSize="23"
+                            HorizontalOptions="Center"
+                            WidthRequest="200"
+                            Margin="0, 0, 0, 10"
+                            IsEnabled="True"
+                            Clicked="Update"/>
                     
                 </Grid>
 

@@ -2,11 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iMate.Pages.SliderPage"
+             xmlns:viewmodels="clr-namespace:iMate.ViewModels"
+             x:DataType="viewmodels:FormViewModel"
+             xmlns:models="clr-namespace:iMate.Models.ApiModels"
              Title="Check Mood ☀️">
     <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -34,11 +40,45 @@
                 <Image Source="underline.png" Grid.Row="0" Margin="0, 10, 0, 0" WidthRequest="300" HeightRequest="50" />
             </Grid>
 
-
             <!--  ooooooooooooooooooooooooooooooooooooooooooo  -->
+            
+            <!-- Pick a Colour Text -->
+            <Label Grid.Column="0" 
+               Grid.Row="1" 
+               Grid.ColumnSpan="3" 
+               Text="Would you say that you feel overall more positive or negative at the moment?"
+               FontSize="17"
+               Padding="14, 10"
+               HorizontalOptions="Center" 
+               VerticalOptions="Center"
+               HorizontalTextAlignment="Center"
+               Margin="0, 10"
+               FontFamily="AveriaRegular"
+            />
 
-            <Grid Grid.Row="1" Grid.Column="0" Margin="0, 20">
+            <!-- Pick a Colour Buttons -->
+            <StackLayout Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Negative" 
+                        BackgroundColor="#ff5252" 
+                        TextColor="White" Margin="-15, 0, 30,0" 
+                        FontFamily="AveriaRegular"
+                        Clicked="UserNegativeClicked"
+                        />
+                <Button Text="Positive" 
+                        BackgroundColor="#27ae60" 
+                        TextColor="White" 
+                        FontFamily="AveriaRegular"
+                        Clicked="UserPositiveClicked"
+                        />
+            </StackLayout>
+            
+                        <!--  ooooooooooooooooooooooooooooooooooooooooooo  -->
+
+            <!-- Positive -->
+            <Grid Grid.Row="4" Grid.Column="0" Margin="0, 30" IsVisible="{Binding IsPositive}">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -46,11 +86,24 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="90"/>
                 </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" 
+                       Grid.Row="0" 
+                       Grid.ColumnSpan="3" 
+                       Text="Are you feeling energized and outward-focused, or drained and inward-focused?"
+                       FontSize="17"
+                       Padding="14, 10"
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0, 40, 0,0"
+                       FontFamily="AveriaRegular"
+                />
 
                 <!--  Mood 1  -->
                 <Label Grid.Column="0" 
-                       Grid.Row="0" 
-                       Text="Depressed" 
+                       Grid.Row="1" 
+                       Text="Energised" 
                        HorizontalOptions="Center" 
                        VerticalOptions="End"
                        Margin="10, 0"    
@@ -59,9 +112,10 @@
                 />
 
                 <!-- Slider 1 -->
-                <Slider Grid.Column="1" Grid.Row="0" 
-                    Minimum="0" Maximum="100" 
-                    Value="50" 
+                <Slider Grid.Column="1" Grid.Row="1" 
+                    Minimum="0" Maximum="10" 
+                    x:Name="PositiveSlider"
+                    Value="5" 
                     VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
                     Margin="10, 0"
                     ThumbColor="{DynamicResource Cyclamen}"
@@ -71,17 +125,84 @@
 
                 <!--  Mood 2   -->
                 <Label Grid.Column="2" 
-                       Grid.Row="0" 
-                       Text="Overjoyed" 
+                       Grid.Row="1" 
+                       Text="Drained" 
                        HorizontalOptions="Center"
                        VerticalOptions="End"
                        Margin="10, 0"
                        FontFamily="AveriaRegular"
                 />
+                
+                <Button Grid.Row="2" Grid.Column="1" Margin="0, 5, 0,0" Text="Next" Clicked="FromPositiveNextQuestion"/>
             </Grid>
 
-            <Grid Grid.Row="2" Grid.Column="0" Margin="0, 20">
+            <!-- Active -->
+            <Grid Grid.Row="4" Grid.Column="0" Margin="0, 30" IsVisible="{Binding IsActive}">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" 
+                       Grid.Row="0" 
+                       Grid.ColumnSpan="3" 
+                       Text="On a scale of 1 (not at all) to 10 (extremely), how much do you feel a sense of connection and belonging right now?"
+                       FontSize="17"
+                       Padding="14, 10"
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0, 40, 0,0"
+                       FontFamily="AveriaRegular"
+                />
+
+                <!--  Mood 1  -->
+                <Label Grid.Column="0" 
+                       Grid.Row="1" 
+                       Text="1" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="End"
+                       Margin="10, 0"    
+                       FontFamily="AveriaRegular"
+                       HorizontalTextAlignment="Center"
+                />
+
+                <!-- Slider 1 -->
+                <Slider Grid.Column="1" Grid.Row="1" 
+                    Minimum="0" Maximum="10" 
+                    x:Name="Activeslider"
+                    Value="5" 
+                    VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                    Margin="10, 0"
+                    ThumbColor="{DynamicResource Cyclamen}"
+                    MaximumTrackColor="#484747"
+                    MinimumTrackColor="{DynamicResource Cyclamen}"
+                />
+
+                <!--  Mood 2   -->
+                <Label Grid.Column="2" 
+                       Grid.Row="1" 
+                       Text="10" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="End"
+                       Margin="10, 0"
+                       FontFamily="AveriaRegular"
+                />
+                
+                <Button Grid.Row="2" Grid.Column="1" Text="Next" Margin="0, 5, 0,0" Clicked="FromActiveNextQuestion"/>
+            </Grid>
+            
+            <!-- Negative -->
+            <Grid Grid.Row="4" Grid.Column="0" Margin="0, 20" IsVisible="{Binding IsNegative}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -90,11 +211,22 @@
                     <ColumnDefinition Width="90"/>
                 </Grid.ColumnDefinitions>
 
-
-                <!--  Mood 1  -->
                 <Label Grid.Column="0" 
                        Grid.Row="0" 
-                       Text="Angry" 
+                       Grid.ColumnSpan="3" 
+                       Text="Within the negative emotions, is your feeling intense and outward-focused, or more passive and inward-focused?"
+                       FontSize="17"
+                       Padding="14, 10"
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0, 40, 0,0"
+                       FontFamily="AveriaRegular"
+                />
+                <!--  Mood 1  -->
+                <Label Grid.Column="0" 
+                       Grid.Row="1" 
+                       Text="Intense"
                        HorizontalOptions="Center" 
                        VerticalOptions="End"
                        Margin="10, 0"
@@ -102,9 +234,10 @@
                 />
 
                 <!-- Slider 1 -->
-                <Slider Grid.Column="1" Grid.Row="0" 
-                    Minimum="0" Maximum="100" 
-                    Value="50"
+                <Slider Grid.Column="1" Grid.Row="1" 
+                    Minimum="0" Maximum="10" 
+                    Value="5"
+                    x:Name="NegativeSlider"
                     VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
                     Margin="10, 0"
                     ThumbColor="{DynamicResource Cyclamen}"
@@ -114,39 +247,167 @@
 
                 <!--  Mood 2   -->
                 <Label Grid.Column="2" 
-                       Grid.Row="0" 
-                       Text="Fearful" 
+                       Grid.Row="1" 
+                       Text="Passive" 
                        HorizontalOptions="Center" 
                        VerticalOptions="End"
                        Margin="10, 0"
                        FontFamily="AveriaRegular"
                 />
+                
+                <Button Grid.Row="2" Grid.Column="1" Text="Next" Margin="0, 5, 0,0" Clicked="FromNegativeNextQuestion"/>
             </Grid>
+            
+            <!-- Passivity -->
+            <Grid Grid.Row="4" Grid.Column="0" Margin="0, 30" IsVisible="{Binding IsPassive}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" 
+                       Grid.Row="0" 
+                       Grid.ColumnSpan="3" 
+                       Text="On a scale of 1 (not at all) to 10 (extremely), how overwhelmed or out of control do you feel right now?"
+                       FontSize="17"
+                       Padding="14, 10"
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0, 40, 0,0"
+                       FontFamily="AveriaRegular"
+                />
 
-            <!--  ooooooooooooooooooooooooooooooooooooooooooo  -->
+                <!--  Mood 1  -->
+                <Label Grid.Column="0" 
+                       Grid.Row="1" 
+                       Text="1" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="End"
+                       Margin="10, 0"    
+                       FontFamily="AveriaRegular"
+                       HorizontalTextAlignment="Center"
+                />
 
+                <!-- Slider 1 -->
+                <Slider Grid.Column="1" Grid.Row="1" 
+                    Minimum="0" Maximum="10" 
+                    x:Name="PassivitySlider"
+                    Value="5" 
+                    VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                    Margin="10, 0"
+                    ThumbColor="{DynamicResource Cyclamen}"
+                    MaximumTrackColor="#484747"
+                    MinimumTrackColor="{DynamicResource Cyclamen}"
+                />
 
+                <!--  Mood 2   -->
+                <Label Grid.Column="2" 
+                       Grid.Row="1" 
+                       Text="10" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="End"
+                       Margin="10, 0"
+                       FontFamily="AveriaRegular"
+                />
+                
+                <Button Grid.Row="2" Grid.Column="1" Text="Next" Margin="0, 5, 0,0" Clicked="FromPassivityNextQuestion"/>
+            </Grid>
+            
+            <!-- Intensity -->
+            <Grid Grid.Row="4" Grid.Column="0" Margin="0, 30" IsVisible="{Binding IsIntense}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" 
+                       Grid.Row="0" 
+                       Grid.ColumnSpan="3" 
+                       Text="On a scale of 1 (not at all) to 10 (extremely), how much do you want to distance yourself from the situation or person that triggered this feeling?"
+                       FontSize="17"
+                       Padding="14, 10"
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0, 40, 0,0"
+                       FontFamily="AveriaRegular"
+                />
 
-            <!-- Pick a Colour Text -->
-            <Label Grid.Column="0" 
-               Grid.Row="3" 
-               Grid.ColumnSpan="3" 
-               Text="Which of these colours best suits how you are feeling?"
-               FontSize="17"
-               HorizontalOptions="Center" 
-               VerticalOptions="Center"
-               HorizontalTextAlignment="Center"
-               Margin="0, 40"
-               FontFamily="AveriaRegular"
-            />
+                <!--  Mood 1  -->
+                <Label Grid.Column="0" 
+                       Grid.Row="1" 
+                       Text="1" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="End"
+                       Margin="10, 0"    
+                       FontFamily="AveriaRegular"
+                       HorizontalTextAlignment="Center"
+                />
 
-            <!-- Pick a Colour Buttons -->
-            <StackLayout Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="Red" BackgroundColor="#ff5252" TextColor="White" FontFamily="AveriaRegular"/>
-                <Button Text="Blue" BackgroundColor="#34ace0" TextColor="White" Margin="10,0" FontFamily="AveriaRegular"/>
-                <Button Text="Yellow" BackgroundColor="#ffda79" TextColor="Black" FontFamily="AveriaRegular"/>
-            </StackLayout>
+                <!-- Slider 1 -->
+                <Slider Grid.Column="1" Grid.Row="1" 
+                    Minimum="0" Maximum="10" 
+                    x:Name="IntenseSlider"
+                    Value="5" 
+                    VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                    Margin="10, 0"
+                    ThumbColor="{DynamicResource Cyclamen}"
+                    MaximumTrackColor="#484747"
+                    MinimumTrackColor="{DynamicResource Cyclamen}"
+                />
 
+                <!--  Mood 2   -->
+                <Label Grid.Column="2" 
+                       Grid.Row="1" 
+                       Text="10" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="End"
+                       Margin="10, 0"
+                       FontFamily="AveriaRegular"
+                />
+                
+                <Button Grid.Row="2" Grid.Column="1" Text="Next" Margin="0, 5, 0,0" Clicked="FromIntensityNextQuestion"/>
+            </Grid>
         </Grid>
+        <CollectionView ItemsSource="{Binding Questions}"
+                        ItemsLayout="VerticalList"
+                        VerticalOptions="Center"
+                        x:Name="questions"
+                        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:FormQuestions">
+                    <Grid Margin="15, 0, 0, 0">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Question}" />
+                            <VerticalStackLayout RadioButtonGroup.GroupName="Question1" />
+
+                            <RadioButton Content="Never" 
+                            />
+
+                            <RadioButton Content="Sometimes"
+                            />
+
+                            <RadioButton Content="Always" 
+                            />
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+        <Label IsVisible="{Binding Leaf}" Text="{Binding Leaf}" Margin="0, 20" HorizontalTextAlignment="Center"></Label>
     </VerticalStackLayout>
 </ContentPage>

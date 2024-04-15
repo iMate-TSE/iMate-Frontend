@@ -22,8 +22,9 @@ public partial class SettingsPage : ContentPage
         _viewModel.LogOut();
         Application.Current.MainPage = new LoginPage(_httpService);
     }
+    
 
-    private async void UpdateTap(object sender, PropertyChangedEventArgs e) 
+    private async void Update(object sender, EventArgs e)
     {
         _viewModel.SoundEffects = SE.IsToggled;
         _viewModel.MotivationalMessages = MM.IsToggled;
@@ -31,17 +32,6 @@ public partial class SettingsPage : ContentPage
         _viewModel.ReducedMotion = RM.IsToggled;
         _viewModel.SmartScheduling = SS.IsToggled;
         _viewModel.ReminderTime = RT.Time;
-        //_viewModel.UpdateSettings();
-    }
-
-    private async void Update(object? sender, ToggledEventArgs e)
-    {
-        _viewModel.SoundEffects = SE.IsToggled;
-        _viewModel.MotivationalMessages = MM.IsToggled;
-        _viewModel.PracticeReminder = PR.IsToggled;
-        _viewModel.ReducedMotion = RM.IsToggled;
-        _viewModel.SmartScheduling = SS.IsToggled;
-        _viewModel.ReminderTime = RT.Time;
-        //_viewModel.UpdateSettings();
+        _viewModel.UpdateSettings();
     }
 }
