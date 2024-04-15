@@ -107,6 +107,8 @@ namespace iMate.ViewModels
 
             if (currentMood == null) return;
             
+            Console.WriteLine("================ " + currentMood);
+            
             
             async Task GetCard()
             {
@@ -118,15 +120,13 @@ namespace iMate.ViewModels
                     Cards.Add(new Card(card.cardID, card.Content));
                     IsErrorVisible = false;
                 }
-                
+                // There is a bug with Carousel View, so this extra card is here to avoid to running
+                // into issues when removing it.
+                Random random = new Random();
+                int randomIndex = random.Next(0, affirmations.Count);
+                Cards.Add(new Card(9999, affirmations[randomIndex] + "😊"));
             }
             await GetCard(); 
-            
-            // There is a bug with Carousel View, so this extra card is here to avoid to running
-            // into issues when removing it.
-            Random random = new Random();
-            int randomIndex = random.Next(0, affirmations.Count);
-            Cards.Add(new Card(9999, affirmations[randomIndex] + "😊"));
         }
 
     }

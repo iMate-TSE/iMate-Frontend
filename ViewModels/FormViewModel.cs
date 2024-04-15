@@ -41,7 +41,7 @@ namespace iMate.ViewModels
         [ObservableProperty] private bool _isPassive = false;
         [ObservableProperty] private bool _isIntense = false;
 
-        [ObservableProperty] private string _leaf = "null";
+        [ObservableProperty] private string _leaf = "No Mood";
 
         public ICommand GetQuestionsCommand { get; }
 
