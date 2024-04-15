@@ -1,9 +1,13 @@
-﻿namespace iMate
+﻿using iMate.Services;
+
+namespace iMate
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        private IHttpService _httpService;
+        public MainPage(IHttpService httpService)
         {
+            _httpService = new HttpService();
             InitializeComponent();
         }
         
@@ -25,7 +29,7 @@
                         break;
                     case "Check Mood":
                         SemanticScreenReader.Announce("Check Mood button clicked");
-                        await Navigation.PushAsync(new FormPage());
+                        await Navigation.PushAsync(new SliderPage(_httpService));
                         break;
                     case "Resources":
                         await Navigation.PushAsync(new ResourcesPage());
@@ -33,7 +37,7 @@
                 }
             } else if (sender is Image image)
             {
-                await Navigation.PushAsync(new SliderPage());
+                await Navigation.PushAsync(new ProfilePage(_httpService));
             }
         }
     }

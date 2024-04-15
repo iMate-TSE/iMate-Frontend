@@ -22,6 +22,7 @@ namespace iMate.Services
         void LogOut(string username);
         Task<List<DatabaseCard>> GetCards(string mood);
         Task<User> FetchProfile(string token);
+        Task<List<FormQuestions>> GetQuestions(string questionCategory);
     }
 
 
@@ -169,7 +170,6 @@ namespace iMate.Services
                 response.EnsureSuccessStatusCode();
             }catch(Exception ex) { Console.WriteLine(ex.Message); }
         }
-
         
         public async Task<User> FetchProfile(string token)
         {
@@ -197,8 +197,6 @@ namespace iMate.Services
                 return null;
             }
         }
-
-
         
         public async Task<List<DatabaseCard>> GetCards(string mood)
         {
@@ -226,5 +224,35 @@ namespace iMate.Services
             }
         }
 
+        public async Task<List<FormQuestions>> GetQuestions(string questionCategory)
+        {
+            try
+            {
+                using HttpResponseMessage response =
+                    await _httpClient.GetAsync($"Mood/generateQuestions/?moodCategory={questionCategory}");
+
+                response.EnsureSuccessStatusCode();
+                var JsonReponse = await (response.Content.ReadFromJsonAsync<List<FormQuestions>>());
+
+                foreach (FormQuestions q in JsonReponse)
+                {
+                    Console.WriteLine("===========================" + q.Category);
+                }
+
+                if (JsonReponse != null)
+                {
+                    return JsonReponse;
+                }
+                else
+                {
+                    return new List<FormQuestions>();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new List<FormQuestions>();
+            }
+        }
     }
 }
