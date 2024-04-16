@@ -22,15 +22,13 @@ namespace iMate.ViewModels
                 ).Build())
             .WithChild(new DecisionTreeClassifier(1, "Positive")
                .WithChild((new DecisionTreeClassifier(1, "Active")
-                                    .WithChild(new DecisionTreeClassifier(0, "Happy/Excited").Build())
-                                    .WithChild(new DecisionTreeClassifier(1,"Loved/Grateful").Build())
-                 ).Build())
+                    .WithChild(new DecisionTreeClassifier(0, "Happy/Excited").Build())
+                    .WithChild(new DecisionTreeClassifier(1,"Loved/Grateful").Build())
+                ).Build())
                 .WithChild((new DecisionTreeClassifier(0, "Passive")
-                        .WithChild(new DecisionTreeClassifier(0, "Relaxed/Sleepy/Stressed").Build())
-                    ).Build())
-             
-                
-                .Build()
+                    .WithChild(new DecisionTreeClassifier(0, "Relaxed/Sleepy/Stressed").Build())
+                    ).Build()
+                ).Build()
             ).Build();
 
         [ObservableProperty] public ObservableCollection<FormQuestions> _questions;
