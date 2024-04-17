@@ -4,8 +4,10 @@
              x:Class="iMate.Pages.SliderPage"
              xmlns:viewmodels="clr-namespace:iMate.ViewModels"
              x:DataType="viewmodels:FormViewModel"
+             BackgroundColor="{DynamicResource Platinum}"
              xmlns:models="clr-namespace:iMate.Models.ApiModels"
              Title="Check Mood ☀️">
+    <ScrollView>
     <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
@@ -39,13 +41,14 @@
                 />
                 <Image Source="underline.png" Grid.Row="0" Margin="0, 10, 0, 0" WidthRequest="300" HeightRequest="50" />
             </Grid>
+            
+            <Label IsVisible="{Binding Leaf}" Text="{Binding Leaf}" Margin="0, 20" HorizontalTextAlignment="Center"></Label>
 
             <!--  ooooooooooooooooooooooooooooooooooooooooooo  -->
             
             <!-- Pick a Colour Text -->
             <Label Grid.Column="0" 
                Grid.Row="1" 
-               Grid.ColumnSpan="3" 
                Text="Would you say that you feel overall more positive or negative at the moment?"
                FontSize="17"
                Padding="14, 10"
@@ -57,7 +60,7 @@
             />
 
             <!-- Pick a Colour Buttons -->
-            <StackLayout Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center">
+            <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center">
                 <Button Text="Negative" 
                         BackgroundColor="#ff5252" 
                         TextColor="White" Margin="-15, 0, 30,0" 
@@ -391,23 +394,47 @@
                 <DataTemplate x:DataType="models:FormQuestions">
                     <Grid Margin="15, 0, 0, 0">
                         <VerticalStackLayout>
-                            <Label Text="{Binding Question}" />
-                            <VerticalStackLayout RadioButtonGroup.GroupName="Question1" />
+                            <Grid Margin="0, 0, 0, 20" RowDefinitions="*, Auto">
+                                <Label 
+                                    Text="{Binding Question}" 
+                                    FontSize="17"
+                                    Grid.Row="0"
+                                    Padding="14, 10"
+                                    HorizontalOptions="Center" 
+                                    VerticalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    Margin="0, 10, 0,0"
+                                    FontFamily="AveriaRegular"
+                                    />
+                                <VerticalStackLayout RadioButtonGroup.GroupName="{Binding formQuestionID}"
+                                                     Grid.Row="1" Margin="25, 0,0,0">
+                                    <RadioButton 
+                                        Content="Never" 
+                                        FontFamily="AveriaRegular"
+                                        CheckedChanged="RadioButton_OnCheckedChanged"
+                                        />
 
-                            <RadioButton Content="Never" 
-                            />
+                                    <RadioButton 
+                                        Content="Sometimes" 
+                                        FontFamily="AveriaRegular"
+                                        CheckedChanged="RadioButton_OnCheckedChanged"
+                                        />
 
-                            <RadioButton Content="Sometimes"
-                            />
-
-                            <RadioButton Content="Always" 
-                            />
+                                    <RadioButton 
+                                        Content="Always" 
+                                        FontFamily="AveriaRegular"
+                                        CheckedChanged="RadioButton_OnCheckedChanged"
+                                        />
+                                </VerticalStackLayout>
+                            </Grid>
                         </VerticalStackLayout>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             
         </CollectionView>
-        <Label IsVisible="{Binding Leaf}" Text="{Binding Leaf}" Margin="0, 20" HorizontalTextAlignment="Center"></Label>
+        <Button Text="Submit" Margin="0, 20, 0, 0" WidthRequest="300" IsVisible="{Binding ShowSubmit}" Command="{Binding SubmitForm}"/>
+        
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -23,6 +23,7 @@ namespace iMate.Services
         Task<List<DatabaseCard>> GetCards(string mood);
         Task<User> FetchProfile(string token);
         Task<List<FormQuestions>> GetQuestions(string questionCategory);
+        Task<string> FetchMood(int P, int A, int D);
     }
 
 
@@ -224,6 +225,29 @@ namespace iMate.Services
             }
         }
 
+        public async Task<string> FetchMood(int P, int A, int D)
+        {
+            try
+            {
+                using HttpResponseMessage response =
+                    await _httpClient.GetAsync($"Mood?Pleasure={P}&Arousal={A}&Dominance={D}");
+                response.EnsureSuccessStatusCode();
+                var res = await (response.Content.ReadAsStringAsync());
+                if (res != null)
+                {
+                    return res;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+        }
+
         public async Task<List<FormQuestions>> GetQuestions(string questionCategory)
         {
             try
@@ -232,12 +256,8 @@ namespace iMate.Services
                     await _httpClient.GetAsync($"Mood/generateQuestions/?moodCategory={questionCategory}");
 
                 response.EnsureSuccessStatusCode();
+                
                 var JsonReponse = await (response.Content.ReadFromJsonAsync<List<FormQuestions>>());
-
-                foreach (FormQuestions q in JsonReponse)
-                {
-                    Console.WriteLine("===========================" + q.Category);
-                }
 
                 if (JsonReponse != null)
                 {

@@ -1,10 +1,11 @@
 using System.Diagnostics;
+using CommunityToolkit.Mvvm.Messaging;
 using iMate.Services;
 using iMate.Models;
 
 namespace iMate.Pages;
 
-public partial class TaskPage : ContentPage
+public partial class TaskPage : ContentPage, IRecipient<SetMoodMessage>
 {
 	private DeckViewModel _deckViewModel;
     private int side = 0;
@@ -14,8 +15,14 @@ public partial class TaskPage : ContentPage
         InitializeComponent();
 
 		_deckViewModel = new DeckViewModel(httpService);
+		WeakReferenceMessenger.Default.Register<SetMoodMessage>(this);
 
 		BindingContext = _deckViewModel;
+	}
+	
+	public void Receive(SetMoodMessage message)
+	{
+		_deckViewModel.GetCards(message.Value);
 	}
 
 	private void FlipCard(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using iMate.Models.ApiModels;
 
 namespace iMate.ViewModels
@@ -46,8 +47,14 @@ namespace iMate.ViewModels
         public DeckViewModel(IHttpService httpService) : base(httpService)
         {
             Cards = new ObservableCollection<Card>();
+
+            WeakReferenceMessenger.Default.Register<SetMoodMessage>(this, (sender, message) =>
+            {
+                Console.WriteLine("======== Got Value " + message.Value);
+              GetCards(message.Value);  
+            });
             
-            GetCards();
+            //etCards();
         }
 
         public async void RemoveCard(int id)
@@ -101,14 +108,9 @@ namespace iMate.ViewModels
             "I make a difference in the world by simply existing in it."
         };
 
-        private async void GetCards()
+        public async void GetCards(string currentMood)
         {
-            string? currentMood = await SecureStorage.Default.GetAsync("current_mood");
-
             if (currentMood == null) return;
-            
-            Console.WriteLine("================ " + currentMood);
-            
             
             async Task GetCard()
             {

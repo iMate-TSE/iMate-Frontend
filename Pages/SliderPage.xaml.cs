@@ -27,6 +27,7 @@ public partial class SliderPage : ContentPage
 	private void FromPositiveNextQuestion(object? sender, EventArgs e)
 	{
 		double value = PositiveSlider.Value;
+		_viewModel.PositiveValue = value;
 		if (value <=5) _viewModel.Decide(0);
 		else { _viewModel.Decide(1);}
 	}
@@ -34,22 +35,23 @@ public partial class SliderPage : ContentPage
 	private void FromActiveNextQuestion(object? sender, EventArgs e)
 	{
 		double value = Activeslider.Value;
+		_viewModel.ActivityValue = value;
 		if (value <= 5) _viewModel.Decide(0);
 		else { _viewModel.Decide(1);}
-		_viewModel.fetchQuestions();
 	}
 
 	private void FromPassivityNextQuestion(object? sender, EventArgs e)
 	{
 		double value = PassivitySlider.Value;
+		_viewModel.PassivityValue = value;
 		if (value <= 5) _viewModel.Decide(0);
 		else { _viewModel.Decide(1);}
-		_viewModel.fetchQuestions();
 	}
 	
 	private void FromNegativeNextQuestion(object? sender, EventArgs e)
 	{
 		double value = NegativeSlider.Value;
+		_viewModel.NegativeValue = value;
 		if (value <= 5) _viewModel.Decide(0);
 		else { _viewModel.Decide(1);}
 	}
@@ -57,8 +59,34 @@ public partial class SliderPage : ContentPage
 	private void FromIntensityNextQuestion(object? sender, EventArgs e)
 	{
 		double value = IntenseSlider.Value;
+		_viewModel.IntensityValue = value;
 		if (value <= 5) _viewModel.Decide(0);
 		else { _viewModel.Decide(1);}
-		_viewModel.fetchQuestions();
+	}
+
+	private void RadioButton_OnCheckedChanged(object? sender, CheckedChangedEventArgs e)
+	{
+		RadioButton button = (RadioButton)sender;
+		if (button.IsChecked)
+		{
+			string selectedValue = button.Content.ToString();
+			int numericValue = -1;
+
+			switch (selectedValue)
+			{
+				case "Always":
+					numericValue = 3;
+					break;
+				case "Sometimes":
+					numericValue = 1;
+					break;
+				case "Never":
+					numericValue = 0;
+					break;
+			}
+
+			int questionid = int.Parse(button.GroupName);
+			_viewModel.UpdateResponses(questionid, numericValue);
+		}
 	}
 }
