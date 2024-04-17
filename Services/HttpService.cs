@@ -24,6 +24,7 @@ namespace iMate.Services
         Task<User> FetchProfile(string token);
         Task<List<FormQuestions>> GetQuestions(string questionCategory);
         Task<string> FetchMood(int P, int A, int D);
+        Task UpdateProfile(string data);
     }
 
 
@@ -182,6 +183,8 @@ namespace iMate.Services
 
                 var jsonResponse = await (response.Content.ReadFromJsonAsync<User>());
                 
+                Console.WriteLine("USEr====================" + jsonResponse.userName);
+                
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
@@ -197,6 +200,20 @@ namespace iMate.Services
                 Console.WriteLine(ex.Message);
                 return null;
             }
+        }
+
+        public async Task UpdateProfile(string data)
+        {
+            Console.WriteLine("CALLING FROM HTTP Profile......");
+            try
+            {
+                var jsonContent = new StringContent(data, Encoding.UTF8, "application/json");
+                
+                using HttpResponseMessage response = await _httpClient.PutAsync("Profile", jsonContent);
+                response.EnsureSuccessStatusCode();
+               
+
+            }catch (Exception ex) { Console.WriteLine(ex.Message); }
         }
         
         public async Task<List<DatabaseCard>> GetCards(string mood)

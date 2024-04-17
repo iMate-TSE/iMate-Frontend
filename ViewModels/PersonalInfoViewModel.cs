@@ -1,5 +1,8 @@
-﻿using iMate.Services;
+﻿using System.Text.Json;
+using System.Windows.Input;
+using iMate.Services;
 using iMate.Models;
+using iMate.Models.FormModels;
 
 namespace iMate.ViewModels
 {
@@ -16,49 +19,54 @@ namespace iMate.ViewModels
 
         [ObservableProperty]
         private string _gender;
-        
-        
+
+        public ICommand updateProfileCommand { get; set; }
 
         public PersonalInfoViewModel(IHttpService httpService) : base(httpService)
         {
-            Dictionary<String, string> ProfileData = fetchProfileData();
-
-            _fullname = ProfileData["fullname"];
-            _username = ProfileData["username"];
-            _age = Int16.Parse(ProfileData["age"]);
-            _gender = ProfileData["gender"];
+            fetchProfileData();
+            updateProfileCommand = new Command(UpdateProfile);
         }
 
-        private Dictionary<string, string> fetchProfileData()
+        private void fetchProfileData()
         {
-            User? profile = null;
-            
             async void getProfileAsync()
             {
                 string token = await SecureStorage.Default.GetAsync("auth_token");
-                User? Profile = await HttpService.FetchProfile(token);
-                profile = Profile;
+                User Profile = await HttpService.FetchProfile(token);
+                
+                Age = Profile.age ?? 0;
+                Username = Profile.userName;
+                Gender = Profile.gender;
+                Fullname = Profile.userName;
             }
 
-            if (profile != null)
-            {
-                return new Dictionary<string, string>()
-                {
-                    ["fullname"] = profile.userName,
-                    ["username"] = profile.userName,
-                    ["age"] = profile.age.ToString(),
-                    ["gender"] = profile.gender
-                };
-            }
 
-            return new Dictionary<string, string>()
-            {
-                ["fullname"] = "Alan Turing",
-                ["username"] = "aturing",
-                ["age"] = "21",
-                ["gender"] = "Male"
-            };
+            getProfileAsync();
+
+
+            Fullname = "No User";
+            Username = "No User";
+            Age = 0;
+            Gender = "N/A";
         }
 
+        public async void UpdateProfile()
+        {
+            Console.WriteLine("=================== CALLING UPDATE");
+            string currentToken = await SecureStorage.Default.GetAsync("auth_token");
+            var profileData = new ProfileDataModel
+            {
+                fullname = Fullname,
+                token = currentToken,
+                username = Username,
+                age = Age,
+                gender = Gender,
+            };
+
+            string content = JsonSerializer.Serialize(profileData);
+
+            HttpService.UpdateProfile(content);
+        }
     }
 }
