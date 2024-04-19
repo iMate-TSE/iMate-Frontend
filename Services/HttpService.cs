@@ -27,6 +27,8 @@ namespace iMate.Services
         Task UpdateProfile(string data);
         Task SaveMoodEntry(string data);
         Task<List<MoodEntry>> GetJournalData(string token);
+        Task<int> FetchPoints(string token);
+        void UpdatePoints(string content);
     }
 
 
@@ -204,6 +206,44 @@ namespace iMate.Services
             }
         }
 
+        public async Task<int> FetchPoints(string token)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync($"Profile/getCredits?token={token}");
+
+                response.EnsureSuccessStatusCode();
+
+                var jsonResponse = await (response.Content.ReadAsStringAsync());
+                
+                if (jsonResponse != null)
+                {
+                    return int.Parse(jsonResponse);
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+        public async void UpdatePoints(string content)
+        {
+            try
+            {
+                var jsonContent = new StringContent(content, Encoding.UTF8, "application/json");
+                using HttpResponseMessage res = await _httpClient.PutAsync("Profile/setCredits", jsonContent);
+                Console.WriteLine(res);
+                res.EnsureSuccessStatusCode();
+            } catch (Exception ex) { Console.WriteLine(ex.Message);}
+        }
+        
         public async Task UpdateProfile(string data)
         {
             Console.WriteLine("CALLING FROM HTTP Profile......");

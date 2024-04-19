@@ -15,7 +15,7 @@ public partial class CustomTitleView : ContentView
 
 	    _httpService = new HttpService();
 
-	    _viewModel = new HeaderViewModel();
+	    _viewModel = new HeaderViewModel(_httpService);
 
 	    BindingContext = _viewModel;
     }

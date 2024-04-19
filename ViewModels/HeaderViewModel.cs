@@ -1,6 +1,8 @@
-﻿namespace iMate.ViewModels;
+﻿using iMate.Services;
 
-public partial class HeaderViewModel : ObservableObject
+namespace iMate.ViewModels;
+
+public partial class HeaderViewModel : ViewModelBase
 {
     [ObservableProperty]
     private string _streak;
@@ -8,21 +10,17 @@ public partial class HeaderViewModel : ObservableObject
     [ObservableProperty]
     private string _points;
     
-    public HeaderViewModel()
+    public HeaderViewModel(IHttpService httpService) : base(httpService)
     {
-        Dictionary<String, string> headerData = FetchHeaderData();
-
-        _streak = $"🔥 {headerData["steak"]}";
-        _points = $"👑 {headerData["points"]}";
+        FetchHeaderData();
     }
 
-    private Dictionary<string, string> FetchHeaderData()
+    private async void FetchHeaderData()
     {
-        return new Dictionary<string, string>()
-        {
-            ["steak"] = "124",
-            ["points"] = "1000",
-        };
+        string token = await SecureStorage.Default.GetAsync("auth_token");
+        int points = await HttpService.FetchPoints(token);
+        Points = $"👑 {points}" ?? $"👑 0";
+        Streak = $"🔥 0";
     }
 
 }
