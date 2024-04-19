@@ -35,12 +35,12 @@
     </ContentPage.Resources>
 
     <VerticalStackLayout>
-        <Label Text="{Binding Fullname}" FontSize="Title" HorizontalOptions="CenterAndExpand" Margin="0,20,0,10" TextColor="Black"/>
+        <Label Text="{Binding Username}" FontSize="Title" HorizontalOptions="CenterAndExpand" Margin="0,20,0,10" TextColor="Black"/>
         <Ellipse HeightRequest="150" WidthRequest="150" Fill="Pink" Margin="0, 0, 0, 50"/>
 
         <Grid RowDefinitions="*, *, *, *, *" Margin="10, 0, 0, 0">
             <StackLayout Margin="0,0,0,10" Grid.Row="0" Padding="10">
-                <Label Text="{Binding Username}" x:Name="UsernameEntry" Style="{StaticResource title}">
+                <Label Text="{Binding Fullname}" x:Name="UsernameEntry" Style="{StaticResource title}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="UsernameTapped"/>
                     </Label.GestureRecognizers>

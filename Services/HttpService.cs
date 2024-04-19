@@ -23,6 +23,10 @@ namespace iMate.Services
         Task<List<DatabaseCard>> GetCards(string mood);
         Task<User> FetchProfile(string token);
         Task<List<FormQuestions>> GetQuestions(string questionCategory);
+        Task<string> FetchMood(int P, int A, int D);
+        Task UpdateProfile(string data);
+        Task SaveMoodEntry(string data);
+        Task<List<MoodEntry>> GetJournalData(string token);
     }
 
 
@@ -181,6 +185,8 @@ namespace iMate.Services
 
                 var jsonResponse = await (response.Content.ReadFromJsonAsync<User>());
                 
+                Console.WriteLine("USEr====================" + jsonResponse.userName);
+                
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
@@ -195,6 +201,35 @@ namespace iMate.Services
             {
                 Console.WriteLine(ex.Message);
                 return null;
+            }
+        }
+
+        public async Task UpdateProfile(string data)
+        {
+            Console.WriteLine("CALLING FROM HTTP Profile......");
+            try
+            {
+                var jsonContent = new StringContent(data, Encoding.UTF8, "application/json");
+                
+                using HttpResponseMessage response = await _httpClient.PutAsync("Profile", jsonContent);
+                response.EnsureSuccessStatusCode();
+               
+
+            }catch (Exception ex) { Console.WriteLine(ex.Message); }
+        }
+
+        public async Task SaveMoodEntry(string data)
+        {
+            try
+            {
+                Console.WriteLine("======= Calling Save Mood");
+                var jsonContent = new StringContent(data, Encoding.UTF8, "application/json");
+                using HttpResponseMessage res = await _httpClient.PostAsync("Mood/save", jsonContent);
+                res.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
         
@@ -224,6 +259,50 @@ namespace iMate.Services
             }
         }
 
+        public async Task<string> FetchMood(int P, int A, int D)
+        {
+            try
+            {
+                using HttpResponseMessage response =
+                    await _httpClient.GetAsync($"Mood?Pleasure={P}&Arousal={A}&Dominance={D}");
+                response.EnsureSuccessStatusCode();
+                var res = await (response.Content.ReadAsStringAsync());
+                if (res != null)
+                {
+                    return res;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+        }
+
+        public async Task<List<MoodEntry>> GetJournalData(string token)
+        {
+            try
+            {
+                using HttpResponseMessage res = await _httpClient.GetAsync($"Mood/summary?token={token}");
+                res.EnsureSuccessStatusCode();
+
+                var JsonResponse = await (res.Content.ReadFromJsonAsync<List<MoodEntry>>());
+                if (JsonResponse != null)
+                {
+                    return JsonResponse;
+                }
+
+                return new List<MoodEntry>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+        }
         public async Task<List<FormQuestions>> GetQuestions(string questionCategory)
         {
             try
@@ -232,12 +311,8 @@ namespace iMate.Services
                     await _httpClient.GetAsync($"Mood/generateQuestions/?moodCategory={questionCategory}");
 
                 response.EnsureSuccessStatusCode();
+                
                 var JsonReponse = await (response.Content.ReadFromJsonAsync<List<FormQuestions>>());
-
-                foreach (FormQuestions q in JsonReponse)
-                {
-                    Console.WriteLine("===========================" + q.Category);
-                }
 
                 if (JsonReponse != null)
                 {

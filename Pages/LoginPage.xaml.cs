@@ -5,11 +5,15 @@ namespace iMate.Pages;
 public partial class LoginPage : ContentPage
 {
     private LoginViewModel _viewModel;
+
+    private IHttpService _httpService;
 	public LoginPage(IHttpService httpService)
 	{
 		InitializeComponent();
 
-        _viewModel = new LoginViewModel(httpService);
+        _httpService = httpService;
+
+        _viewModel = new LoginViewModel(_httpService);
 
         BindingContext = _viewModel;
 
@@ -45,7 +49,7 @@ public partial class LoginPage : ContentPage
             if (await _viewModel.CheckUser())
             {
                 await SecureStorage.Default.SetAsync("isLoggedIn", "true");
-                Application.Current.MainPage = new AppShell();
+                Application.Current.MainPage = new AppShell(_httpService);
                 //await Navigation.PopAsync();  
             }
 
@@ -79,7 +83,7 @@ public partial class LoginPage : ContentPage
                 if (await _viewModel.SignUp())
                 {
                     await SecureStorage.Default.SetAsync("isLoggedIn", "true");
-                    Application.Current.MainPage = new AppShell();
+                    Application.Current.MainPage = new AppShell(_httpService);
                     //await Navigation.PushAsync(new MainPage());
                 }
         }

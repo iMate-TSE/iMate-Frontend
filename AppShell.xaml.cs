@@ -4,7 +4,7 @@ namespace iMate
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        public AppShell(IHttpService httpService)
         {
             InitializeComponent();
 

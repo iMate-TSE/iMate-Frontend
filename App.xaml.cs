@@ -10,7 +10,7 @@ namespace iMate
 
             if (IsUserLoggedIn())
             {
-                MainPage = new AppShell();
+                MainPage = new AppShell(httpService);
             }
             else
             {

@@ -50,7 +50,6 @@ namespace iMate.ViewModels
             UpdateSettingsCommand = new Command(UpdateSettings);
             
             
-            
         }
 
         public async void GetSettings()

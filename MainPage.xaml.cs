@@ -7,7 +7,8 @@ namespace iMate
         private IHttpService _httpService;
         public MainPage(IHttpService httpService)
         {
-            _httpService = new HttpService();
+            _httpService = httpService;
+            Console.WriteLine("XXXXXXXXXXXXXXXXX" + _httpService);
             InitializeComponent();
         }
         
