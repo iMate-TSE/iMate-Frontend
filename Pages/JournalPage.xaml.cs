@@ -1,65 +1,27 @@
+using iMate.Services;
+
 namespace iMate.Pages;
 using SkiaSharp;
 using Microcharts;
 
 public partial class JournalPage : ContentPage
 {
-    ChartEntry[] _entries = new[]
-{
-            new ChartEntry(20)
-            {
-                Label = "Mon",
-                ValueLabel = "112",
-                Color = SKColor.Parse("#2c3e50")
-            },
-            new ChartEntry(100)
-            {
-                Label = "Tue",
-                ValueLabel = "648",
-                Color = SKColor.Parse("#77d065")
-            },
-            new ChartEntry(200)
-            {
-                Label = "Wed",
-                ValueLabel = "428",
-                Color = SKColor.Parse("#b455b6")
-            },
-            new ChartEntry(45)
-            {
-                Label = "Thu",
-                ValueLabel = "214",
-                Color = SKColor.Parse("#3498db")
-            },
-            new ChartEntry(67)
-            {
-                Label = "Fri",
-                ValueLabel = "214",
-                Color = SKColor.Parse("#3498db")
-            },
-            new ChartEntry(89)
-            {
-                Label = "Sat",
-                ValueLabel = "214",
-                Color = SKColor.Parse("#3498db")
-            },
-            new ChartEntry(100)
-            {
-                Label = "Sun",
-                ValueLabel = "214",
-                Color = SKColor.Parse("#3498db")
-            }
-        };
-    public JournalPage()
+    
+    private JournalViewModel _viewModel = null;
+    
+    public JournalPage(IHttpService httpService)
 	{
 		InitializeComponent();
 
+        _viewModel = new JournalViewModel(httpService);
 
-        chartView.Chart = new LineChart
+        BindingContext = _viewModel;
+
+        foreach (var item in _viewModel.MoodEntries)
         {
-            Entries = _entries,
-            LabelTextSize = 35,
-            LabelOrientation = Orientation.Horizontal,
-            BackgroundColor = SKColor.Parse("#EAE5E5"),
-        };
+            Console.WriteLine(item.Color + " " + item.Value);
+        }
+
+        chartView.Chart = _viewModel.Chart;
     }
 }

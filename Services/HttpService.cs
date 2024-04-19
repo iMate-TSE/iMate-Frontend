@@ -25,6 +25,8 @@ namespace iMate.Services
         Task<List<FormQuestions>> GetQuestions(string questionCategory);
         Task<string> FetchMood(int P, int A, int D);
         Task UpdateProfile(string data);
+        Task SaveMoodEntry(string data);
+        Task<List<MoodEntry>> GetJournalData(string token);
     }
 
 
@@ -215,6 +217,21 @@ namespace iMate.Services
 
             }catch (Exception ex) { Console.WriteLine(ex.Message); }
         }
+
+        public async Task SaveMoodEntry(string data)
+        {
+            try
+            {
+                Console.WriteLine("======= Calling Save Mood");
+                var jsonContent = new StringContent(data, Encoding.UTF8, "application/json");
+                using HttpResponseMessage res = await _httpClient.PostAsync("Mood/save", jsonContent);
+                res.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
         
         public async Task<List<DatabaseCard>> GetCards(string mood)
         {
@@ -265,6 +282,27 @@ namespace iMate.Services
             }
         }
 
+        public async Task<List<MoodEntry>> GetJournalData(string token)
+        {
+            try
+            {
+                using HttpResponseMessage res = await _httpClient.GetAsync($"Mood/summary?token={token}");
+                res.EnsureSuccessStatusCode();
+
+                var JsonResponse = await (res.Content.ReadFromJsonAsync<List<MoodEntry>>());
+                if (JsonResponse != null)
+                {
+                    return JsonResponse;
+                }
+
+                return new List<MoodEntry>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+        }
         public async Task<List<FormQuestions>> GetQuestions(string questionCategory)
         {
             try

@@ -23,7 +23,22 @@ public partial class SliderPage : ContentPage
 	{
 		_viewModel.Decide(1);
 	}
-
+	
+	private void UserIDKClicked(object? sender, EventArgs e)
+	{
+		_viewModel.IsPADForm = true;
+		_viewModel.ShowPADSubmit = true;
+	}
+	
+	private void SubmitPADForm(object? sender, EventArgs e)
+	{
+		int p = (int)PSlider.Value;
+		int a = (int)ASlider.Value;
+		int d = (int)DSlider.Value;
+		_viewModel.PADRegression(p,a,d);
+	}
+	
+	
 	private void FromPositiveNextQuestion(object? sender, EventArgs e)
 	{
 		double value = PositiveSlider.Value;

@@ -34,11 +34,13 @@ namespace iMate.ViewModels
             {
                 string token = await SecureStorage.Default.GetAsync("auth_token");
                 User Profile = await HttpService.FetchProfile(token);
-                
-                Age = Profile.age ?? 0;
-                Username = Profile.userName;
-                Gender = Profile.gender;
-                Fullname = Profile.userName;
+                if (Profile != null)
+                {
+                    Age = Profile.age ?? 0;
+                    Username = Profile.userName;
+                    Gender = Profile.gender;
+                    Fullname = Profile.fullName;
+                }
             }
 
 
@@ -53,7 +55,6 @@ namespace iMate.ViewModels
 
         public async void UpdateProfile()
         {
-            Console.WriteLine("=================== CALLING UPDATE");
             string currentToken = await SecureStorage.Default.GetAsync("auth_token");
             var profileData = new ProfileDataModel
             {

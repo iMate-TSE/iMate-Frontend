@@ -5,6 +5,8 @@ public class User
     public int userID { get; set; }
     
     public string? userName { get; set; }
+    
+    public string? fullName { get; set; }
 
     public string? avatarPath { get; set; }
 

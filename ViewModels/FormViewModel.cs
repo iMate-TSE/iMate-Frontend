@@ -1,8 +1,10 @@
 ﻿using iMate.Models;
 using System.Collections.ObjectModel;
+using System.Text.Json;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using iMate.Models.ApiModels;
+using iMate.Models.FormModels;
 using iMate.Services;
 
 namespace iMate.ViewModels
@@ -33,6 +35,24 @@ namespace iMate.ViewModels
                 .Build()
             ).Build();
 
+        private Dictionary<string, string> moodDescriptors = new Dictionary<string, string>()
+        {
+            {"Anxious",
+                "Anxiety is what we feel when we are worried, tense or afraid – particularly about things that are about to happen, or which we think could happen in the future. Anxiety is a natural human response when we feel that we are under threat. It can be experienced through our thoughts, feelings and physical sensations."},
+            {"Angry" , "Anger is a normal, healthy emotion, which we all feel sometimes. We often feel angry when we're frustrated, we don't like a situation or we have been treated badly. But we may also feel angry without knowing why, and that's okay – as long as we find a way to express our feelings safely."},
+            {"Disgust", "Disgusted is feeling like you want to turn your nose up and walk away. It's a strong rejection of something you find offensive, dirty, or unpleasant. Your face might scrunch up, and you might feel a wave of nausea. Rotten food, bad smells, or rude behavior can all trigger disgust."},
+            {"Stressed","Stress is how we react when we feel under pressure or threatened. It usually happens when we are in a situation that we don't feel we can manage or control."},
+            {"Lonely", "Many of us feel lonely from time to time. Feelings of loneliness are personal, so everyone's experience will be different. Some people describe loneliness as the feeling we have when our need for social contact and relationships isn’t met. But loneliness isn’t the same as being alone."},
+            {"Sad", "Sadness is an emotional state characterized by feelings of unhappiness and low mood. It is a normal response to situations that are upsetting, painful, or disappointing. Sometimes these feelings can feel more intense, while in other cases they might be fairly mild."},
+            {"Depressed","Depression often involves having a low mood or losing interest and enjoyment in things. It can also cause a range of other changes to how you feel or behave."},
+            {"Happy", "Happiness is something that people seek to find, yet what defines happiness can vary from one person to the next. Typically, happiness is an emotional state characterized by feelings of joy, satisfaction, contentment, and fulfillment. While happiness has many different definitions, it is often described as involving positive emotions and life satisfaction. "},
+            {"Excited", "Excited feels like a fizzing feeling in your chest, like butterflies are having a party.  Everything seems brighter, and you might have a burst of energy. You can't wait for something awesome to happen!"},
+            {"Loved/ Grateful", "Loved feels like a warm hug from the inside. It's a sense of security and deep connection with others. You feel cherished, valued, and important. Grateful feels like a sunshine spreading through your chest.  You appreciate the good things in your life, big or small.  It brings a sense of contentment and happiness."},
+            {"Relaxed", "Relaxed feels like a weight lifting off your shoulders. You're calm and at ease, with your mind and body feeling loose and unburdened. It's a peaceful state of being."},
+            {"Bored", "Bored feels like a slow leak in your energy. Time seems to drag, and you can't find anything interesting to do. You might feel restless or irritable."},
+            {"Sleepy", "Sleepy feels like your eyelids are getting heavy and your body is craving rest. You might yawn a lot and feel sluggish. It's time to wind down and recharge."},
+        };
+
         [ObservableProperty] 
         public ObservableCollection<FormQuestions> _questions = new ObservableCollection<FormQuestions>();
 
@@ -43,6 +63,12 @@ namespace iMate.ViewModels
         [ObservableProperty] private bool _isIntense = false;
         [ObservableProperty] private bool _showSubmit = false;
 
+        [ObservableProperty] private bool _isPADForm = false;
+        [ObservableProperty] private bool _showPADSubmit = false;
+
+        [ObservableProperty] private bool _formIncomplete = true;
+        [ObservableProperty] private bool _showOutputScreen = false;
+
         [ObservableProperty] private double _intensityValue = 0;
         [ObservableProperty] private double _passivityValue = 0;
         [ObservableProperty] private double _activityValue = 0;
@@ -50,6 +76,7 @@ namespace iMate.ViewModels
         [ObservableProperty] private double _negativeValue = 0;
 
         [ObservableProperty] private string _leaf = "No Mood";
+        [ObservableProperty] private string _descriptor;
 
         public ICommand GetQuestionsCommand { get; }
         public ICommand SubmitForm { get; }
@@ -58,21 +85,18 @@ namespace iMate.ViewModels
         
         public FormViewModel(IHttpService httpService) : base(httpService)
         {
-            Console.WriteLine("XXXXXXXXFormXXXXXXXXX" + httpService);
             GetQuestionsCommand = new Command(FetchQuestions);
             SubmitForm = new Command(computePad);
         }
 
         public void Decide(int weight)
         {
-            if (currentDecisionStep.Children.Count > 1)
+            currentDecisionStep = currentDecisionStep.Children.Count switch
             {
-                currentDecisionStep = currentDecisionStep.Children[weight];
-            }
-            else if (currentDecisionStep.Children.Count > 0)
-            {
-                currentDecisionStep = currentDecisionStep.Children.First();
-            }
+                > 1 => currentDecisionStep.Children[weight],
+                > 0 => currentDecisionStep.Children.First(),
+                _ => currentDecisionStep
+            };
 
             if (currentDecisionStep.Data == "Positive")
             {
@@ -147,72 +171,94 @@ namespace iMate.ViewModels
             _questionResponses[questionId] = value;
         }
 
+        private async Task SaveMoodEntry(string mood)
+        {
+            string currentToken = await SecureStorage.Default.GetAsync("auth_token");
+            var MoodEntryData = new SaveMoodDataModel
+            {
+                mood = mood,
+                token = currentToken,
+            };
+
+            string content = JsonSerializer.Serialize(MoodEntryData);
+            await HttpService.SaveMoodEntry(content);
+        }
+
         public async void computePad()
         {
             int intensityQuestions = _questionResponses.Values.Sum();
-            
-            int arousal = 2;
-            int pleasure = 10;
-            int dominance = 2;
 
-            double feelingWeight = 0.6;
-            double intensityWeight = 0.4;
+            string moodOutput = "";
 
             switch (Leaf)
             {
                 case "Angry/Disgusted":
-                    arousal = ((int)(IntensityValue * feelingWeight) + (int)(intensityQuestions * intensityWeight));
-                    pleasure -= (int)IntensityValue;
-                    dominance += (int)IntensityValue;
+                    if (intensityQuestions > 5) moodOutput = "Angry";
+                    else moodOutput = "Disgust";
                     break;
                 case "Anxious/Stressed":
-                    arousal = ((int)(PassivityValue * feelingWeight) + (int)(intensityQuestions * intensityWeight));
-                    pleasure -= (int)(PassivityValue * feelingWeight);
-                    dominance = Math.Min(dominance + (int)(PassivityValue * feelingWeight), 10); // Limit dominance to 10
+                    if (intensityQuestions > 5) moodOutput = "Stressed";
+                    else moodOutput = "Anxious";
                     break;
                 case "Lonely/Sad/Depressed":
-                    arousal = 1;
-                    pleasure -= (int)(IntensityValue * feelingWeight);
-                    dominance = Math.Max(dominance - (int)(IntensityValue * feelingWeight), 1); // Limit dominance to 1 (minimum)
+                    if (intensityQuestions >= 3) moodOutput = "Sad";
+                    else if (intensityQuestions > 3 && intensityQuestions <= 7) moodOutput = "Lonely";
+                    else moodOutput = "Depressed";
                     break;
                 case "Happy/Excited":
-                    arousal = Math.Min(arousal + (int)(ActivityValue * feelingWeight), 10); // Limit arousal to 10
-                    pleasure += Math.Min((int)(ActivityValue * feelingWeight), 10);
-                    dominance = Math.Min(dominance + (int)(ActivityValue * feelingWeight), 10); // Limit dominance to 10
+                    if (intensityQuestions > 5) moodOutput = "Excited";
+                    else moodOutput = "Happy";
                     break;
                 case "Loved/Grateful":
-                    // Arousal can vary depending on intensity
-                    arousal = ((int)(ActivityValue * feelingWeight) + (int)(intensityQuestions * intensityWeight)); 
-                    // Feeling weight directly contributes to pleasure
-                    pleasure += (int)(ActivityValue * feelingWeight);
-                    // Loved/Grateful might not involve high dominance
-                    dominance = Math.Min(dominance + (int)(ActivityValue * feelingWeight), 10); // Limit dominance to 10
+                    if (intensityQuestions > 5) moodOutput = "Loved/ Grateful";
+                    else moodOutput = "Loved/ Grateful";
                     break;
                 case "Relaxed/Bored/Sleepy":
-                    // Low activation
-                    arousal = 1;
-                    // Adjust pleasure based on specific emotion (relaxed vs bored/sleepy)
-                    pleasure = Math.Max(pleasure - (int)(PassivityValue * feelingWeight / 2), 1); // Reduce pleasure slightly, limit to 1 (minimum)
-                    // Relaxed/Bored/Sleepy might not involve strong dominance
-                    dominance = Math.Max(dominance - (int)(PassivityValue * feelingWeight / 5), 1); // Reduce dominance slightly, limit to 1 (minimum)
+                    if (intensityQuestions >= 3) moodOutput = "Relaxed";
+                    else if (intensityQuestions > 3 && intensityQuestions <= 7) moodOutput = "Bored";
+                    else moodOutput = "Sleepy";
                     break;
                 default:
                     break;
             }
+            
+            WeakReferenceMessenger.Default.Send<SetMoodMessage>(new SetMoodMessage(moodOutput));
+            Leaf = moodOutput;
+            FormIncomplete = false;
+            ShowSubmit = false;
+            ShowOutputScreen = true;
+            Descriptor = moodDescriptors[Leaf];
+            await SaveMoodEntry(moodOutput);
+        }
 
-            Console.WriteLine($"P = {pleasure} A = {arousal} D = {dominance}");
-            string mood = await HttpService.FetchMood(pleasure, arousal, dominance);
+        public async void PADRegression(int p, int a, int d)
+        {
+            string mood = await HttpService.FetchMood(p, a, d);
             WeakReferenceMessenger.Default.Send<SetMoodMessage>(new SetMoodMessage(mood));
             Leaf = mood;
+            FormIncomplete = false;
+            IsPADForm = false;
+            ShowPADSubmit = false;
+            ShowOutputScreen = true;
+            Descriptor = moodDescriptors[Leaf];
+            SaveMoodEntry(mood);
         }
 
         public async void FetchQuestions()
         {
             List<FormQuestions> allQuestions = await HttpService.GetQuestions(Leaf);
-            ShowSubmit = true;        
-            //List<FormQuestions> randomFour = allQuestions.OrderBy(c => Guid.NewGuid()).ToList();
+            ShowSubmit = true;
+            List<FormQuestions> randomFour;
+            if (allQuestions.Count > 4)
+            {
+                randomFour = allQuestions.OrderBy(c => Guid.NewGuid()).Take(3).ToList();
+            }
+            else
+            {
+                randomFour = allQuestions;
+            }
             
-            foreach (var question in allQuestions)
+            foreach (var question in randomFour)
             {
                 Questions.Add(question);
                 _questionResponses.Add(question.formQuestionID, -1);
