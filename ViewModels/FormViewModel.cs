@@ -1,4 +1,4 @@
-﻿using iMate.Models;
+using iMate.Models;
 using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows.Input;
@@ -24,15 +24,13 @@ namespace iMate.ViewModels
                 ).Build())
             .WithChild(new DecisionTreeClassifier(1, "Positive")
                .WithChild((new DecisionTreeClassifier(1, "Active")
-                                    .WithChild(new DecisionTreeClassifier(0, "Happy/Excited").Build())
-                                    .WithChild(new DecisionTreeClassifier(1,"Loved/Grateful").Build())
-                 ).Build())
+                    .WithChild(new DecisionTreeClassifier(0, "Happy/Excited").Build())
+                    .WithChild(new DecisionTreeClassifier(1,"Loved/Grateful").Build())
+                ).Build())
                 .WithChild((new DecisionTreeClassifier(0, "Passive")
-                        .WithChild(new DecisionTreeClassifier(0, "Relaxed/Bored/Sleepy").Build())
-                    ).Build())
-             
-                
-                .Build()
+                    .WithChild(new DecisionTreeClassifier(0, "Relaxed/Sleepy/Stressed").Build())
+                    ).Build()
+                ).Build()
             ).Build();
 
         private Dictionary<string, string> moodDescriptors = new Dictionary<string, string>()
