@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:iMate.Views"
+             xmlns:viewmodels="clr-namespace:iMate.ViewModels"
+             x:DataType="viewmodels:JournalViewModel"
              xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              x:Class="iMate.Pages.JournalPage"
              BackgroundColor="{DynamicResource Platinum}"
@@ -26,10 +28,151 @@
         </Grid>
         
         <Grid RowDefinitions="*" Margin="0, 50, 0, 0">
-            <microcharts:ChartView x:Name="chartView" HeightRequest="250" Margin="10, 40, 10, 10"/>
+            <microcharts:ChartView x:Name="chartView" Chart="{Binding Chart}" HeightRequest="250" Margin="10, 40, 10, 10"/>
         </Grid>
 
         <Label Text="Key" HorizontalTextAlignment="Center" TextDecorations="Underline" />
+        
+        <Grid RowDefinitions="*,*,*,*,*,*,*" 
+              ColumnDefinitions="*, *"
+              Margin="0, 20, 0,0"
+              >
+            
+            <Grid Grid.Row="0" Grid.Column="0" ColumnDefinitions="*, *"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Row="0" 
+                         Grid.Column="0" 
+                         BackgroundColor="#FFFF00"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Excited" Grid.Row="0" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*, *"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Row="0" 
+                         Grid.Column="0" 
+                         BackgroundColor="#FFC107"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Happy" Grid.Row="0" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="*, *"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Row="0" 
+                         Grid.Column="0" 
+                         BackgroundColor="#F08080"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Loved/ Grateful" Grid.Row="0" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*, *"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Column="0" 
+                         BackgroundColor="#90EE90"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Relaxed" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="4" Grid.Column="0" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Column="0" 
+                         BackgroundColor="#C0392B"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Angry" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="5" Grid.Column="0" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Column="0" 
+                         BackgroundColor="#9932CC"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Stressed" Grid.Column="1" />
+            </Grid>
+
+            <Grid Grid.Row="6" Grid.Column="0" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Column="0" 
+                         BackgroundColor="#EEDC82"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Anxious" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="0" Grid.Column="1" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Column="0" 
+                         BackgroundColor="#708090"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Disgust" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Column="0" 
+                         BackgroundColor="#4169E1"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Sad" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="1" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Column="0" 
+                         BackgroundColor="#A9A9A9"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Bored" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="3" Grid.Column="1" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse Grid.Column="0" 
+                         BackgroundColor="#36454C"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Sleepy" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="4" Grid.Column="1" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse 
+                         Grid.Column="0" 
+                         BackgroundColor="#D3D3D3"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Lonely" Grid.Column="1" />
+            </Grid>
+            
+            <Grid Grid.Row="5" Grid.Column="1" ColumnDefinitions="*, Auto"
+                  HorizontalOptions="Center" Margin="0,0,0,7">
+                <Ellipse
+                         Grid.Column="0" 
+                         BackgroundColor="#2F4F4F"
+                         Margin="10, 0"
+                         WidthRequest="15" HeightRequest="15"
+                />
+                <Label Text="Depressed" Grid.Column="1" />
+            </Grid>
+        </Grid>
         
     </VerticalStackLayout>
 </ContentPage>

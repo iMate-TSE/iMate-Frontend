@@ -6,8 +6,8 @@ using Microcharts;
 
 public partial class JournalPage : ContentPage
 {
-    
-    private JournalViewModel _viewModel = null;
+
+    private JournalViewModel _viewModel;
     
     public JournalPage(IHttpService httpService)
 	{
@@ -16,12 +16,5 @@ public partial class JournalPage : ContentPage
         _viewModel = new JournalViewModel(httpService);
 
         BindingContext = _viewModel;
-
-        foreach (var item in _viewModel.MoodEntries)
-        {
-            Console.WriteLine(item.Color + " " + item.Value);
-        }
-
-        chartView.Chart = _viewModel.Chart;
     }
 }

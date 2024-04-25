@@ -12,28 +12,34 @@ partial class JournalViewModel : ViewModelBase
     {
         new ChartEntry(0)
         {
-            Label = "Error",
-            ValueLabel = "Error",
-            Color = SKColors.Crimson
-        },
+         ValueLabel = "",
+         Color =  SKColors.White,
+        }
     };
 
     [ObservableProperty] private LineChart _chart;
 
-    private Dictionary<int, string> moodColourMap = new Dictionary<int, string>()
+    private Dictionary<string, string> moodMap = new Dictionary<string, string>
     {
-        
+        { "1", "Excited" },
+        { "2", "Happy" },
+        { "3", "Loved/ Grateful" },
+        { "4", "Relaxed" },
+        { "5", "Angry" },
+        { "6", "Stressed" },
+        { "7", "Anxious" },
+        { "8", "Disgust" },
+        { "9", "Sad" },
+        { "10", "Bored" },
+        { "11", "Sleepy" },
+        { "12", "Lonely" },
+        { "13", "Depressed" },
+        { "14", "Unspecified"}
     };
     
     public JournalViewModel(IHttpService httpService) : base(httpService)
     {
         GetJournal();
-        Console.WriteLine("HELL(OOOOOOOOOOOOOOOOOOO");
-
-        foreach (var e in MoodEntries)
-        {   
-            Console.WriteLine("FROM CONSTR LOOOP" + e.Value);
-        }
         
         Chart = new LineChart()
         {
@@ -53,8 +59,6 @@ partial class JournalViewModel : ViewModelBase
             {
                 List<MoodEntry> thisWeek = await HttpService.GetJournalData(token);
 
-                Console.WriteLine("=================" + thisWeek.Count);
-
                 foreach (var card in thisWeek)
                 {
                     string label = card.date.DayOfWeek switch
@@ -67,9 +71,7 @@ partial class JournalViewModel : ViewModelBase
                         DayOfWeek.Tuesday => "Tue",
                         DayOfWeek.Wednesday => "Wed"
                     };
-
-
-                    string valueLabel = "a";
+                    
 
                     SKColor color = card.moodID switch
                     {
@@ -87,11 +89,11 @@ partial class JournalViewModel : ViewModelBase
                         12 => SKColor.Parse("#D3D3D3"),
                         13 => SKColor.Parse("#2F4F4F")
                     };
-
+                 
                     ChartEntry entry = new ChartEntry(card.Id)
                     {
                         Label = label,
-                        ValueLabel = valueLabel,
+                        ValueLabel = moodMap[card.moodID.ToString() ?? "14"],
                         Color = color
                     };
                     
@@ -100,14 +102,23 @@ partial class JournalViewModel : ViewModelBase
             }
             else
             {
-                MoodEntries.Add(new ChartEntry(0)
-                {
-                    Label = "Error",
-                    ValueLabel = "Error",
-                    Color = SKColors.Crimson
-                });
             }
         }
-        await GetData(); 
+        await GetData();
+
+        var entries = new ChartEntry[MoodEntries.Count];
+        
+        for (int i = 0; i < MoodEntries.Count; i++)
+        {
+            entries[i] = MoodEntries[i];
+        }
+        
+        Chart = new LineChart()
+        {
+            Entries = entries,
+            LabelTextSize = 35,
+            LabelOrientation = Orientation.Horizontal,
+            BackgroundColor = SKColor.Parse("#EAE5E5"),
+        };
     }
 }

@@ -36,7 +36,6 @@ namespace iMate
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<BreathePage>();
             builder.Services.AddSingleton<SliderPage>();
-            builder.Services.AddSingleton<FormPage>();
             builder.Services.AddSingleton<ResourcesPage>();
             builder.Services.AddSingleton<PersonalInfoPage>();
 

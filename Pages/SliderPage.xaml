@@ -437,7 +437,7 @@
                 </Grid>
                 
                 <!-- Passivity -->
-                <Grid Grid.Row="4" Grid.Column="0" Margin="0, 30" IsVisible="{Binding IsPassive}">
+                <Grid Grid.Row="4" Grid.Column="0" Margin="0, 30" IsVisible="{Binding IsPassivity}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*" />
@@ -558,6 +558,68 @@
                     />
                     
                     <Button Grid.Row="2" Grid.Column="1" Text="Next" Margin="0, 5, 0,0" Clicked="FromIntensityNextQuestion"/>
+                </Grid>
+                
+                <!-- Passive -->
+                  <Grid Grid.Row="4" Grid.Column="0" Margin="0, 30" IsVisible="{Binding IsPassive}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Grid.Column="0" 
+                           Grid.Row="0" 
+                           Grid.ColumnSpan="3" 
+                           Text="How likely are you to fall asleep if you went to nap right now?"
+                           FontSize="17"
+                           Padding="14, 10"
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0, 40, 0,0"
+                           FontFamily="AveriaRegular"
+                    />
+
+                    <!--  Mood 1  -->
+                    <Label Grid.Column="0" 
+                           Grid.Row="1" 
+                           Text="Not Very" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="End"
+                           Margin="10, 0"    
+                           FontFamily="AveriaRegular"
+                           HorizontalTextAlignment="Center"
+                    />
+
+                    <!-- Slider 1 -->
+                    <Slider Grid.Column="1" Grid.Row="1" 
+                        Minimum="0" Maximum="10" 
+                        x:Name="PassiveSlider"
+                        Value="5" 
+                        VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                        Margin="10, 0"
+                        ThumbColor="{DynamicResource Cyclamen}"
+                        MaximumTrackColor="#484747"
+                        MinimumTrackColor="{DynamicResource Cyclamen}"
+                    />
+
+                    <!--  Mood 2   -->
+                    <Label Grid.Column="2" 
+                           Grid.Row="1" 
+                           Text="Very" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           Margin="10, 0"
+                           FontFamily="AveriaRegular"
+                    />
+                    
+                    <Button Grid.Row="2" Grid.Column="1" Text="Next" Margin="0, 5, 0,0" Clicked="FromPassiveNextQuestion"/>
                 </Grid>
             </Grid>
             <CollectionView ItemsSource="{Binding Questions}"

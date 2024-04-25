@@ -28,7 +28,7 @@ namespace iMate.ViewModels
                     .WithChild(new DecisionTreeClassifier(1,"Loved/Grateful").Build())
                 ).Build())
                 .WithChild((new DecisionTreeClassifier(0, "Passive")
-                    .WithChild(new DecisionTreeClassifier(0, "Relaxed/Sleepy/Stressed").Build())
+                    .WithChild(new DecisionTreeClassifier(0, "Relaxed/Bored/Sleepy").Build())
                     ).Build()
                 ).Build()
             ).Build();
@@ -59,6 +59,7 @@ namespace iMate.ViewModels
         [ObservableProperty] private bool _isActive = false;
         [ObservableProperty] private bool _isPassive = false;
         [ObservableProperty] private bool _isIntense = false;
+        [ObservableProperty] private bool _isPassivity = false;
         [ObservableProperty] private bool _showSubmit = false;
 
         [ObservableProperty] private bool _isPADForm = false;
@@ -72,6 +73,7 @@ namespace iMate.ViewModels
         [ObservableProperty] private double _activityValue = 0;
         [ObservableProperty] private double _positiveValue = 0;
         [ObservableProperty] private double _negativeValue = 0;
+        [ObservableProperty] private double _passiveValue = 0;
 
         [ObservableProperty] private string _leaf = "No Mood";
         [ObservableProperty] private string _descriptor;
@@ -95,6 +97,7 @@ namespace iMate.ViewModels
                 > 0 => currentDecisionStep.Children.First(),
                 _ => currentDecisionStep
             };
+            Console.WriteLine("=========== STEP ============" + currentDecisionStep.Data);
 
             if (currentDecisionStep.Data == "Positive")
             {
@@ -145,19 +148,19 @@ namespace iMate.ViewModels
             }
             else if (currentDecisionStep.Data == "Passivity")
             {
-                IsPassive = true;
+                IsPassivity = true;
                 IsNegative = false;
             }
             else if (currentDecisionStep.Data == "Anxious/Stressed")
             {
                 Leaf = currentDecisionStep.Data;
-                IsPassive = false;
+                IsPassivity = false;
                 FetchQuestions();
             }
             else if (currentDecisionStep.Data == "Lonely/Sad/Depressed")
             {
                 Leaf = currentDecisionStep.Data;
-                IsPassive = false;
+                IsPassivity = false;
                 FetchQuestions();
             }
         }
