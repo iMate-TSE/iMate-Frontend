@@ -13,9 +13,19 @@ namespace iMate.ViewModels
     {
         public ObservableCollection<Message> Messages { get;  } = new ObservableCollection<Message>();
 
+        public int msgIndex = -1;
+        public List<Message> backlog = new List<Message>()
+        {
+            new Message(2, "On a scale of 1 to 10, how would you rate your overall sense of enjoyment or pleasure right now?", "Bot"),
+            new Message(3, "How energized or awake do you feel at the moment?", "Bot"),
+            new Message(4, "How in control do you feel of your current situation, or do you feel like things are beyond your control?", "Bot")
+        };
+
         public ChatViewModel() 
         {
+            //ConnectToServer();
             Messages = GetMessages();
+            
         }
 
         private static ObservableCollection<Message> GetMessages()
@@ -23,18 +33,31 @@ namespace iMate.ViewModels
             // this eventually needs to hit the backend and do ai things
             return new ObservableCollection<Message>()
             {
-                new Message(1, "Hello Bot how are you doing today?", "Richard"),
-                new Message(2, "Hey Richard! I'm doing well, thank you. How about you?", "Bot"),
-                new Message(3, "I'm doing great, just catching up on some work. How can I assist you today?", "Richard"),
-                new Message(4, "I need help with setting up a new feature in our application. Are you available to guide me through it?", "Richard"),
-                new Message(5, "Of course! I'm here to help. Let's get started. What feature are you looking to set up?", "Bot"),
-                new Message(6, "I want to implement a chat feature where users can communicate in real-time. Can you help me with that?", "Richard")
+                new Message(1, "Hello I am your mood assessor how are you doing today?", "Bot"),
             };
         }
 
         public void AddMessage(Message message)
         {
             Messages.Add(message);
+            
+
+            List<string> values = new List<string>() {"1","2","3","4", "5", "6", "7", "8" , "9", "10", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
+            if (!values.Any(item => message.Content.Contains(item)) && msgIndex > -1)
+            {
+                Messages.Add(new Message(23, "That's great, but can you give an answer as a number from 1-10", "Bot"));
+                Thread.Sleep(1000);
+                Messages.Add(backlog[msgIndex]);
+            }
+            else
+            {
+                if (backlog.Count > (msgIndex + 1))
+                {
+                    Messages.Add(backlog[msgIndex + 1]);
+                    msgIndex++;
+                }
+            }
+
         }
     }
 }
