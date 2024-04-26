@@ -20,6 +20,8 @@ namespace iMate.ViewModels
         [ObservableProperty]
         private string _gender;
 
+        [ObservableProperty] private string _profilePhoto;
+
         public ICommand updateProfileCommand { get; set; }
 
         public PersonalInfoViewModel(IHttpService httpService) : base(httpService)
@@ -40,6 +42,7 @@ namespace iMate.ViewModels
                     Username = Profile.userName;
                     Gender = Profile.gender;
                     Fullname = Profile.fullName;
+                    ProfilePhoto = Profile.avatarPath ?? "fish.png";
                 }
             }
 
@@ -51,11 +54,14 @@ namespace iMate.ViewModels
             Username = "No User";
             Age = 0;
             Gender = "N/A";
+            ProfilePhoto = "fish.png";
         }
 
         public async void UpdateProfile()
         {
             string currentToken = await SecureStorage.Default.GetAsync("auth_token");
+            string currentPhoto = await SecureStorage.Default.GetAsync("photo") ?? "fish.png";
+            
             var profileData = new ProfileDataModel
             {
                 fullname = Fullname,
@@ -63,6 +69,7 @@ namespace iMate.ViewModels
                 username = Username,
                 age = Age,
                 gender = Gender,
+                avatarPath = currentPhoto
             };
 
             string content = JsonSerializer.Serialize(profileData);

@@ -19,7 +19,7 @@
                      WidthRequest="45" 
                      HeightRequest="45"
                      Aspect="AspectFill"
-                     Source="profile_placeholder.png"
+                     Source="{Binding ProfilePhoto}"
                      Clicked="ImageButton_Clicked"
             />
 

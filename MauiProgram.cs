@@ -38,6 +38,7 @@ namespace iMate
             builder.Services.AddSingleton<SliderPage>();
             builder.Services.AddSingleton<ResourcesPage>();
             builder.Services.AddSingleton<PersonalInfoPage>();
+            builder.Services.AddSingleton<ProfilePhotoSelector>();
 
 
             builder.Services.AddTransient<ChatViewModel>();

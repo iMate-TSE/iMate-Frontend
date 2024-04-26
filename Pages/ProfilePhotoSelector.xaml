@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Profile Photo👲"
+             BackgroundColor="{DynamicResource Platinum}"
+             x:Class="iMate.Pages.ProfilePhotoSelector">
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *,*,*,*">
+            <Grid RowDefinitions="*" Grid.Row="0">
+                <Label 
+                    Text="Select a Profile Picture"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    FontSize="20"
+                    Margin="0, 20, 0, 5" Grid.Row="0"
+                    FontFamily="AmikoRegular"
+                />
+                <Image Source="underline.png" Grid.Row="0" Margin="0, 30, 0, 0" WidthRequest="200" />
+            </Grid>
+            
+            <Border Grid.Row="1"
+                    x:Name="FishBorder"
+                    StrokeThickness="4"
+                    HeightRequest="130" WidthRequest="130" 
+                    StrokeShape="RoundRectangle 100, 100, 100, 100"
+                    Padding="10"
+                    Background="{DynamicResource Platinum}"
+                    Stroke="{DynamicResource Platinum}">
+                <ImageButton 
+                    Source="fish.png"
+                    HeightRequest="100" WidthRequest="100" 
+                    Clicked="SelectPhoto" />
+            </Border>
+            
+            <Border Grid.Row="2"
+                    x:Name="CatBorder"
+                    StrokeThickness="4"
+                    HeightRequest="130" WidthRequest="130" 
+                    StrokeShape="RoundRectangle 100, 100, 100, 100"
+                    Padding="10"
+                    Background="{DynamicResource Platinum}"
+                    Stroke="{DynamicResource Platinum}">
+                <ImageButton 
+                    Source="cat.png"
+                    HeightRequest="100" WidthRequest="100" 
+                    Clicked="SelectPhoto" />
+            </Border>
+            
+            <Border Grid.Row="3"
+                    x:Name="DogBorder"
+                    StrokeThickness="4"
+                    HeightRequest="130" WidthRequest="130" 
+                    StrokeShape="RoundRectangle 100, 100, 100, 100"
+                    Padding="10"
+                    Background="{DynamicResource Platinum}"
+                    Stroke="{DynamicResource Platinum}">
+                <ImageButton 
+                    Source="dog.png"
+                    HeightRequest="100" WidthRequest="100" 
+                     Clicked="SelectPhoto" />
+            </Border>
+            
+            <Border Grid.Row="4"
+                    x:Name="BirdBorder"
+                    StrokeThickness="4"
+                    HeightRequest="130" WidthRequest="130" 
+                    StrokeShape="RoundRectangle 100, 100, 100, 100"
+                    Padding="10"
+                    Background="{DynamicResource Platinum}"
+                    Stroke="{DynamicResource Platinum}">
+                <ImageButton 
+                    Source="bird.png" 
+                    HeightRequest="100" WidthRequest="100" 
+                    Clicked="SelectPhoto" />
+            </Border>
+            
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
