@@ -9,17 +9,17 @@
              Title="Personal Information">
     <VerticalStackLayout>
         <Grid RowDefinitions="Auto,*,*,*,*,*,*,*,*,*,*" ColumnDefinitions="*">
-            <Ellipse Grid.Row="0" Grid.Column="0" HeightRequest="100" WidthRequest="100" Fill="Pink" Margin="0, 0, 0, 10"/>
+            <Image Grid.Row="0" Grid.Column="0" HeightRequest="100" WidthRequest="100" Source="{Binding ProfilePhoto}" Margin="0, 0, 0, 10"/>
             <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" Text="Change Picture" TextColor="#227093">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ChangePictureTapped"/>
                 </Label.GestureRecognizers>
             </Label>
             <Label Grid.Row="2" Grid.Column="0" Text="Full Name" Margin="10, 20, 0, 0" Padding="20, 20, 20, 0" TextColor="#84817a"/>
-            <Entry x:Name="FullName" Placeholder="Josh Coric" Grid.Row="3" Grid.Column="0" Margin="25, 0, 25, 0" Text="{Binding Fullname}"/>
+            <Entry x:Name="FullName" Placeholder="John Doe" Grid.Row="3" Grid.Column="0" Margin="25, 0, 25, 0" Text="{Binding Fullname}"/>
             
             <Label Grid.Row="4" Grid.Column="0" Text="Username" Margin="10, 20, 0, 0" Padding="20, 5, 20, 0" TextColor="#84817a"/>
-            <Entry x:Name="Username" Placeholder="Yoshi1346" Grid.Row="5" Grid.Column="0" Margin="25, 0, 25, 0" Text="{Binding Username}"/>
+            <Entry x:Name="Username" Placeholder="Doe3456" Grid.Row="5" Grid.Column="0" Margin="25, 0, 25, 0" Text="{Binding Username}"/>
 
             <Label Grid.Row="6" Grid.Column="0" Text="Age" Margin="10, 20, 0, 0" Padding="20, 0, 20, 0" TextColor="#84817a"/>
             <Entry x:Name="Age" Placeholder="23" Grid.Row="7" Grid.Column="0" Margin="25, 0, 25, 5" Text="{Binding Age}"/>

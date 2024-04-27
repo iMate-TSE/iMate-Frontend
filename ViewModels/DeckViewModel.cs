@@ -1,11 +1,11 @@
 ﻿using iMate.Models;
 using iMate.Services;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Windows.Input;
+using System.Text.Json;
 using CommunityToolkit.Mvvm.Messaging;
 using iMate.Models.ApiModels;
+using iMate.Models.FormModels;
 
 namespace iMate.ViewModels
 {
@@ -50,15 +50,26 @@ namespace iMate.ViewModels
 
             WeakReferenceMessenger.Default.Register<SetMoodMessage>(this, (sender, message) =>
             {
-                Console.WriteLine("======== Got Value " + message.Value);
               GetCards(message.Value);  
             });
-            
-            //etCards();
         }
 
         public async void RemoveCard(int id)
         {
+            string userToken = await SecureStorage.Default.GetAsync("auth_token");
+            if (userToken == null)
+            {
+                return;
+            }
+            var content = new PointsUpdateDataModel()
+            {
+                token = userToken,
+                points = "10",
+            };
+            var text = JsonSerializer.Serialize(content);
+                
+            HttpService.UpdatePoints(text);
+            
             if (Cards.Count > 1)
             {
                 foreach (Card card in Cards)

@@ -48,8 +48,6 @@ namespace iMate.ViewModels
             
             LogOutCommand = new Command(LogOut);
             UpdateSettingsCommand = new Command(UpdateSettings);
-            
-            
         }
 
         public async void GetSettings()
@@ -60,7 +58,7 @@ namespace iMate.ViewModels
             var settings = await HttpService.GetSettings(_userName);
             
 
-            if (settings != null)
+            if (settings.Keys.Count == 6)
             {
                 _settings = settings;
                 SoundEffects = bool.Parse(_settings["sound"]);

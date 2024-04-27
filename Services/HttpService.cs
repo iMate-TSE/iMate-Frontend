@@ -22,11 +22,15 @@ namespace iMate.Services
         void LogOut(string username);
         Task<List<DatabaseCard>> GetCards(string mood);
         Task<User> FetchProfile(string token);
+        Task<string> FetchProfilePhoto(string token);
         Task<List<FormQuestions>> GetQuestions(string questionCategory);
         Task<string> FetchMood(int P, int A, int D);
         Task UpdateProfile(string data);
         Task SaveMoodEntry(string data);
         Task<List<MoodEntry>> GetJournalData(string token);
+        Task<int> FetchPoints(string token);
+        Task<int> FetchStreak(string token);
+        void UpdatePoints(string content);
     }
 
 
@@ -204,6 +208,97 @@ namespace iMate.Services
             }
         }
 
+        public async Task<string> FetchProfilePhoto(string token)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync($"Profile/?token={token}");
+
+                response.EnsureSuccessStatusCode();
+
+                var jsonResponse = await (response.Content.ReadFromJsonAsync<User>());
+                
+                if (jsonResponse != null)
+                {
+                    return jsonResponse.avatarPath;
+                }
+                else
+                {
+                    return "fish.png";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public async Task<int> FetchPoints(string token)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync($"Profile/getCredits?token={token}");
+
+                response.EnsureSuccessStatusCode();
+
+                var jsonResponse = await (response.Content.ReadAsStringAsync());
+                
+                if (jsonResponse != null)
+                {
+                    return int.Parse(jsonResponse);
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+        public async void UpdatePoints(string content)
+        {
+            try
+            {
+                var jsonContent = new StringContent(content, Encoding.UTF8, "application/json");
+                using HttpResponseMessage res = await _httpClient.PutAsync("Profile/setCredits", jsonContent);
+                Console.WriteLine(res);
+                res.EnsureSuccessStatusCode();
+            } catch (Exception ex) { Console.WriteLine(ex.Message);}
+        }
+        
+        public async Task<int> FetchStreak(string token)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync($"Profile/getStreak?token={token}");
+
+                response.EnsureSuccessStatusCode();
+
+                var jsonResponse = await (response.Content.ReadAsStringAsync());
+                
+                if (jsonResponse != null)
+                {
+                    return int.Parse(jsonResponse);
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+        
         public async Task UpdateProfile(string data)
         {
             Console.WriteLine("CALLING FROM HTTP Profile......");

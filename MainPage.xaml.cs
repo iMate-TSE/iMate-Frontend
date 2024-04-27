@@ -1,4 +1,5 @@
 ﻿using iMate.Services;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace iMate
 {
@@ -8,7 +9,7 @@ namespace iMate
         public MainPage(IHttpService httpService)
         {
             _httpService = httpService;
-            Console.WriteLine("XXXXXXXXXXXXXXXXX" + _httpService);
+            
             InitializeComponent();
         }
         

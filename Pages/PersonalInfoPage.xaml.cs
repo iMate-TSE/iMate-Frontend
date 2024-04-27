@@ -16,6 +16,6 @@ public partial class PersonalInfoPage : ContentPage
 	}
 	private void ChangePictureTapped(object sender, EventArgs e)
 	{
-
+		Navigation.PushAsync(new ProfilePhotoSelector());
 	}
 }

@@ -63,6 +63,15 @@ public partial class SliderPage : ContentPage
 		else { _viewModel.Decide(1);}
 	}
 	
+	private void FromPassiveNextQuestion(object? sender, EventArgs e)
+	{
+		double value = PassiveSlider.Value;
+		_viewModel.PassiveValue = value;
+		if (value <= 5) _viewModel.Decide(0);
+		else { _viewModel.Decide(1);}
+	}
+
+	
 	private void FromNegativeNextQuestion(object? sender, EventArgs e)
 	{
 		double value = NegativeSlider.Value;

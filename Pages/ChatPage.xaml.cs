@@ -28,6 +28,6 @@ public partial class ChatPage : ContentPage
 		_viewModel.AddMessage(message);
 
         // Clear the text box
-        MessageEntry.Text = "";
+        MessageEntry.Text = String.Empty;
     }
 }
