@@ -38,7 +38,7 @@ namespace iMate.Services
     {
         private static readonly HttpClient _httpClient = new()
         {
-            BaseAddress = new Uri("https://imateapi.azurewebsites.net/api/v1/")
+            BaseAddress = new Uri("http://10.0.2.2:5137/api/v1/")
         };
 
 
