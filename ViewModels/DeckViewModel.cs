@@ -61,17 +61,18 @@ namespace iMate.ViewModels
             {
                 return;
             }
-            var content = new PointsUpdateDataModel()
-            {
-                token = userToken,
-                points = "10",
-            };
-            var text = JsonSerializer.Serialize(content);
-                
-            HttpService.UpdatePoints(text);
             
             if (Cards.Count > 1)
             {
+                var content = new PointsUpdateDataModel()
+                {
+                    token = userToken,
+                    points = "10",
+                };
+                var text = JsonSerializer.Serialize(content);
+
+                HttpService.UpdatePoints(text);
+
                 foreach (Card card in Cards)
                 {
                     
