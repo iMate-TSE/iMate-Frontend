@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iMate", "iMate.csproj", "{38837EF8-7C0E-4FE5-AD54-243967D9283D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{414AA5D4-AB42-4B53-9C1D-8EC182EAEA2D} = {414AA5D4-AB42-4B53-9C1D-8EC182EAEA2D}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iMate.API", "..\iMate.API\iMate.API.csproj", "{414AA5D4-AB42-4B53-9C1D-8EC182EAEA2D}"
 EndProject
